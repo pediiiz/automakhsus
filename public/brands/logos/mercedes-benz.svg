@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="320" height="360" version="1.1" >
+<desc>Wappenstern der Gemeinde Tamins in Graubünden in der Schweiz</desc>
+<defs>
+<!--  x= cos(Pi/36) , y= sin(Pi/36) , polygon-scale(1/y)  -->
+   <g id="top" transform="translate(0,-1)" >
+      <polyline points="-0.173648177,0.984807753 0,0 0.173648177,0.984807753" stroke-width="0.02" fill="none" stroke="black" transform="scale(0.921605)" />
+   </g>
+</defs>
+<g id="star" transform="translate(160,180) scale(160)" >
+   <circle cx="0" cy="0" r="1" stroke="#c0c0c0" stroke-width="0.01" fill="none" />
+   <circle cx="0" cy="0" r="0.1847925" stroke="#c0c0c0" stroke-width="0.01" fill="none" />
+   <use xlink:href="#top" transform="rotate(-120)"/>
+   <use xlink:href="#top" transform="rotate(0)"/>
+   <use xlink:href="#top" transform="rotate(120)"/>
+</g>
+</svg>

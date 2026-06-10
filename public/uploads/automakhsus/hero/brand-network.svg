@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="740" viewBox="0 0 1000 740" role="img" aria-label="شبکه برندهای Auto Makhsus">
+  <rect width="1000" height="740" rx="48" fill="#07111F"/>
+  <path d="M500 180 L220 340 L330 574 H670 L780 340 Z" fill="none" stroke="#8FD3FF" stroke-width="8" stroke-opacity="0.42"/>
+  <path d="M500 180 L500 410 M220 340 L500 410 M780 340 L500 410 M330 574 L500 410 M670 574 L500 410" stroke="#2F80ED" stroke-width="5" stroke-opacity="0.55"/>
+  <circle cx="500" cy="410" r="96" fill="#0B5CFF" stroke="#8FD3FF" stroke-width="8"/>
+  <text x="500" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="38" font-weight="900" fill="#FFFFFF">Auto</text>
+  <text x="500" y="444" text-anchor="middle" font-family="Arial, sans-serif" font-size="34" font-weight="900" fill="#FFFFFF">Makhsus</text>
+  <g font-family="Arial, sans-serif" font-size="27" font-weight="900" fill="#FFFFFF" text-anchor="middle">
+    <circle cx="500" cy="180" r="78" fill="#0B1220" stroke="#8FD3FF" stroke-width="5"/><text x="500" y="189">TehranSandali</text>
+    <circle cx="220" cy="340" r="72" fill="#0B1220" stroke="#2F80ED" stroke-width="5"/><text x="220" y="349">MrSeat</text>
+    <circle cx="780" cy="340" r="72" fill="#0B1220" stroke="#2F80ED" stroke-width="5"/><text x="780" y="349">TehranSeat</text>
+    <circle cx="330" cy="574" r="72" fill="#0B1220" stroke="#8FD3FF" stroke-width="5"/><text x="330" y="583">Tuduzi</text>
+    <circle cx="670" cy="574" r="72" fill="#0B1220" stroke="#8FD3FF" stroke-width="5"/><text x="670" y="583">ANI2203</text>
+  </g>
+</svg>

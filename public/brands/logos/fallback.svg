@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" role="img" aria-label="Automotive brand fallback logo">
+  <rect width="240" height="160" rx="36" fill="#111111"/>
+  <circle cx="120" cy="80" r="42" fill="none" stroke="#ffffff" stroke-opacity="0.42" stroke-width="7"/>
+  <path d="M78 96h84M96 96l10-28h28l10 28" fill="none" stroke="#ffffff" stroke-linecap="round" stroke-linejoin="round" stroke-width="7"/>
+</svg>

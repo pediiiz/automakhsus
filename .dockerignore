@@ -1,0 +1,7 @@
+.env
+.env.*
+.git
+.next
+npm-debug.log
+coverage
+tsconfig.tsbuildinfo
