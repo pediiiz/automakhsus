@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { BrandEcosystem, DigitalPlatform, LeadSection, PageHero, SeoJsonLd, ServicePillars, TrustStats } from "@/components/seo-page";
+import { BrandEcosystem, DigitalPlatform, EcosystemMap, LeadSection, PageHero, SeoJsonLd, ServicePillars, TrustStats } from "@/components/seo-page";
 import { absolute, visual } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
@@ -21,6 +21,7 @@ export default function HomePage() {
         description="از صندلی و تودوزی تا سرویس مولتی‌برند، آپشن، دیتیلینگ، ون VIP، کمپر و مدیریت دیجیتال مشتریان."
         image={visual.hero}
       />
+      <EcosystemMap />
       <BrandEcosystem />
       <ServicePillars />
       <TrustStats />
