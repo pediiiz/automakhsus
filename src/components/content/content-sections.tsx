@@ -3,7 +3,7 @@ import Link from "next/link";
 import type { CSSProperties } from "react";
 import { LeadSection, SeoJsonLd } from "@/components/seo-page";
 import type { ContentCard, ProjectContent, QuestionContent, VehicleBrand, VehicleModel, VideoContent } from "@/lib/content-data";
-import { ecosystemLinks } from "@/lib/content-data";
+import { academyArticles, ecosystemLinks, projects, videos } from "@/lib/content-data";
 import { absolute, marketplaceCategories, technicalServices } from "@/lib/site-data";
 import { breadcrumbSchema } from "@/lib/seo";
 
@@ -57,6 +57,20 @@ export function EcosystemContentLinks() {
         </div>
       </div>
     </section>
+  );
+}
+
+export function ContentDiscoveryNav() {
+  return (
+    <nav className="content-discovery" aria-label="ناوبری محتوایی Auto Makhsus">
+      <div className="container-shell flex gap-2 overflow-x-auto py-3">
+        {ecosystemLinks.map((item) => (
+          <Link key={item.href} href={item.href} className="content-discovery-link" style={{ "--content-accent": item.accent } as CSSProperties}>
+            {item.fa}
+          </Link>
+        ))}
+      </div>
+    </nav>
   );
 }
 
@@ -144,16 +158,91 @@ export function VideoDetail({ item, schema }: { item: VideoContent; schema: obje
           <div className="video-frame">
             <Image src={item.poster} alt={`پوستر ${item.title}`} width={1100} height={620} sizes="(max-width: 1024px) 100vw, 56vw" className="aspect-video w-full rounded-[1.35rem] object-cover" />
             <span className="video-play">▶</span>
+            <span className="video-duration">{item.duration}</span>
           </div>
+          <article className="card p-7 md:p-8">
+            <p className="eyebrow">Video Brief</p>
+            <h2 className="mt-3 text-3xl font-black">آنچه در این ویدئو می‌بینید</h2>
+            <p className="mt-4 text-lg leading-10 text-[var(--muted)]">{item.summary}</p>
+            <div className="mt-6 grid gap-2">
+              {[item.category, item.service, ...item.tags].map((tag) => <span key={tag} className="rounded-full bg-sky-50 px-3 py-2 text-xs font-black text-sky-900">{tag}</span>)}
+            </div>
+          </article>
+        </div>
+        <div className="container-shell mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
+          <article className="card p-7">
+            <p className="eyebrow">Chapters</p>
+            <h2 className="mt-3 text-3xl font-black">فصل‌های ویدئو</h2>
+            <div className="mt-6 grid gap-3">
+              {item.chapters.map((chapter) => (
+                <div key={`${chapter.time}-${chapter.title}`} className="chapter-row">
+                  <span>{chapter.time}</span>
+                  <div>
+                    <h3 className="font-black">{chapter.title}</h3>
+                    <p className="mt-1 text-sm leading-7 text-[var(--muted)]">{chapter.summary}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </article>
           <article className="card p-7">
             <p className="eyebrow">Transcript</p>
-            <h2 className="mt-3 text-3xl font-black">توضیح و ترنسکریپت</h2>
+            <h2 className="mt-3 text-3xl font-black">ترنسکریپت و توضیح</h2>
             <p className="mt-4 leading-9 text-[var(--muted)]">{item.transcript}</p>
-            <p className="mt-5 text-sm font-black text-[var(--electric)]">مدت ویدئو: {item.duration}</p>
+          </article>
+        </div>
+        <div className="container-shell mt-8 grid gap-6 lg:grid-cols-2">
+          <article className="card p-7">
+            <p className="eyebrow">Related Services</p>
+            <h2 className="mt-3 text-2xl font-black">سرویس‌های مرتبط</h2>
+            <div className="mt-5 grid gap-3 sm:grid-cols-2">
+              {item.relatedServices.map((slug) => {
+                const service = technicalServices.find((entry) => entry.slug === slug) || marketplaceCategories.find((entry) => entry.slug === slug);
+                return <Link key={slug} href="/fa/services" className="rounded-2xl border border-[var(--border)] p-4 text-sm font-black transition hover:border-[var(--electric)]">{service?.title || slug}</Link>;
+              })}
+            </div>
+          </article>
+          <article className="card p-7">
+            <p className="eyebrow">Related Cars</p>
+            <h2 className="mt-3 text-2xl font-black">برند و مدل مرتبط</h2>
+            <div className="mt-5 grid gap-3">
+              {item.relatedCars.map((car) => (
+                <Link key={car.href} href={car.href} className="rounded-2xl bg-slate-50 p-4 text-sm font-black text-slate-950 transition hover:bg-sky-50 hover:text-[var(--electric)]">
+                  {car.brand}{car.model ? ` / ${car.model}` : ""}
+                </Link>
+              ))}
+            </div>
           </article>
         </div>
       </section>
-      <ContentDetail item={item} />
+      <section className="section bg-[linear-gradient(180deg,#f6f9ff_0%,#ffffff_100%)]">
+        <div className="container-shell grid gap-6 lg:grid-cols-[1fr_320px]">
+          <article className="card p-6 md:p-9">
+            <p className="eyebrow">Video Notes</p>
+            <div className="mt-8 grid gap-6">
+              {item.sections.map((section) => (
+                <section key={section.title} className="rounded-[1.25rem] border border-[var(--border)] bg-white p-5">
+                  <h2 className="text-2xl font-black">{section.title}</h2>
+                  <p className="mt-3 leading-9 text-[var(--muted)]">{section.body}</p>
+                </section>
+              ))}
+            </div>
+            <FaqBlock faqs={item.faqs} />
+          </article>
+          <aside className="grid content-start gap-4">
+            <div className="card p-5">
+              <p className="eyebrow">Continue</p>
+              <div className="mt-4 grid gap-2 text-sm font-black">
+                <Link href="/fa/videos">همه ویدئوها</Link>
+                <Link href="/fa/academy">مقالات آموزشی</Link>
+                <Link href="/fa/projects">نمونه‌کارها</Link>
+                <Link href="/fa/cars">دانشنامه خودرو</Link>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </section>
+      <LeadSection sourcePage={item.path} interest={item.service} />
     </main>
   );
 }
@@ -249,6 +338,9 @@ export function VehicleBrandGrid({ brands }: { brands: VehicleBrand[] }) {
             <h2 className="mt-5 text-2xl font-black">{brand.fa}</h2>
             <p className="mt-2 text-sm font-black text-[var(--electric)]">{brand.name}</p>
             <p className="mt-4 text-sm leading-8 text-[var(--muted)]">{brand.description}</p>
+            <div className="mt-5 flex flex-wrap gap-2">
+              {brand.services.slice(0, 3).map((service) => <span key={service} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{service}</span>)}
+            </div>
           </Link>
         ))}
       </div>
@@ -259,6 +351,14 @@ export function VehicleBrandGrid({ brands }: { brands: VehicleBrand[] }) {
 export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBrand; model?: VehicleModel; schema: object }) {
   const title = model ? `${model.fa} در Auto Makhsus` : `خدمات ${brand.fa} در Auto Makhsus`;
   const description = model?.intro || brand.description;
+  const issues = model?.commonIssues || brand.commonIssues;
+  const diagnostics = model?.diagnostics || brand.diagnostics;
+  const parts = model?.parts || brand.parts;
+  const packages = model?.servicePackages || brand.servicePackages;
+  const faqs = model?.faqs || brand.faqs;
+  const relatedProjects = projects.filter((item) => item.brand === brand.name || item.brand === brand.fa || (model && item.model === model.name)).slice(0, 2);
+  const relatedVideos = videos.filter((item) => item.relatedCars.some((car) => car.href.includes(`/fa/cars/${brand.slug}`)) || item.tags.includes(brand.name)).slice(0, 2);
+  const relatedArticles = academyArticles.filter((item) => item.tags.some((tag) => ["دیاگ", "سرویس دوره‌ای", "کارشناسی قبل خرید", "قطعات مصرفی"].includes(tag))).slice(0, 2);
   return (
     <main>
       <SeoJsonLd data={schema} />
@@ -276,8 +376,27 @@ export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBra
             <p className="eyebrow">Common Issues</p>
             <h2 className="mt-3 text-3xl font-black">مشکلات رایج و نکات نگهداری</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {(model?.commonIssues || brand.commonIssues).map((issue) => <p key={issue} className="rounded-2xl bg-sky-50 p-4 text-sm font-black text-sky-950">{issue}</p>)}
+              {issues.map((issue) => <p key={issue} className="rounded-2xl bg-sky-50 p-4 text-sm font-black text-sky-950">{issue}</p>)}
               {model?.maintenance.map((item) => <p key={item} className="rounded-2xl bg-slate-50 p-4 text-sm font-black text-slate-900">{item}</p>)}
+            </div>
+          </article>
+        </div>
+        <div className="container-shell mt-8 grid gap-5 lg:grid-cols-3">
+          <VehicleInfoPanel title="دیاگ و عیب‌یابی" items={diagnostics} />
+          <VehicleInfoPanel title="قطعات و خرید + نصب" items={parts} />
+          <VehicleInfoPanel title="آپشن و دیتیلینگ" items={[...brand.options, ...brand.detailing].slice(0, 6)} />
+        </div>
+        <div className="container-shell mt-8">
+          <article className="card p-7">
+            <p className="eyebrow">Service Packages</p>
+            <h2 className="mt-3 text-3xl font-black">پکیج‌های پیشنهادی {model?.fa || brand.fa}</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              {packages.map((entry) => (
+                <div key={entry.title} className="service-package-card">
+                  <h3 className="text-xl font-black">{entry.title}</h3>
+                  <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{entry.body}</p>
+                </div>
+              ))}
             </div>
           </article>
         </div>
@@ -293,6 +412,18 @@ export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBra
           </div>
         ) : null}
       </section>
+      <section className="section bg-[linear-gradient(180deg,#f6f9ff_0%,#ffffff_100%)]">
+        <div className="container-shell grid gap-6 lg:grid-cols-3">
+          <RelatedContentCard title="مقالات آموزشی مرتبط" items={relatedArticles.map((item) => ({ title: item.title, href: item.path, description: item.summary }))} fallbackHref="/fa/academy" />
+          <RelatedContentCard title="ویدئوهای مرتبط" items={relatedVideos.map((item) => ({ title: item.title, href: item.path, description: item.summary }))} fallbackHref="/fa/videos" />
+          <RelatedContentCard title="نمونه‌کارهای مرتبط" items={relatedProjects.map((item) => ({ title: item.title, href: item.path, description: item.summary }))} fallbackHref="/fa/projects" />
+        </div>
+      </section>
+      <section className="section bg-white">
+        <div className="container-shell">
+          <FaqBlock faqs={faqs} />
+        </div>
+      </section>
       <section className="section bg-[#07111f] text-white">
         <div className="container-shell grid gap-5 md:grid-cols-3">
           <Link href="/fa/academy" className="dark-mini-card">مقالات آموزشی مرتبط</Link>
@@ -302,6 +433,35 @@ export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBra
       </section>
       <LeadSection sourcePage={model ? `/fa/cars/${brand.slug}/${model.slug}` : `/fa/cars/${brand.slug}`} interest={`رزرو سرویس ${model?.fa || brand.fa}`} />
     </main>
+  );
+}
+
+function VehicleInfoPanel({ title, items }: { title: string; items: string[] }) {
+  return (
+    <article className="vehicle-info-panel">
+      <h2 className="text-2xl font-black">{title}</h2>
+      <div className="mt-5 grid gap-3">
+        {items.map((item) => <p key={item} className="rounded-2xl bg-white p-4 text-sm font-black text-slate-950 shadow-sm">{item}</p>)}
+      </div>
+    </article>
+  );
+}
+
+function RelatedContentCard({ title, items, fallbackHref }: { title: string; items: { title: string; href: string; description: string }[]; fallbackHref: string }) {
+  return (
+    <article className="card p-6">
+      <h2 className="text-2xl font-black">{title}</h2>
+      <div className="mt-5 grid gap-3">
+        {items.length ? items.map((item) => (
+          <Link key={item.href} href={item.href} className="rounded-2xl border border-[var(--border)] p-4 transition hover:border-[var(--electric)]">
+            <h3 className="font-black">{item.title}</h3>
+            <p className="mt-2 text-sm leading-7 text-[var(--muted)]">{item.description}</p>
+          </Link>
+        )) : (
+          <Link href={fallbackHref} className="rounded-2xl border border-[var(--border)] p-4 font-black text-[var(--electric)]">مشاهده آرشیو</Link>
+        )}
+      </div>
+    </article>
   );
 }
 

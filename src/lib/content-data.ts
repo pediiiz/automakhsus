@@ -26,6 +26,8 @@ export type VideoContent = ContentCard & {
   duration: string;
   transcript: string;
   poster: string;
+  chapters: { time: string; title: string; summary: string }[];
+  relatedCars: { brand: string; model?: string; href: string }[];
 };
 
 export type ProjectContent = ContentCard & {
@@ -49,6 +51,12 @@ export type VehicleBrand = {
   description: string;
   services: string[];
   commonIssues: string[];
+  diagnostics: string[];
+  parts: string[];
+  options: string[];
+  detailing: string[];
+  servicePackages: { title: string; body: string }[];
+  faqs: { question: string; answer: string }[];
   models: VehicleModel[];
 };
 
@@ -60,6 +68,10 @@ export type VehicleModel = {
   intro: string;
   commonIssues: string[];
   maintenance: string[];
+  diagnostics: string[];
+  parts: string[];
+  servicePackages: { title: string; body: string }[];
+  faqs: { question: string; answer: string }[];
 };
 
 export const contentVisual = {
@@ -162,6 +174,16 @@ export const videos: VideoContent[] = [
     poster: contentVisual.videos,
     duration: "03:40",
     transcript: "در این ویدئو، مسیر استاندارد دیاگ از دریافت علائم مشتری تا خواندن کد خطا، بررسی داده زنده و ارائه گزارش توضیح داده می‌شود.",
+    chapters: [
+      { time: "00:00", title: "ثبت علائم", summary: "چه اطلاعاتی از مشتری و خودرو قبل از اتصال دستگاه لازم است." },
+      { time: "00:48", title: "خواندن کد و داده زنده", summary: "تفاوت کد خطا، داده زنده و تست عملی در خودروهای خارجی." },
+      { time: "02:10", title: "گزارش تشخیص", summary: "چطور نتیجه دیاگ به اولویت تعمیر و هزینه احتمالی تبدیل می‌شود." },
+    ],
+    relatedCars: [
+      { brand: "BMW", model: "X5", href: "/fa/cars/bmw/x5" },
+      { brand: "Mercedes-Benz", model: "C200", href: "/fa/cars/mercedes-benz/c200" },
+      { brand: "Hyundai", model: "Santa Fe", href: "/fa/cars/hyundai/santa-fe" },
+    ],
     path: "/fa/videos/diagnostic-workflow-video",
     relatedServices: ["diagnostics", "electronics"],
     sections: [
@@ -186,6 +208,16 @@ export const videos: VideoContent[] = [
     poster: contentVisual.videos,
     duration: "04:15",
     transcript: "در این ویدئو درباره انتخاب قطعه، سازگاری، نصب، تست عملکرد و ثبت گارانتی نصب صحبت می‌شود.",
+    chapters: [
+      { time: "00:00", title: "بررسی سازگاری", summary: "انتخاب آپشن بر اساس برند، مدل، برق و ماژول‌های خودرو." },
+      { time: "01:12", title: "نصب تمیز", summary: "مسیر سیم‌کشی، فیتینگ کابین و حفظ ظاهر کارخانه‌ای." },
+      { time: "03:05", title: "کنترل کیفیت", summary: "تست عملکرد، خطایابی بعد نصب و ثبت مسیر گارانتی." },
+    ],
+    relatedCars: [
+      { brand: "Toyota", model: "Prado", href: "/fa/cars/toyota/prado" },
+      { brand: "Lexus", model: "RX", href: "/fa/cars/lexus/rx" },
+      { brand: "Kia", model: "Optima", href: "/fa/cars/kia/optima" },
+    ],
     path: "/fa/videos/option-installation-video",
     relatedServices: ["options", "electronics"],
     sections: [
@@ -355,26 +387,26 @@ export const questions: QuestionContent[] = [
 
 const priorityModels: Record<string, VehicleModel[]> = {
   bmw: [
-    { slug: "x3", name: "X3", fa: "BMW X3", years: "2015 تا جدید", intro: "کراس‌اوور محبوب BMW با حساسیت بالا به نگهداری گیربکس، سیستم تعلیق و برق.", commonIssues: ["خطاهای سنسور", "نشتی روغن", "لرزش تعلیق"], maintenance: ["دیاگ دوره‌ای", "بازدید گیربکس", "بررسی جلوبندی"] },
-    { slug: "x5", name: "X5", fa: "BMW X5", years: "2014 تا جدید", intro: "SUV لوکس BMW که نیازمند سرویس منظم، قطعات سازگار و تشخیص دقیق است.", commonIssues: ["خطاهای ماژول", "مشکلات تعلیق", "مصرفی‌های گران"], maintenance: ["سرویس دوره‌ای", "دیاگ تخصصی", "بازدید ترمز"] },
+    { slug: "x3", name: "X3", fa: "BMW X3", years: "2015 تا جدید", intro: "کراس‌اوور محبوب BMW با حساسیت بالا به نگهداری گیربکس، سیستم تعلیق و برق.", commonIssues: ["خطاهای سنسور", "نشتی روغن", "لرزش تعلیق"], maintenance: ["دیاگ دوره‌ای", "بازدید گیربکس", "بررسی جلوبندی"], diagnostics: ["خواندن خطاهای DME و گیربکس", "بررسی داده زنده سنسور اکسیژن و فشار", "تست باتری و افت ولتاژ ماژول‌ها"], parts: ["فیلتر و روغن سازگار", "قطعات جلوبندی با کیفیت", "لنت و دیسک مناسب وزن خودرو"], servicePackages: [{ title: "بازدید خرید BMW X3", body: "دیاگ، تعلیق، روغن‌ریزی، گیربکس و بدنه قبل از خرید بررسی می‌شود." }, { title: "سرویس نگهداری X3", body: "سرویس مصرفی، بازدید ترمز، جلوبندی و گزارش دیجیتال برای نگهداری دوره‌ای." }], faqs: [{ question: "برای X3 دیاگ دوره‌ای لازم است؟", answer: "بله، خطاهای مقطعی برق و گیربکس در X3 بهتر است قبل از تبدیل شدن به خرابی سنگین بررسی شوند." }] },
+    { slug: "x5", name: "X5", fa: "BMW X5", years: "2014 تا جدید", intro: "SUV لوکس BMW که نیازمند سرویس منظم، قطعات سازگار و تشخیص دقیق است.", commonIssues: ["خطاهای ماژول", "مشکلات تعلیق", "مصرفی‌های گران"], maintenance: ["سرویس دوره‌ای", "دیاگ تخصصی", "بازدید ترمز"], diagnostics: ["بررسی خطاهای تعلیق و ارتفاع", "تست گیربکس و دمای روغن", "کنترل ماژول‌های بدنه و رفاهی"], parts: ["مصرفی‌های اصلی یا معادل معتبر", "قطعات ترمز متناسب با وزن X5", "اقلام تعلیق و بوش‌های با دوام"], servicePackages: [{ title: "پکیج کنترل سلامت X5", body: "برای خودروهای پرکارکرد شامل دیاگ، تعلیق، ترمز، گیربکس و نشتی‌ها." }, { title: "پکیج تحویل سفر", body: "بازدید ایمنی، روغن، لاستیک، ترمز و خطاهای ماژولی قبل از سفر." }], faqs: [{ question: "هزینه نگهداری X5 چطور کنترل می‌شود؟", answer: "با دیاگ زودهنگام، قطعه معتبر، ثبت سابقه و پیشگیری از تعمیرات سنگین." }] },
   ],
   "mercedes-benz": [
-    { slug: "c200", name: "C200", fa: "Mercedes-Benz C200", years: "2014 تا جدید", intro: "سدان پرتقاضای بنز با نیاز به تشخیص دقیق برق، موتور و آپشن‌ها.", commonIssues: ["خطای ماژول", "سنسورها", "گیربکس"], maintenance: ["دیاگ", "سرویس روغن", "بازدید برق"] },
-    { slug: "e200", name: "E200", fa: "Mercedes-Benz E200", years: "2014 تا جدید", intro: "سدان executive بنز با ارزش بالای نگهداری صحیح و ثبت سوابق.", commonIssues: ["برق و آپشن", "تعلیق", "ترمز"], maintenance: ["سرویس دوره‌ای", "کارشناسی", "بازدید تعلیق"] },
+    { slug: "c200", name: "C200", fa: "Mercedes-Benz C200", years: "2014 تا جدید", intro: "سدان پرتقاضای بنز با نیاز به تشخیص دقیق برق، موتور و آپشن‌ها.", commonIssues: ["خطای ماژول", "سنسورها", "گیربکس"], maintenance: ["دیاگ", "سرویس روغن", "بازدید برق"], diagnostics: ["اسکن ماژول‌های SAM و ECU", "بررسی خطاهای موتور توربو", "تست آپشن‌ها و سنسورهای کابین"], parts: ["روغن و فیلتر مطابق استاندارد بنز", "قطعات برقی با سازگاری دقیق", "مصرفی‌های ترمز و تعلیق معتبر"], servicePackages: [{ title: "بازدید فنی C200", body: "مناسب خرید یا نگهداری؛ شامل دیاگ، موتور، گیربکس، برق و بدنه." }, { title: "پکیج آپشن C200", body: "بررسی نصب آپشن با سیم‌کشی ایمن و کنترل کیفیت." }], faqs: [{ question: "آیا نصب آپشن روی C200 ریسک دارد؟", answer: "اگر سازگاری و سیم‌کشی درست بررسی نشود بله؛ نصب باید OEM-style و تست‌شده باشد." }] },
+    { slug: "e200", name: "E200", fa: "Mercedes-Benz E200", years: "2014 تا جدید", intro: "سدان executive بنز با ارزش بالای نگهداری صحیح و ثبت سوابق.", commonIssues: ["برق و آپشن", "تعلیق", "ترمز"], maintenance: ["سرویس دوره‌ای", "کارشناسی", "بازدید تعلیق"], diagnostics: ["بررسی ماژول‌های رفاهی و ایمنی", "تست تعلیق و ترمز", "کنترل خطاهای گیربکس و موتور"], parts: ["مصرفی‌های سطح executive", "قطعات ترمز با استاندارد بالا", "اقلام برقی سازگار"], servicePackages: [{ title: "پکیج نگهداری E200", body: "سرویس دوره‌ای، دیاگ و بازدید سیستم‌های رفاهی برای حفظ کیفیت سواری." }, { title: "پکیج کارشناسی E200", body: "دیاگ کامل، بدنه، رنگ، آپشن‌ها و سابقه سرویس قبل از خرید." }], faqs: [{ question: "برای E200 چه چیزی مهم‌تر است؟", answer: "ثبت سابقه، دیاگ دقیق و قطعه سازگار برای حفظ ارزش خودرو بسیار مهم است." }] },
   ],
   toyota: [
-    { slug: "prado", name: "Prado", fa: "Toyota Prado", years: "2008 تا جدید", intro: "SUV قابل اعتماد تویوتا که با سرویس صحیح، دوام بالایی دارد.", commonIssues: ["جلوبندی", "ترمز", "قطعات مصرفی"], maintenance: ["سرویس دوره‌ای", "بازدید تعلیق", "دیاگ"] },
+    { slug: "prado", name: "Prado", fa: "Toyota Prado", years: "2008 تا جدید", intro: "SUV قابل اعتماد تویوتا که با سرویس صحیح، دوام بالایی دارد.", commonIssues: ["جلوبندی", "ترمز", "قطعات مصرفی"], maintenance: ["سرویس دوره‌ای", "بازدید تعلیق", "دیاگ"], diagnostics: ["کنترل خطاهای 4WD و ABS", "بازدید سیستم تعلیق و ترمز", "بررسی سنسورها و مصرفی‌ها"], parts: ["قطعات مصرفی بادوام", "اقلام تعلیق مناسب استفاده شهری و سفر", "لنت و دیسک معتبر"], servicePackages: [{ title: "پکیج سفر پرادو", body: "بازدید ایمنی، جلوبندی، ترمز، روغن‌ها و خطاهای سیستم چهارچرخ." }, { title: "پکیج خرید + نصب", body: "تامین قطعه مصرفی و نصب در مسیر کنترل‌شده Auto Makhsus." }], faqs: [{ question: "پرادو بیشتر به چه بازدیدی نیاز دارد؟", answer: "جلوبندی، ترمز، روغن‌ها و سیستم چهارچرخ باید منظم بررسی شوند." }] },
   ],
   lexus: [
-    { slug: "rx", name: "RX", fa: "Lexus RX", years: "2010 تا جدید", intro: "کراس‌اوور لوکس لکسوس با تمرکز روی نگهداری نرم، دقیق و مستند.", commonIssues: ["مصرفی‌ها", "سیستم هیبرید در برخی مدل‌ها", "تعلیق"], maintenance: ["دیاگ", "سرویس روغن", "بازدید ترمز"] },
+    { slug: "rx", name: "RX", fa: "Lexus RX", years: "2010 تا جدید", intro: "کراس‌اوور لوکس لکسوس با تمرکز روی نگهداری نرم، دقیق و مستند.", commonIssues: ["مصرفی‌ها", "سیستم هیبرید در برخی مدل‌ها", "تعلیق"], maintenance: ["دیاگ", "سرویس روغن", "بازدید ترمز"], diagnostics: ["بررسی خطاهای سیستم هیبرید در مدل‌های مرتبط", "کنترل سنسورها و ترمز", "بازدید کیفیت سواری و تعلیق"], parts: ["مصرفی‌های باکیفیت برای حفظ نرمی سواری", "قطعات ترمز و تعلیق سازگار", "مواد دیتیلینگ مناسب کابین لوکس"], servicePackages: [{ title: "پکیج سلامت Lexus RX", body: "دیاگ، تعلیق، ترمز و سرویس مصرفی با گزارش نگهداری." }, { title: "پکیج دیتیلینگ RX", body: "محافظت بدنه و کابین برای حفظ کیفیت و ارزش خودرو." }], faqs: [{ question: "آیا RX به دیتیلینگ تخصصی نیاز دارد؟", answer: "برای حفظ کیفیت کابین، رنگ و ارزش فروش، دیتیلینگ اصولی توصیه می‌شود." }] },
   ],
   hyundai: [
-    { slug: "santa-fe", name: "Santa Fe", fa: "هیوندای سانتافه", years: "2010 تا جدید", intro: "سانتافه در ایران پرمصرف است و نگهداری آن باید با قطعات معتبر انجام شود.", commonIssues: ["گیربکس", "جلوبندی", "مصرفی‌ها"], maintenance: ["سرویس دوره‌ای", "بازدید جلوبندی", "دیاگ"] },
-    { slug: "tucson", name: "Tucson", fa: "هیوندای توسان", years: "2010 تا جدید", intro: "توسان برای سرویس، قطعه و عیب‌یابی در شبکه خودروهای خارجی Auto Makhsus پوشش داده می‌شود.", commonIssues: ["سنسورها", "تعلیق", "ترمز"], maintenance: ["دیاگ", "سرویس روغن", "بازدید ترمز"] },
+    { slug: "santa-fe", name: "Santa Fe", fa: "هیوندای سانتافه", years: "2010 تا جدید", intro: "سانتافه در ایران پرمصرف است و نگهداری آن باید با قطعات معتبر انجام شود.", commonIssues: ["گیربکس", "جلوبندی", "مصرفی‌ها"], maintenance: ["سرویس دوره‌ای", "بازدید جلوبندی", "دیاگ"], diagnostics: ["بررسی گیربکس و دمای روغن", "کنترل خطاهای سنسور و ABS", "بازدید صدای جلوبندی"], parts: ["مصرفی‌های معتبر و قابل تامین", "قطعات گیربکس و جلوبندی با QC", "لوازم جانبی و آپشن‌های سازگار"], servicePackages: [{ title: "پکیج سانتافه کارکرده", body: "دیاگ، جلوبندی، گیربکس، ترمز و سرویس پایه بعد از خرید." }, { title: "پکیج مصرفی سانتافه", body: "تامین و نصب قطعات مصرفی با ثبت فاکتور و سابقه." }], faqs: [{ question: "برای سانتافه گیربکس را چه زمانی بررسی کنیم؟", answer: "در تعویض دنده غیرعادی، تاخیر، ضربه یا قبل از خرید حتماً بررسی شود." }] },
+    { slug: "tucson", name: "Tucson", fa: "هیوندای توسان", years: "2010 تا جدید", intro: "توسان برای سرویس، قطعه و عیب‌یابی در شبکه خودروهای خارجی Auto Makhsus پوشش داده می‌شود.", commonIssues: ["سنسورها", "تعلیق", "ترمز"], maintenance: ["دیاگ", "سرویس روغن", "بازدید ترمز"], diagnostics: ["اسکن خطاهای سنسور و موتور", "بازدید جلوبندی و ترمز", "کنترل مصرفی‌ها و نشت‌ها"], parts: ["لنت، فیلتر و روغن معتبر", "قطعات تعلیق و کمک", "آپشن‌های کابین سازگار"], servicePackages: [{ title: "پکیج نگهداری توسان", body: "سرویس دوره‌ای، دیاگ و بازدید ترمز برای استفاده شهری." }, { title: "پکیج آماده فروش", body: "بازدید فنی، دیتیلینگ سبک و گزارش وضعیت برای فروش شفاف‌تر." }], faqs: [{ question: "توسان بیشتر چه خرابی‌هایی دارد؟", answer: "تعلیق، ترمز، سنسورها و مصرفی‌ها باید براساس کارکرد بررسی شوند." }] },
   ],
   kia: [
-    { slug: "cerato", name: "Cerato", fa: "کیا سراتو", years: "2010 تا جدید", intro: "سراتو نیازمند سرویس مصرفی منظم و بررسی دقیق قطعات جایگزین است.", commonIssues: ["جلوبندی", "ترمز", "برق"], maintenance: ["سرویس دوره‌ای", "دیاگ", "بازدید جلوبندی"] },
-    { slug: "optima", name: "Optima", fa: "کیا اپتیما", years: "2010 تا جدید", intro: "اپتیما به سرویس اصولی موتور، گیربکس و سیستم برق نیاز دارد.", commonIssues: ["گیربکس", "سنسورها", "مصرفی‌ها"], maintenance: ["بازدید گیربکس", "سرویس روغن", "دیاگ"] },
+    { slug: "cerato", name: "Cerato", fa: "کیا سراتو", years: "2010 تا جدید", intro: "سراتو نیازمند سرویس مصرفی منظم و بررسی دقیق قطعات جایگزین است.", commonIssues: ["جلوبندی", "ترمز", "برق"], maintenance: ["سرویس دوره‌ای", "دیاگ", "بازدید جلوبندی"], diagnostics: ["کنترل خطاهای موتور و سنسور", "بازدید برق و باتری", "بررسی صدای تعلیق"], parts: ["مصرفی‌های اقتصادی اما معتبر", "قطعات جلوبندی سازگار", "لوازم جانبی رایج"], servicePackages: [{ title: "پکیج مصرفی سراتو", body: "روغن، فیلتر، ترمز و بازدید پایه برای کاهش هزینه نگهداری." }, { title: "پکیج خرید سراتو", body: "کارشناسی فنی، دیاگ و بررسی مصرفی‌ها قبل از معامله." }], faqs: [{ question: "برای سراتو قطعه استوک مناسب است؟", answer: "فقط اگر سلامت، سازگاری و ریسک نصب بررسی شود؛ قطعه مصرفی بهتر است معتبر و نو باشد." }] },
+    { slug: "optima", name: "Optima", fa: "کیا اپتیما", years: "2010 تا جدید", intro: "اپتیما به سرویس اصولی موتور، گیربکس و سیستم برق نیاز دارد.", commonIssues: ["گیربکس", "سنسورها", "مصرفی‌ها"], maintenance: ["بازدید گیربکس", "سرویس روغن", "دیاگ"], diagnostics: ["بررسی گیربکس و سنسورها", "کنترل خطاهای موتور", "بازدید ترمز و جلوبندی"], parts: ["روغن و فیلتر گیربکس مناسب", "قطعات مصرفی معتبر", "آپشن‌های کابین و رفاهی"], servicePackages: [{ title: "پکیج گیربکس اپتیما", body: "بازدید عملکرد، خطاها، دما و سرویس پیشنهادی گیربکس." }, { title: "پکیج نگهداری اپتیما", body: "سرویس دوره‌ای، دیاگ و بازدید مصرفی‌ها با ثبت سابقه." }], faqs: [{ question: "نشانه نیاز اپتیما به بازدید گیربکس چیست؟", answer: "ضربه، تاخیر در تعویض دنده، داغ شدن یا خطاهای مرتبط باید سریع بررسی شوند." }] },
   ],
 };
 
@@ -403,10 +435,113 @@ export const vehicleBrands: VehicleBrand[] = [
   name,
   fa,
   description,
-  services: ["دیاگ تخصصی", "سرویس دوره‌ای", "قطعات و خرید + نصب", "کارشناسی قبل خرید"],
-  commonIssues: ["نیاز به قطعه سازگار", "خطاهای برقی و سنسوری", "اهمیت ثبت سابقه سرویس"],
+  services: brandServices(slug, fa),
+  commonIssues: brandIssues(slug, fa),
+  diagnostics: brandDiagnostics(slug, fa),
+  parts: brandParts(slug, fa),
+  options: brandOptions(slug, fa),
+  detailing: brandDetailing(slug, fa),
+  servicePackages: brandPackages(slug, fa),
+  faqs: brandFaqs(slug, fa),
   models: priorityModels[slug] || [],
 }));
+
+function brandServices(slug: string, fa: string) {
+  const base = ["دیاگ تخصصی", "سرویس دوره‌ای", "قطعات و خرید + نصب", "کارشناسی قبل خرید"];
+  const premium = ["دیتیلینگ و محافظت بدنه", "بررسی آپشن‌ها و الکترونیک کابین"];
+  const rugged = ["بازدید تعلیق و آفرود", "کنترل سیستم چهارچرخ"];
+  if (["porsche", "maserati", "alfa-romeo"].includes(slug)) return [...base, "بازدید فنی خودروهای خاص", "قطعات Special Order"];
+  if (["land-rover", "range-rover", "jeep", "toyota"].includes(slug)) return [...base, ...rugged];
+  if (["lexus", "mercedes-benz", "bmw", "audi", "volvo"].includes(slug)) return [...base, ...premium];
+  return [...base, `برنامه نگهداری ${fa}`];
+}
+
+function brandIssues(slug: string, fa: string) {
+  const issues: Record<string, string[]> = {
+    bmw: ["حساسیت به سرویس روغن و کیفیت قطعه", "خطاهای ماژول و سنسور", "تعلیق و ترمز در مدل‌های سنگین‌تر"],
+    "mercedes-benz": ["خطاهای ماژول‌های رفاهی", "اهمیت سرویس موتور و گیربکس", "نیاز به نصب آپشن بدون آسیب به سیم‌کشی"],
+    porsche: ["هزینه بالای خطای تشخیص", "حساسیت گیربکس و سیستم خنک‌کاری", "نیاز به دیتیلینگ و نگهداری دقیق"],
+    audi: ["خطاهای برق و ماژول", "سرویس گیربکس و توربو در مدل‌های مرتبط", "قطعات تخصصی با ریسک تامین"],
+    volkswagen: ["حساسیت به قطعات مصرفی سازگار", "خطاهای سنسور و برق", "نیاز به سرویس پیشگیرانه"],
+    mini: ["فضای فنی فشرده و اهمیت تشخیص دقیق", "قطعات خاص بدنه و کابین", "حساسیت به سرویس دوره‌ای"],
+    "land-rover": ["تعلیق و سیستم ارتفاع", "خطاهای برق و ماژول", "نیاز به قطعات معتبر"],
+    "range-rover": ["هزینه بالای خطاهای تعلیق", "ماژول‌های رفاهی و برق", "اهمیت ثبت سابقه سرویس"],
+    volvo: ["سیستم‌های ایمنی و سنسورها", "قطعات خاص بدنه و برق", "نیاز به دیاگ دقیق"],
+    maserati: ["قطعات کمیاب و Special Order", "حساسیت سرویس موتور و گیربکس", "نیاز به نگهداری بسیار مستند"],
+    "alfa-romeo": ["قطعات خاص و زمان تامین", "خطاهای سنسوری و برقی", "اهمیت شناخت مدل"],
+    jeep: ["تعلیق و استفاده سخت", "سیستم چهارچرخ", "مصرفی‌های مناسب کاربری"],
+    toyota: ["مصرفی‌های پرتکرار", "جلوبندی و ترمز", "اهمیت قطعه معتبر در مدل‌های وارداتی"],
+    lexus: ["حفظ کیفیت سواری", "سیستم هیبرید در برخی مدل‌ها", "دیتیلینگ و نگهداری کابین"],
+    nissan: ["قطعات مصرفی و برق", "گیربکس در بعضی مدل‌ها", "دیاگ قبل از تعمیر"],
+    hyundai: ["جلوبندی، گیربکس و مصرفی‌ها", "خطاهای سنسور", "تفاوت کیفیت قطعه جایگزین"],
+    kia: ["مصرفی‌ها و جلوبندی", "گیربکس در مدل‌های پرکارکرد", "نیاز به قطعه معتبر"],
+    skoda: ["برند جدیدتر با نیاز به مستندسازی", "قطعات و سرویس تخصصی", "خطاهای برق و ماژول"],
+    aion: ["خودروی جدیدتر با نیاز به پشتیبانی فنی", "برق و الکترونیک حساس", "نیاز به ثبت دقیق سابقه"],
+  };
+  return issues[slug] || [`نیاز به قطعه سازگار ${fa}`, "خطاهای برقی و سنسوری", "اهمیت ثبت سابقه سرویس"];
+}
+
+function brandDiagnostics(slug: string, fa: string) {
+  if (["aion", "volvo"].includes(slug)) return ["اسکن ماژول‌های ایمنی و کمک‌راننده", "کنترل خطاهای ارتباطی شبکه خودرو", "گزارش ریسک ادامه رانندگی"];
+  if (["bmw", "mercedes-benz", "audi"].includes(slug)) return ["دیاگ موتور، گیربکس و ماژول‌های بدنه", "بررسی داده زنده سنسورها", "تست باتری، ولتاژ و خطاهای مقطعی"];
+  if (["porsche", "maserati", "alfa-romeo"].includes(slug)) return ["تشخیص مرحله‌ای برای جلوگیری از تعمیر اشتباه", "کنترل دما، فشار و وضعیت سرویس‌های حساس", "تهیه گزارش فنی قبل از سفارش قطعه"];
+  if (["toyota", "lexus", "nissan", "hyundai", "kia", "skoda"].includes(slug)) return ["دیاگ کامل قبل از تعویض قطعه", "کنترل گیربکس، ترمز و سنسورها", "اولویت‌بندی تعمیرات ضروری و مصرفی"];
+  return [`دیاگ تخصصی ${fa}`, "بررسی برق، سنسور و ماژول", "گزارش تشخیص و اولویت تعمیر"];
+}
+
+function brandParts(slug: string, fa: string) {
+  if (["porsche", "maserati", "alfa-romeo", "mini", "volvo"].includes(slug)) return ["مسیر Special Order برای قطعات کمیاب", "بررسی OEM / Aftermarket قبل از سفارش", "ثبت قطعه، فاکتور و نصب در CRM"];
+  if (["toyota", "lexus", "hyundai", "kia", "nissan"].includes(slug)) return ["قطعات مصرفی قابل تامین", "خرید + نصب با کنترل کیفیت", "تشخیص قطعه اصلی، جایگزین معتبر یا استوک سالم"];
+  if (["land-rover", "range-rover", "jeep"].includes(slug)) return ["قطعات تعلیق و چهارچرخ", "مصرفی‌های مناسب کاربری سنگین", "بررسی ریسک قطعه استوک قبل از نصب"];
+  return [`تامین قطعات ${fa}`, "قطعات فنی، برق و مصرفی", "ثبت مسیر خرید + نصب در پرونده خودرو"];
+}
+
+function brandOptions(slug: string, fa: string) {
+  if (["bmw", "mercedes-benz", "lexus", "audi"].includes(slug)) return ["آپشن‌های رفاهی کابین", "نصب OEM-style بدون تخریب", "تست عملکرد و خطایابی بعد نصب"];
+  if (["toyota", "hyundai", "kia", "nissan"].includes(slug)) return ["ارتقای نمایشگر، دوربین، سنسور و امکانات رفاهی", "بررسی سازگاری برق و قطعه", "ثبت گارانتی نصب"];
+  return [`بررسی آپشن‌های قابل نصب روی ${fa}`, "کنترل سیم‌کشی و سازگاری", "QC نهایی و تحویل مستند"];
+}
+
+function brandDetailing(slug: string, fa: string) {
+  if (["porsche", "maserati", "lexus", "mercedes-benz", "bmw"].includes(slug)) return ["دیتیلینگ حرفه‌ای برای حفظ ارزش خودرو", "محافظت رنگ، سرامیک و PPF", "نگهداری کابین و تریم لوکس"];
+  return [`دیتیلینگ و نگهداری ظاهر ${fa}`, "شست‌وشو و آماده‌سازی اصولی", "پیشنهاد محافظت براساس کاربری خودرو"];
+}
+
+function brandPackages(slug: string, fa: string) {
+  const specialOrder = ["porsche", "maserati", "alfa-romeo", "mini", "volvo"].includes(slug);
+  const authorized = ["toyota", "lexus", "nissan", "hyundai", "skoda", "aion"].includes(slug);
+  return [
+    {
+      title: `پکیج تشخیص ${fa}`,
+      body: `دیاگ، بررسی علائم، اولویت‌بندی تعمیر و گزارش قابل پیگیری برای ${fa}.`,
+    },
+    {
+      title: specialOrder ? "پکیج تامین قطعه خاص" : "پکیج خرید + نصب قطعه",
+      body: specialOrder ? "برای قطعات کمیاب، مسیر سفارش خاص، کنترل سازگاری و نصب مستند پیشنهاد می‌شود." : "قطعه مصرفی یا فنی بعد از تایید سازگاری تامین و در مسیر کنترل‌شده نصب می‌شود.",
+    },
+    {
+      title: authorized ? "پکیج سرویس نمایندگی/مولتی‌برند" : "پکیج نگهداری دوره‌ای",
+      body: authorized ? "برای برندهای تحت پوشش ANI2203 یا Auto Makhsus، سرویس با ثبت سابقه و کنترل کیفیت انجام می‌شود." : "سرویس دوره‌ای، بازدید ترمز، تعلیق، برق و گزارش سلامت برای کاهش ریسک خرابی.",
+    },
+  ];
+}
+
+function brandFaqs(slug: string, fa: string) {
+  return [
+    {
+      question: `آیا Auto Makhsus برای ${fa} فقط سرویس فنی انجام می‌دهد؟`,
+      answer: "خیر. بسته به نیاز خودرو، دیاگ، سرویس، قطعه، خرید + نصب، آپشن، دیتیلینگ و کارشناسی قبل خرید قابل برنامه‌ریزی است.",
+    },
+    {
+      question: `برای ${fa} قطعه OEM بهتر است یا Aftermarket؟`,
+      answer: "تصمیم به نوع قطعه، حساسیت بخش، بودجه، موجودی و ریسک نصب بستگی دارد. مسیر پیشنهادی باید قبل از خرید شفاف شود.",
+    },
+    {
+      question: "آیا سابقه سرویس به پرونده خودرو وصل می‌شود؟",
+      answer: "در معماری Auto Makhsus، هدف اتصال سرویس، فاکتور، قطعه، پروژه و گارانتی به Vehicle Digital Passport است.",
+    },
+  ];
+}
 
 export const ecosystemLinks = [
   { title: "Academy", fa: "آکادمی", href: "/fa/academy", description: "مقالات فنی، راهنمای نگهداری، عیب‌یابی و آموزش خودروهای خارجی.", accent: "#0b5cff" },
@@ -454,9 +589,15 @@ export function videoSchema(item: VideoContent) {
     description: item.description,
     thumbnailUrl: absolute(item.poster),
     uploadDate: item.date,
-    duration: `PT${item.duration.replace(":", "M")}S`,
+    duration: videoDurationToIso(item.duration),
     transcript: item.transcript,
     inLanguage: "fa-IR",
+    hasPart: item.chapters.map((chapter) => ({
+      "@type": "Clip",
+      name: chapter.title,
+      startOffset: videoTimeToSeconds(chapter.time),
+      description: chapter.summary,
+    })),
   };
 }
 
@@ -505,10 +646,32 @@ export function vehicleSchema(brand: VehicleBrand, model?: VehicleModel) {
     mainEntity: {
       "@type": "Service",
       name: model ? `خدمات ${model.fa}` : `خدمات ${brand.fa}`,
-      serviceType: brand.services.join(", "),
+      serviceType: [...brand.services, ...(model?.maintenance || [])].join(", "),
       provider: { "@type": "Organization", name: "Auto Makhsus" },
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: model ? `پکیج‌های خدمات ${model.fa}` : `پکیج‌های خدمات ${brand.fa}`,
+        itemListElement: (model?.servicePackages || brand.servicePackages).map((entry) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: entry.title,
+            description: entry.body,
+          },
+        })),
+      },
     },
   };
+}
+
+function videoDurationToIso(duration: string) {
+  const [minutes = "0", seconds = "0"] = duration.split(":");
+  return `PT${Number(minutes)}M${Number(seconds)}S`;
+}
+
+function videoTimeToSeconds(time: string) {
+  const [minutes = "0", seconds = "0"] = time.split(":");
+  return Number(minutes) * 60 + Number(seconds);
 }
 
 export const contentRoutes = [

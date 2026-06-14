@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ContentDiscoveryNav } from "@/components/content/content-sections";
 import { brands, phone, whatsapp } from "@/lib/site-data";
 
 const nav = [
@@ -40,6 +41,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <a className="btn-primary" href={`tel:${phone}`}>تماس</a>
           </div>
         </div>
+        <ContentDiscoveryNav />
       </header>
       {children}
       <footer className="border-t border-white/10 bg-[#07111f] py-12 text-white">

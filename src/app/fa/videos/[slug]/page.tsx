@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ContentDetail } from "@/components/content/content-sections";
+import { VideoDetail } from "@/components/content/content-sections";
 import { faqSchema, findContent, videoSchema, videos } from "@/lib/content-data";
 import { pageMetadata } from "@/lib/seo";
 
@@ -19,5 +19,5 @@ export default async function VideoDetailPage({ params }: { params: Promise<{ sl
   const { slug } = await params;
   const item = findContent(videos, slug);
   if (!item) notFound();
-  return <ContentDetail item={item} schema={{ "@graph": [videoSchema(item), faqSchema(item)] }} />;
+  return <VideoDetail item={item} schema={{ "@graph": [videoSchema(item), faqSchema(item)] }} />;
 }
