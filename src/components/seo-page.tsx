@@ -41,7 +41,7 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
           <div className="mt-8 flex flex-wrap gap-3">
             <Link className="btn-primary" href="#lead">درخواست مشاوره</Link>
             <Link className="btn-ghost-dark" href="/fa/services">رزرو سرویس</Link>
-            <Link className="btn-ghost-dark" href="/fa/ecosystem">خرید قطعه</Link>
+            <Link className="btn-ghost-dark" href="/fa/store">خرید قطعه</Link>
             <Link className="btn-ghost-dark" href="/fa/cooperation">درخواست نصب</Link>
             <a className="btn-ghost-dark" href="https://ani2203.com/fa/booking">رزرو خدمات آنی سرویس</a>
           </div>
@@ -204,16 +204,16 @@ export function MarketplaceSection() {
               فروشگاه Auto Makhsus برای خرید قطعه، خرید همراه نصب، سفارش خاص و اتصال سفارش به CRM، فاکتور، پروژه، انبار و گارانتی طراحی می‌شود.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link className="btn-primary" href="#lead">خرید قطعه</Link>
-              <Link className="btn-secondary" href="#lead">خرید + نصب در Auto Makhsus</Link>
+              <Link className="btn-primary" href="/fa/store">خرید قطعه</Link>
+              <Link className="btn-secondary" href="/fa/store">خرید + نصب در Auto Makhsus</Link>
             </div>
           </div>
           <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
             {marketplaceCategories.map((item) => (
-              <article key={item.slug} className="market-card">
+              <Link key={item.slug} href={`/fa/store/categories/${item.slug}`} className="market-card">
                 <h3 className="text-lg font-black">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{item.description}</p>
-              </article>
+              </Link>
             ))}
           </div>
         </div>

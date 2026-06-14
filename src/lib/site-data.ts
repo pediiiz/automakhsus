@@ -128,6 +128,8 @@ export const faRoutes = [
   "/fa/community",
   "/fa/community/questions",
   "/fa/cars",
+  "/fa/store",
+  "/fa/store/categories",
   "/fa/ecosystem",
   "/fa/about",
   "/fa/contact",

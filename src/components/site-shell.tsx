@@ -11,7 +11,7 @@ const nav = [
   ["دانشنامه خودرو", "/fa/cars"],
   ["کامیونیتی", "/fa/community"],
   ["اکوسیستم", "/fa/ecosystem"],
-  ["فروشگاه", "/fa/ecosystem"],
+  ["فروشگاه", "/fa/store"],
   ["پلتفرم دیجیتال", "/fa/digital-platform"],
   ["رزرو/همکاری", "/fa/cooperation"],
   ["تماس", "/fa/contact"],

@@ -385,6 +385,145 @@ export const questions: QuestionContent[] = [
   },
 ];
 
+const seedArticles: Omit<ContentCard, "image" | "date" | "path" | "relatedServices" | "sections" | "faqs">[] = [
+  { slug: "bmw-service-cost-control", title: "کنترل هزینه خدمات BMW در ایران", eyebrow: "BMW Guide", summary: "چطور با دیاگ، سرویس دوره‌ای و انتخاب قطعه درست هزینه نگهداری BMW را کنترل کنیم.", description: "خدمات BMW وقتی قابل مدیریت می‌شود که تشخیص، قطعه و سابقه سرویس در یک مسیر شفاف ثبت شود.", category: "راهنمای برند", tags: ["BMW", "هزینه سرویس", "قطعات"], brand: "BMW", service: "خدمات BMW", readTime: "۸ دقیقه" },
+  { slug: "benz-electrical-diagnostics", title: "عیب‌یابی برق و ماژول‌های Benz", eyebrow: "Benz Diagnostics", summary: "راهنمای تشخیص خطاهای برقی مرسدس بنز قبل از تعویض قطعه.", description: "در خودروهای Benz خطای ماژول، افت ولتاژ و نصب آپشن غیراستاندارد باید مرحله‌ای بررسی شود.", category: "راهنمای عیب‌یابی", tags: ["Benz", "برق", "ماژول"], brand: "Mercedes-Benz", service: "برق و الکترونیک", readTime: "۷ دقیقه" },
+  { slug: "porsche-maintenance-risk", title: "ریسک‌های نگهداری Porsche کارکرده", eyebrow: "Porsche Guide", summary: "نکاتی که قبل از سرویس، خرید قطعه و کارشناسی پورشه باید بدانید.", description: "پورشه به تشخیص دقیق، قطعه معتبر و گزارش مستند نیاز دارد تا تعمیر اشتباه هزینه سنگین ایجاد نکند.", category: "راهنمای برند", tags: ["Porsche", "کارشناسی", "قطعه"], brand: "Porsche", service: "کارشناسی قبل خرید", readTime: "۹ دقیقه" },
+  { slug: "toyota-lexus-periodic-service", title: "سرویس Toyota و Lexus؛ از مصرفی تا دیاگ", eyebrow: "Toyota Lexus", summary: "برنامه سرویس، قطعه و ثبت سابقه برای تویوتا و لکسوس وارداتی.", description: "Toyota و Lexus اگر با قطعه مناسب و سرویس مستند نگهداری شوند، ارزش و اعتماد بالاتری حفظ می‌کنند.", category: "راهنمای نگهداری", tags: ["Toyota", "Lexus", "سرویس دوره‌ای"], brand: "Toyota", service: "سرویس دوره‌ای", readTime: "۶ دقیقه" },
+  { slug: "imported-car-parts-buy-install", title: "خرید قطعه خودرو خارجی همراه نصب", eyebrow: "Marketplace Guide", summary: "چرا خرید + نصب در Auto Makhsus برای قطعات حساس منطقی‌تر است.", description: "خرید قطعه بدون بررسی سازگاری و نصب می‌تواند دوباره‌کاری ایجاد کند؛ مسیر خرید + نصب به CRM، فاکتور و پروژه متصل می‌شود.", category: "فروشگاه قطعات", tags: ["قطعات خودروهای خارجی", "خرید + نصب", "OEM"], service: "فروشگاه قطعات", readTime: "۷ دقیقه" },
+  { slug: "detailing-foreign-cars", title: "دیتیلینگ خودروهای خارجی؛ محافظت از ارزش خودرو", eyebrow: "Detailing", summary: "دیتیلینگ، PPF، سرامیک و مراقبت بدنه برای خودروهای خارجی.", description: "دیتیلینگ حرفه‌ای فقط زیبایی نیست؛ بخشی از نگهداری ارزش خودرو، کابین و رنگ محسوب می‌شود.", category: "دیتیلینگ", tags: ["دیتیلینگ", "PPF", "سرامیک"], service: "دیتیلینگ خودروهای خارجی", readTime: "۶ دقیقه" },
+  { slug: "foreign-car-options-safe-install", title: "نصب آپشن خودروهای خارجی بدون آسیب", eyebrow: "Options", summary: "اصول نصب آپشن، سیم‌کشی و کنترل کیفیت برای خودروهای وارداتی.", description: "هر آپشن باید از نظر برق، ماژول و سازگاری بررسی شود و بعد از نصب تست و ثبت گارانتی شود.", category: "آپشن خودرو", tags: ["آپشن خودروهای خارجی", "نصب", "برق"], service: "آپشن و ارتقا", readTime: "۷ دقیقه" },
+  { slug: "imported-car-gearbox-warning-signs", title: "علائم هشدار گیربکس خودروهای خارجی", eyebrow: "Gearbox", summary: "تقه، تاخیر، داغی و حالت اضطراری گیربکس را جدی بگیرید.", description: "خرابی گیربکس خودروهای خارجی معمولاً قبل از هزینه سنگین با نشانه‌هایی قابل تشخیص است.", category: "گیربکس", tags: ["گیربکس", "دیاگ", "تعمیرگاه خودروهای خارجی"], service: "گیربکس", readTime: "۸ دقیقه" },
+];
+
+academyArticles.push(...seedArticles.map((item) => ({
+  ...item,
+  date: "2026-06-14",
+  image: contentVisual.academy,
+  path: `/fa/academy/${item.slug}`,
+  relatedServices: [item.service.includes("قطعه") ? "technical-parts" : "diagnostics", "mechanics", "inspection"],
+  sections: [
+    { title: "مسئله اصلی", body: `${item.title} برای مالک خودرو خارجی مهم است چون تصمیم اشتباه در تشخیص، قطعه یا نصب می‌تواند هزینه و زمان پروژه را بالا ببرد.` },
+    { title: "مسیر Auto Makhsus", body: "در Auto Makhsus درخواست از فرم سایت وارد CRM می‌شود، برند و مدل خودرو مشخص می‌شود، مشاور فنی یا فروشگاه قطعات مسیر بررسی، تامین، نصب و ثبت سابقه را دنبال می‌کند." },
+    { title: "خروجی قابل پیگیری", body: "هدف این است که سرویس، قطعه، فاکتور، گارانتی و توصیه بعدی در مسیر دیجیتال خودرو قابل پیگیری باشد و مشتری تصمیم روشن بگیرد." },
+  ],
+  faqs: [
+    { question: "آیا قبل از خرید قطعه باید خودرو بررسی شود؟", answer: "برای قطعات حساس بله؛ سازگاری قطعه، برند، مدل، سال و نیاز نصب باید قبل از خرید قطعی شود." },
+    { question: "آیا درخواست از سایت وارد CRM می‌شود؟", answer: "بله، فرم‌های Auto Makhsus با منبع automakhsus و businessUnit مناسب در CRM ثبت می‌شوند." },
+  ],
+})));
+
+const seedVideos: Omit<VideoContent, "image" | "poster" | "date" | "path" | "relatedServices" | "sections" | "faqs" | "chapters" | "relatedCars" | "transcript">[] = [
+  { slug: "bmw-diagnostics-checklist-video", title: "چک‌لیست ویدئویی دیاگ BMW", eyebrow: "BMW Video", summary: "مراحل سریع بررسی خطاهای BMW قبل از تعمیر.", description: "ویدئو ساختاری برای آموزش مالک BMW درباره داده زنده، خطا و گزارش تشخیص.", category: "ویدئو دیاگ", tags: ["BMW", "دیاگ"], service: "خدمات BMW", duration: "04:20" },
+  { slug: "benz-module-warning-video", title: "خطاهای ماژول بنز را چطور بخوانیم؟", eyebrow: "Benz Video", summary: "نکات مهم درباره خطای ماژول و افت ولتاژ در Mercedes-Benz.", description: "این ویدئو توضیح می‌دهد چرا پاک کردن خطا کافی نیست و تست برق لازم است.", category: "ویدئو آموزشی", tags: ["Benz", "برق"], service: "برق و الکترونیک", duration: "05:05" },
+  { slug: "porsche-prepurchase-video", title: "کارشناسی قبل خرید Porsche", eyebrow: "Inspection Video", summary: "چک‌های اولیه موتور، گیربکس، بدنه و سوابق پورشه.", description: "ویدئو برای خریداران خودروهای خاص که می‌خواهند ریسک خرید را کم کنند.", category: "ویدئو کارشناسی", tags: ["Porsche", "کارشناسی"], service: "کارشناسی قبل خرید", duration: "06:10" },
+  { slug: "toyota-lexus-service-video", title: "سرویس Toyota و Lexus وارداتی", eyebrow: "Service Video", summary: "سرویس مصرفی، قطعه و ثبت سابقه برای تویوتا و لکسوس.", description: "نمای آموزشی از برنامه سرویس و قطعات مصرفی خودروهای ژاپنی لوکس.", category: "ویدئو خدمات", tags: ["Toyota", "Lexus"], service: "سرویس دوره‌ای", duration: "04:50" },
+  { slug: "buy-install-parts-video", title: "خرید + نصب قطعه در Auto Makhsus", eyebrow: "Marketplace Video", summary: "از درخواست قطعه تا نصب، QC و ثبت گارانتی.", description: "ویدئو فرآیند فروشگاه، CRM، تامین قطعه و نصب را ساده توضیح می‌دهد.", category: "ویدئو فروشگاه", tags: ["قطعه", "خرید + نصب"], service: "فروشگاه قطعات", duration: "03:55" },
+  { slug: "detailing-ppf-ceramic-video", title: "PPF، سرامیک و دیتیلینگ خودروهای خارجی", eyebrow: "Detailing Video", summary: "تفاوت پوشش‌ها و انتخاب مناسب برای خودروهای وارداتی.", description: "این ویدئو به مالک کمک می‌کند بین دیتیلینگ، سرامیک، PPF و کاور تصمیم بگیرد.", category: "ویدئو دیتیلینگ", tags: ["دیتیلینگ", "PPF"], service: "دیتیلینگ خودروهای خارجی", duration: "05:35" },
+  { slug: "options-safe-install-video", title: "نصب ایمن آپشن خودرو خارجی", eyebrow: "Options Video", summary: "سازگاری، سیم‌کشی، تست و QC نصب آپشن.", description: "ویدئو نشان می‌دهد چرا نصب آپشن باید با کنترل برق و ظاهر کارخانه‌ای انجام شود.", category: "ویدئو آپشن", tags: ["آپشن", "نصب"], service: "آپشن و ارتقا", duration: "04:35" },
+  { slug: "gearbox-warning-video", title: "نشانه‌های هشدار گیربکس اتومات", eyebrow: "Gearbox Video", summary: "تقه، تاخیر، داغی و چراغ گیربکس را بشناسید.", description: "ویدئو آموزشی برای تشخیص زودهنگام ریسک خرابی گیربکس خودروهای خارجی.", category: "ویدئو فنی", tags: ["گیربکس", "دیاگ"], service: "گیربکس", duration: "05:20" },
+];
+
+videos.push(...seedVideos.map((item) => ({
+  ...item,
+  date: "2026-06-14",
+  image: contentVisual.videos,
+  poster: contentVisual.videos,
+  path: `/fa/videos/${item.slug}`,
+  relatedServices: ["diagnostics", item.service.includes("قطعه") ? "technical-parts" : "mechanics"],
+  transcript: `${item.title}: در این ویدئو مسیر تشخیص، تصمیم فنی، انتخاب قطعه یا نصب و ثبت درخواست در CRM توضیح داده می‌شود تا مالک خودرو خارجی با دید روشن اقدام کند.`,
+  chapters: [
+    { time: "00:00", title: "تعریف مسئله", summary: "شرح مشکل، برند، مدل و علت اهمیت بررسی تخصصی." },
+    { time: "01:15", title: "فرآیند فنی", summary: "مراحل تشخیص، قطعه، نصب یا کنترل کیفیت." },
+    { time: "03:20", title: "اقدام بعدی", summary: "ثبت درخواست، رزرو سرویس یا مشاوره قطعه در Auto Makhsus." },
+  ],
+  relatedCars: [
+    { brand: "BMW", model: "X5", href: "/fa/cars/bmw/x5" },
+    { brand: "Mercedes-Benz", model: "C200", href: "/fa/cars/mercedes-benz/c200" },
+    { brand: "Toyota", model: "Prado", href: "/fa/cars/toyota/prado" },
+  ],
+  sections: [
+    { title: "ارزش ویدئو", body: "ویدئو برای آموزش تصمیم‌گیری قبل از مراجعه طراحی شده و جایگزین تشخیص حضوری نیست." },
+    { title: "ارتباط با خدمات", body: "هر ویدئو به سرویس، خودرو، قطعه یا پروژه مرتبط وصل می‌شود تا مسیر تبدیل به لید واضح باشد." },
+  ],
+  faqs: [{ question: "آیا می‌توان فقط با ویدئو مشکل خودرو را تشخیص داد؟", answer: "خیر؛ ویدئو کمک آموزشی است و تشخیص نهایی با بررسی خودرو انجام می‌شود." }],
+})));
+
+const seedProjects: Omit<ProjectContent, "image" | "date" | "path" | "relatedServices" | "sections" | "faqs" | "stages">[] = [
+  { slug: "benz-c200-electrical-diagnosis", title: "عیب‌یابی برق Mercedes-Benz C200", eyebrow: "Project Showcase", summary: "بررسی ماژول، افت ولتاژ و خطای متناوب.", description: "نمونه پروژه کنترل‌شده برای نمایش مسیر تشخیص برق بنز بدون اطلاعات خصوصی.", category: "برق و الکترونیک", tags: ["Benz", "C200"], brand: "Mercedes-Benz", model: "C200", service: "برق و الکترونیک", vehicle: "Mercedes-Benz C200", executionTime: "یک روز کاری" },
+  { slug: "porsche-cayenne-inspection", title: "کارشناسی Porsche Cayenne قبل از خرید", eyebrow: "Before / During / After", summary: "دیاگ، بدنه، گیربکس و گزارش ریسک خرید.", description: "قالب پروژه کارشناسی خودرو خاص با تمرکز روی تصمیم خرید امن.", category: "کارشناسی", tags: ["Porsche", "Cayenne"], brand: "Porsche", model: "Cayenne", service: "کارشناسی قبل خرید", vehicle: "Porsche Cayenne", executionTime: "نیم روز کاری" },
+  { slug: "toyota-prado-suspension-service", title: "بازدید جلوبندی Toyota Prado", eyebrow: "Workshop Project", summary: "صداگیری، بازدید تعلیق و پیشنهاد قطعه.", description: "نمونه پروژه خدمات تعلیق و قطعه برای SUV وارداتی.", category: "جلوبندی", tags: ["Toyota", "Prado"], brand: "Toyota", model: "Prado", service: "جلوبندی و تعلیق", vehicle: "Toyota Prado", executionTime: "یک روز کاری" },
+  { slug: "lexus-rx-ceramic-detailing", title: "دیتیلینگ و سرامیک Lexus RX", eyebrow: "Detailing Project", summary: "آماده‌سازی، اصلاح سطح و محافظت رنگ.", description: "نمونه پروژه دیتیلینگ خودرو لوکس با توصیه نگهداری.", category: "دیتیلینگ", tags: ["Lexus", "RX"], brand: "Lexus", model: "RX", service: "دیتیلینگ", vehicle: "Lexus RX", executionTime: "دو روز کاری" },
+  { slug: "hyundai-santa-fe-gearbox-check", title: "بررسی گیربکس Hyundai Santa Fe", eyebrow: "Diagnostics Project", summary: "دیاگ، تست رانندگی و گزارش ریسک گیربکس.", description: "نمونه پروژه برای خودرو پرتقاضای وارداتی کره‌ای.", category: "گیربکس", tags: ["Hyundai", "Santa Fe"], brand: "Hyundai", model: "Santa Fe", service: "گیربکس", vehicle: "Hyundai Santa Fe", executionTime: "یک روز کاری" },
+  { slug: "kia-optima-buy-install-options", title: "خرید + نصب آپشن Kia Optima", eyebrow: "Options Project", summary: "سازگاری قطعه، نصب تمیز و QC.", description: "نمونه پروژه فروشگاه + نصب برای آپشن خودرو خارجی.", category: "آپشن", tags: ["Kia", "Optima"], brand: "Kia", model: "Optima", service: "آپشن و ارتقا", vehicle: "Kia Optima", executionTime: "یک روز کاری" },
+  { slug: "audi-q5-diagnostic-service", title: "دیاگ تخصصی Audi Q5", eyebrow: "Diagnostics Project", summary: "خطاهای ماژول، سنسور و گزارش تشخیص.", description: "نمونه پروژه دیاگ خودرو اروپایی با خروجی قابل پیگیری.", category: "دیاگ", tags: ["Audi", "Q5"], brand: "Audi", model: "Q5", service: "دیاگ تخصصی", vehicle: "Audi Q5", executionTime: "نیم روز کاری" },
+  { slug: "range-rover-suspension-diagnosis", title: "تشخیص تعلیق Range Rover", eyebrow: "Premium SUV Project", summary: "بررسی ارتفاع، کمپرسور و خطاهای تعلیق.", description: "نمونه پروژه SUV لوکس با تاکید بر تشخیص قبل از تعویض قطعه.", category: "تعلیق", tags: ["Range Rover"], brand: "Range Rover", model: "Sport", service: "جلوبندی و تعلیق", vehicle: "Range Rover Sport", executionTime: "یک تا دو روز کاری" },
+];
+
+projects.push(...seedProjects.map((item) => ({
+  ...item,
+  date: "2026-06-14",
+  image: contentVisual.projects,
+  path: `/fa/projects/${item.slug}`,
+  relatedServices: ["diagnostics", item.service.includes("دیتیلینگ") ? "detailing" : "mechanics"],
+  stages: [
+    { title: "قبل", body: "ثبت علائم، برند، مدل، نیاز مشتری و وضعیت اولیه خودرو." },
+    { title: "حین", body: "تشخیص مرحله‌ای، انتخاب قطعه یا اجرای خدمت با کنترل کیفیت داخلی." },
+    { title: "بعد", body: "تحویل گزارش، توصیه نگهداری و مسیر پیگیری در CRM." },
+  ],
+  sections: [
+    { title: "هدف پروژه", body: "این نمونه‌کار ساختار امن نمایش پروژه‌های واقعی را نشان می‌دهد؛ بدون انتشار اطلاعات شخصی، پلاک، VIN یا داده خصوصی مشتری." },
+    { title: "خروجی", body: "خروجی پروژه شامل تصمیم فنی، مسیر قطعه یا نصب، کنترل کیفیت و توصیه بعدی است." },
+  ],
+  faqs: [{ question: "آیا این نمونه‌کار شامل اطلاعات خصوصی مشتری است؟", answer: "خیر، تمام نمونه‌کارها باید قبل از انتشار از نظر حریم خصوصی بررسی شوند." }],
+})));
+
+const seedFeed: Omit<FeedContent, "image" | "date" | "path" | "relatedServices" | "sections" | "faqs">[] = [
+  { slug: "today-bmw-diagnostics", title: "یادداشت امروز: صف دیاگ BMW", eyebrow: "Daily Feed", summary: "چند درخواست مرتبط با خطای سنسور و افت توان BMW ثبت شد.", description: "فید روزانه برای نمایش فعالیت کنترل‌شده و مسیر درخواست مشاوره استفاده می‌شود.", category: "دیاگ", tags: ["BMW", "دیاگ"], service: "خدمات BMW", format: "service" },
+  { slug: "today-benz-electrical", title: "یادداشت امروز: خطاهای برقی Benz", eyebrow: "Daily Feed", summary: "تمرکز امروز روی افت ولتاژ و ماژول‌های رفاهی بنز بود.", description: "پست روزانه آموزشی و عملیاتی برای خودروهای خارجی.", category: "برق", tags: ["Benz", "ماژول"], service: "برق و الکترونیک", format: "photo" },
+  { slug: "marketplace-oem-consumables", title: "یادداشت فروشگاه: مصرفی‌های OEM", eyebrow: "Marketplace Feed", summary: "درخواست قطعات مصرفی اصلی و خرید + نصب در حال افزایش است.", description: "فروشگاه Auto Makhsus مسیر استعلام قطعه و نصب را به CRM وصل می‌کند.", category: "فروشگاه", tags: ["OEM", "قطعه"], service: "فروشگاه قطعات", format: "photo" },
+  { slug: "detailing-premium-queue", title: "یادداشت دیتیلینگ خودروهای لوکس", eyebrow: "Daily Feed", summary: "چند پروژه محافظت رنگ و کابین برای خودروهای وارداتی بررسی شد.", description: "فید روزانه می‌تواند به پروژه، ویدئو و رزرو سرویس وصل شود.", category: "دیتیلینگ", tags: ["دیتیلینگ", "سرامیک"], service: "دیتیلینگ خودروهای خارجی", format: "project" },
+  { slug: "options-installation-note", title: "یادداشت نصب آپشن ایمن", eyebrow: "Daily Feed", summary: "نکته روز: قبل از نصب آپشن باید سازگاری برق بررسی شود.", description: "پست کوتاه برای آموزش تصمیم‌گیری مشتری قبل از نصب آپشن.", category: "آپشن", tags: ["آپشن", "نصب"], service: "آپشن و ارتقا", format: "service" },
+  { slug: "inspection-before-buying-note", title: "یادداشت کارشناسی قبل خرید", eyebrow: "Daily Feed", summary: "خودروهای وارداتی کارکرده بدون دیاگ کامل ریسک خرید دارند.", description: "فید روزانه برای هدایت خریداران به کارشناسی فنی و بدنه.", category: "کارشناسی", tags: ["کارشناسی", "دیاگ"], service: "کارشناسی قبل خرید", format: "service" },
+  { slug: "gearbox-warning-note", title: "یادداشت هشدار گیربکس", eyebrow: "Daily Feed", summary: "تقه و تاخیر گیربکس را قبل از هزینه سنگین بررسی کنید.", description: "پست فنی کوتاه با CTA رزرو سرویس.", category: "گیربکس", tags: ["گیربکس"], service: "گیربکس", format: "video" },
+  { slug: "special-order-parts-note", title: "یادداشت سفارش خارجی قطعه", eyebrow: "Marketplace Feed", summary: "Special Order باید با خودرو، مشتری، فاکتور و نصب مرتبط شود.", description: "پست فروشگاهی درباره مسیر سفارش خاص قطعات خودرو خارجی.", category: "فروشگاه", tags: ["Special Order"], service: "فروشگاه قطعات", format: "photo" },
+];
+
+feedItems.push(...seedFeed.map((item) => ({
+  ...item,
+  date: "2026-06-14",
+  image: contentVisual.feed,
+  path: `/fa/feed/${item.slug}`,
+  relatedServices: [item.service.includes("قطعه") || item.category === "فروشگاه" ? "technical-parts" : "diagnostics"],
+  sections: [{ title: "یادداشت روز", body: `${item.summary} این محتوا به عنوان فید کنترل‌شده Auto Makhsus منتشر می‌شود و کاربر را به مشاوره، رزرو سرویس یا استعلام قطعه هدایت می‌کند.` }],
+  faqs: [{ question: "آیا فید امکان ارسال عمومی دارد؟", answer: "خیر، در فاز فعلی فقط محتوای کنترل‌شده تیم Auto Makhsus منتشر می‌شود." }],
+})));
+
+const seedQuestions: Omit<QuestionContent, "image" | "date" | "path" | "relatedServices" | "sections" | "faqs" | "acceptedAnswer">[] = [
+  { slug: "where-to-service-bmw-in-iran", title: "برای خدمات BMW کجا مراجعه کنیم؟", eyebrow: "Q&A", summary: "معیار انتخاب مرکز تخصصی BMW در ایران.", description: "پاسخ به سوال رایج درباره خدمات BMW، قطعه و دیاگ.", category: "خدمات برند", tags: ["BMW"], service: "خدمات BMW" },
+  { slug: "benz-check-engine-common-causes", title: "علت چراغ چک Benz چیست؟", eyebrow: "Q&A", summary: "دلایل رایج چراغ چک بنز و مسیر دیاگ تخصصی.", description: "پاک کردن خطا کافی نیست و علت باید مرحله‌ای بررسی شود.", category: "دیاگ", tags: ["Benz", "چراغ چک"], service: "دیاگ تخصصی" },
+  { slug: "porsche-parts-special-order", title: "قطعات Porsche را چطور سفارش دهیم؟", eyebrow: "Q&A", summary: "OEM، Aftermarket، Used و Special Order برای پورشه.", description: "راهنمای انتخاب و سفارش قطعه خودرو خاص.", category: "قطعات", tags: ["Porsche", "Special Order"], service: "فروشگاه قطعات" },
+  { slug: "toyota-lexus-oem-parts", title: "برای Toyota و Lexus قطعه OEM لازم است؟", eyebrow: "Q&A", summary: "چه زمانی قطعه اصلی، جایگزین یا استوک منطقی است.", description: "پاسخ فنی برای تصمیم قطعه در خودروهای ژاپنی.", category: "قطعات", tags: ["Toyota", "Lexus"], service: "فروشگاه قطعات" },
+  { slug: "foreign-car-detailing-value", title: "دیتیلینگ چه تاثیری روی ارزش خودرو خارجی دارد؟", eyebrow: "Q&A", summary: "نقش دیتیلینگ، سرامیک و PPF در حفظ ارزش خودرو.", description: "پاسخ کوتاه درباره نگهداری ظاهر و کابین.", category: "دیتیلینگ", tags: ["دیتیلینگ"], service: "دیتیلینگ خودروهای خارجی" },
+  { slug: "safe-options-installation", title: "نصب آپشن روی خودرو خارجی خطر دارد؟", eyebrow: "Q&A", summary: "اگر سازگاری برق بررسی نشود، بله.", description: "نکات نصب ایمن آپشن و کنترل کیفیت.", category: "آپشن", tags: ["آپشن"], service: "آپشن و ارتقا" },
+  { slug: "gearbox-delay-imported-car", title: "تاخیر تعویض دنده یعنی خرابی گیربکس؟", eyebrow: "Q&A", summary: "تاخیر دنده می‌تواند از روغن، دما، سنسور یا خرابی داخلی باشد.", description: "پاسخ آموزشی برای تشخیص اولیه گیربکس.", category: "گیربکس", tags: ["گیربکس"], service: "گیربکس" },
+  { slug: "buy-and-install-parts-benefit", title: "مزیت خرید + نصب قطعه چیست؟", eyebrow: "Q&A", summary: "قطعه، نصب، گارانتی و سابقه در یک مسیر کنترل‌شده.", description: "پاسخ فروشگاهی درباره مدل خرید + نصب Auto Makhsus.", category: "فروشگاه", tags: ["خرید + نصب"], service: "فروشگاه قطعات" },
+];
+
+questions.push(...seedQuestions.map((item) => ({
+  ...item,
+  date: "2026-06-14",
+  image: contentVisual.community,
+  path: `/fa/community/questions/${item.slug}`,
+  acceptedAnswer: `${item.summary} پاسخ عملی Auto Makhsus این است که ابتدا برند، مدل، علائم و سابقه بررسی شود، سپس مسیر سرویس، قطعه یا نصب در CRM ثبت و پیگیری شود.`,
+  relatedServices: [item.service.includes("قطعه") || item.category === "فروشگاه" ? "technical-parts" : "diagnostics"],
+  sections: [
+    { title: "صورت سوال", body: item.description },
+    { title: "پاسخ پذیرفته‌شده", body: `${item.summary} تصمیم نهایی باید بر اساس بررسی خودرو، سازگاری قطعه و سطح ریسک انجام شود.` },
+  ],
+  faqs: [{ question: "آیا این پاسخ جایگزین تشخیص حضوری است؟", answer: "خیر، پاسخ‌ها برای راهنمایی اولیه هستند و تصمیم قطعی با بررسی خودرو انجام می‌شود." }],
+})));
+
 const priorityModels: Record<string, VehicleModel[]> = {
   bmw: [
     { slug: "x3", name: "X3", fa: "BMW X3", years: "2015 تا جدید", intro: "کراس‌اوور محبوب BMW با حساسیت بالا به نگهداری گیربکس، سیستم تعلیق و برق.", commonIssues: ["خطاهای سنسور", "نشتی روغن", "لرزش تعلیق"], maintenance: ["دیاگ دوره‌ای", "بازدید گیربکس", "بررسی جلوبندی"], diagnostics: ["خواندن خطاهای DME و گیربکس", "بررسی داده زنده سنسور اکسیژن و فشار", "تست باتری و افت ولتاژ ماژول‌ها"], parts: ["فیلتر و روغن سازگار", "قطعات جلوبندی با کیفیت", "لنت و دیسک مناسب وزن خودرو"], servicePackages: [{ title: "بازدید خرید BMW X3", body: "دیاگ، تعلیق، روغن‌ریزی، گیربکس و بدنه قبل از خرید بررسی می‌شود." }, { title: "سرویس نگهداری X3", body: "سرویس مصرفی، بازدید ترمز، جلوبندی و گزارش دیجیتال برای نگهداری دوره‌ای." }], faqs: [{ question: "برای X3 دیاگ دوره‌ای لازم است؟", answer: "بله، خطاهای مقطعی برق و گیربکس در X3 بهتر است قبل از تبدیل شدن به خرابی سنگین بررسی شوند." }] },
@@ -549,7 +688,7 @@ export const ecosystemLinks = [
   { title: "Project Showcase", fa: "نمونه‌کارها", href: "/fa/projects", description: "قبل، حین و بعد از پروژه‌های فنی، دیتیلینگ، نصب، بدنه و داخلی.", accent: "#8fd3ff" },
   { title: "Community", fa: "کامیونیتی و پرسش‌وپاسخ", href: "/fa/community", description: "فوندیشن خواندنی برای سوالات پرتکرار، دسته‌ها و پاسخ‌های پذیرفته‌شده.", accent: "#7c3aed" },
   { title: "Vehicle Knowledge Base", fa: "دانشنامه خودرو", href: "/fa/cars", description: "هاب برند و مدل برای BMW، Mercedes، Porsche، Toyota، Lexus و دیگر خودروهای خارجی.", accent: "#06b6d4" },
-  { title: "Marketplace Preview", fa: "پیش‌نمایش فروشگاه", href: "/fa/ecosystem#marketplace", description: "قطعات، مواد مصرفی، OEM، Aftermarket، Used و Special Order.", accent: "#f59e0b" },
+  { title: "Marketplace", fa: "فروشگاه قطعات", href: "/fa/store", description: "قطعات، مواد مصرفی، OEM، Aftermarket، Used و Special Order با مسیر خرید + نصب.", accent: "#f59e0b" },
 ];
 
 export function findContent<T extends { slug: string }>(items: T[], slug: string) {
