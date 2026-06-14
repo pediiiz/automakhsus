@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { ContentGrid, ContentHero } from "@/components/content/content-sections";
 import { SeoJsonLd } from "@/components/seo-page";
 import { academyArticles, contentVisual } from "@/lib/content-data";
+import { cmsRowToContentCard, listCmsContent, mergeCmsWithStatic } from "@/lib/cms";
 import { absolute } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
@@ -11,12 +12,16 @@ export const metadata: Metadata = pageMetadata({
   path: "/fa/academy",
 });
 
-export default function AcademyPage() {
+export const dynamic = "force-dynamic";
+
+export default async function AcademyPage() {
+  const cmsItems = (await listCmsContent({ type: "ACADEMY_ARTICLE" })).map(cmsRowToContentCard);
+  const items = mergeCmsWithStatic(cmsItems, academyArticles);
   return (
     <main>
       <SeoJsonLd data={breadcrumbSchema([{ name: "Auto Makhsus", url: absolute("/fa") }, { name: "آکادمی", url: absolute("/fa/academy") }])} />
       <ContentHero eyebrow="Academy" title="آکادمی خودروهای خارجی Auto Makhsus" description="مقالات فنی، راهنمای نگهداری، عیب‌یابی و آموزش‌های کاربردی برای مالکان خودروهای وارداتی؛ با مسیر روشن به رزرو سرویس، قطعه و مشاوره." image={contentVisual.academy} />
-      <ContentGrid items={academyArticles} basePath="/fa/academy" />
+      <ContentGrid items={items} basePath="/fa/academy" />
     </main>
   );
 }

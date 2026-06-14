@@ -1,0 +1,63 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum BusinessUnit {
+  TEHRANSANDALI
+  ANI2203
+  TUDUZI
+  AUTOMAKHSUS_TECHNICAL
+  AUTOMAKHSUS_MARKETPLACE
+}
+
+enum ContentType {
+  ACADEMY_ARTICLE
+  VIDEO
+  PROJECT_SHOWCASE
+  FEED_POST
+}
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+model ContentItem {
+  id              String        @id
+  businessUnit    BusinessUnit  @default(AUTOMAKHSUS_TECHNICAL)
+  contentType     ContentType
+  status          ContentStatus @default(DRAFT)
+  title           String
+  slug            String
+  excerpt         String?
+  body            String?
+  coverImage      String?
+  videoUrl        String?
+  duration        String?
+  transcript      String?
+  vehicleBrand    String?
+  vehicleModel    String?
+  serviceTags     String[]      @default([])
+  mediaJson       Json?
+  seoTitle        String?
+  metaDescription String?
+  canonicalPath   String?
+  ogTitle         String?
+  ogDescription   String?
+  ogImage         String?
+  authorName      String?
+  reviewerName    String?
+  publishedAt     DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+  deletedAt       DateTime?
+
+  @@unique([contentType, slug])
+  @@index([status, contentType, businessUnit])
+  @@index([publishedAt])
+}
