@@ -7,6 +7,7 @@
     "typegen": "next typegen",
     "build": "npm run typegen && next build --webpack",
     "start": "next start",
+    "test": "node --test tests/*.test.mjs",
     "lint": "eslint"
   },
   "dependencies": {

@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { randomUUID } from "node:crypto";
 import { z } from "zod";
 import { getPool } from "@/lib/db";
+import { businessUnitLabel, inferLeadBusinessUnit } from "@/lib/lead-routing";
 
 const leadSchema = z.object({
   fullName: z.string().trim().min(2).max(120),
@@ -14,16 +15,6 @@ const leadSchema = z.object({
   businessUnit: z.string().trim().max(80).optional().or(z.literal("")),
 });
 
-function inferBusinessUnit(interest: string, submitted?: string) {
-  if (submitted === "AutoMakhsus Technical" || submitted === "AutoMakhsus Marketplace") {
-    return submitted;
-  }
-  if (interest.includes("قطعه") || interest.includes("فروشگاه") || interest.includes("خرید")) {
-    return "AutoMakhsus Marketplace";
-  }
-  return "AutoMakhsus Technical";
-}
-
 export async function POST(request: NextRequest) {
   const parsed = leadSchema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) {
@@ -31,7 +22,8 @@ export async function POST(request: NextRequest) {
   }
 
   const data = parsed.data;
-  const businessUnit = inferBusinessUnit(data.interest, data.businessUnit || undefined);
+  const businessUnit = inferLeadBusinessUnit(data.interest, data.businessUnit || undefined);
+  const businessUnitDisplay = businessUnitLabel(businessUnit);
   const userAgent = request.headers.get("user-agent");
   const referrer = request.headers.get("referer");
   const pool = getPool();
@@ -41,30 +33,32 @@ export async function POST(request: NextRequest) {
     await client.query("BEGIN");
     const inquiryId = `am_${randomUUID().replaceAll("-", "")}`;
     const inquiry = await client.query<{ id: string }>(
-      `INSERT INTO "Inquiry" ("id", "type", "status", "fullName", "phone", "requestType", "message", "sourcePath", "sourcePage", "priority", "createdAt", "updatedAt")
-       VALUES ($1, 'GENERAL', 'NEW', $2, $3, $4, $5, $6, $7, 'HIGH', now(), now())
+      `INSERT INTO "Inquiry" ("id", "businessUnit", "type", "status", "fullName", "phone", "requestType", "message", "sourcePath", "sourcePage", "priority", "createdAt", "updatedAt")
+       VALUES ($1, $2::"BusinessUnit", 'GENERAL', 'NEW', $3, $4, $5, $6, $7, $8, 'HIGH', now(), now())
        RETURNING "id"`,
       [
         inquiryId,
+        businessUnit,
         data.fullName,
         data.phone,
         data.interest,
-        [data.company ? `شرکت/سازمان: ${data.company}` : "", `واحد کسب‌وکار: ${businessUnit}`, data.description || ""].filter(Boolean).join("\n"),
+        [data.company ? `شرکت/سازمان: ${data.company}` : "", `واحد کسب‌وکار: ${businessUnitDisplay}`, data.description || ""].filter(Boolean).join("\n"),
         "automakhsus",
         data.sourcePage,
       ],
     );
     const conversionId = `amc_${randomUUID().replaceAll("-", "")}`;
     await client.query(
-      `INSERT INTO "ConversionEvent" ("id", "type", "source", "sourcePath", "sourcePage", "locale", "inquiryId", "phone", "serviceType", "metadata", "userAgent", "referrer", "createdAt")
-       VALUES ($1, 'LEAD_SUBMISSION', 'automakhsus', 'automakhsus', $2, 'FA', $3, $4, $5, $6::jsonb, $7, $8, now())`,
+      `INSERT INTO "ConversionEvent" ("id", "businessUnit", "type", "source", "sourcePath", "sourcePage", "locale", "inquiryId", "phone", "serviceType", "metadata", "userAgent", "referrer", "createdAt")
+       VALUES ($1, $2::"BusinessUnit", 'LEAD_SUBMISSION', 'automakhsus', 'automakhsus', $3, 'FA', $4, $5, $6, $7::jsonb, $8, $9, now())`,
       [
         conversionId,
+        businessUnit,
         data.sourcePage,
         inquiry.rows[0].id,
         data.phone,
         data.interest,
-        JSON.stringify({ channel: "automakhsus_parent_site", company: data.company || null, businessUnit }),
+        JSON.stringify({ channel: "automakhsus_parent_site", company: data.company || null, businessUnit, businessUnitLabel: businessUnitDisplay }),
         userAgent,
         referrer,
       ],
