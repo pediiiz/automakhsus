@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { absolute, brands, siteUrl, visual } from "@/lib/site-data";
+import { absolute, brands, marketplaceCategories, siteUrl, technicalServices, visual } from "@/lib/site-data";
 
 export function pageMetadata(args: {
   title: string;
@@ -59,6 +59,44 @@ export const websiteSchema = {
   publisher: {
     "@type": "Organization",
     name: "Auto Makhsus",
+  },
+};
+
+export const technicalServiceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "مرکز تخصصی خودروهای خارجی Auto Makhsus",
+  serviceType: "Foreign and imported car technical service, diagnostics, parts marketplace and buy plus install",
+  provider: {
+    "@type": "Organization",
+    name: "Auto Makhsus",
+    url: siteUrl,
+  },
+  areaServed: {
+    "@type": "Country",
+    name: "Iran",
+  },
+  hasOfferCatalog: {
+    "@type": "OfferCatalog",
+    name: "Auto Makhsus technical service and marketplace catalog",
+    itemListElement: [
+      ...technicalServices.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+        },
+      })),
+      ...marketplaceCategories.map((category) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Product",
+          name: category.title,
+          description: category.description,
+        },
+      })),
+    ],
   },
 };
 

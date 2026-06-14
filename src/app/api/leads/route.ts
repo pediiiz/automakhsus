@@ -11,7 +11,18 @@ const leadSchema = z.object({
   description: z.string().trim().max(1600).optional().or(z.literal("")),
   source: z.literal("automakhsus"),
   sourcePage: z.string().trim().min(1).max(180),
+  businessUnit: z.string().trim().max(80).optional().or(z.literal("")),
 });
+
+function inferBusinessUnit(interest: string, submitted?: string) {
+  if (submitted === "AutoMakhsus Technical" || submitted === "AutoMakhsus Marketplace") {
+    return submitted;
+  }
+  if (interest.includes("قطعه") || interest.includes("فروشگاه") || interest.includes("خرید")) {
+    return "AutoMakhsus Marketplace";
+  }
+  return "AutoMakhsus Technical";
+}
 
 export async function POST(request: NextRequest) {
   const parsed = leadSchema.safeParse(await request.json().catch(() => null));
@@ -20,6 +31,7 @@ export async function POST(request: NextRequest) {
   }
 
   const data = parsed.data;
+  const businessUnit = inferBusinessUnit(data.interest, data.businessUnit || undefined);
   const userAgent = request.headers.get("user-agent");
   const referrer = request.headers.get("referer");
   const pool = getPool();
@@ -37,7 +49,7 @@ export async function POST(request: NextRequest) {
         data.fullName,
         data.phone,
         data.interest,
-        [data.company ? `شرکت/سازمان: ${data.company}` : "", data.description || ""].filter(Boolean).join("\n"),
+        [data.company ? `شرکت/سازمان: ${data.company}` : "", `واحد کسب‌وکار: ${businessUnit}`, data.description || ""].filter(Boolean).join("\n"),
         "automakhsus",
         data.sourcePage,
       ],
@@ -52,7 +64,7 @@ export async function POST(request: NextRequest) {
         inquiry.rows[0].id,
         data.phone,
         data.interest,
-        JSON.stringify({ channel: "automakhsus_parent_site", company: data.company || null }),
+        JSON.stringify({ channel: "automakhsus_parent_site", company: data.company || null, businessUnit }),
         userAgent,
         referrer,
       ],

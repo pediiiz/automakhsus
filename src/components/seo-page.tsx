@@ -2,14 +2,23 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { LeadForm } from "@/components/lead-form";
-import { brands, platformModules, servicePillars, trustSignals, visual } from "@/lib/site-data";
+import {
+  brands,
+  foreignCarBrands,
+  marketplaceCategories,
+  platformModules,
+  servicePillars,
+  technicalServices,
+  trustSignals,
+  visual,
+} from "@/lib/site-data";
 
 const ecosystemBranches = [
-  { title: "Automotive Interiors", fa: "طراحی داخلی خودرو", brands: ["TehranSandali", "TehranSeat"], accent: "#2F80ED" },
-  { title: "Seats", fa: "صندلی و ارتقا", brands: ["MrSeat", "TehranSeat"], accent: "#8FD3FF" },
-  { title: "Upholstery", fa: "تودوزی فابریکی", brands: ["Tuduzi", "TehranSandali"], accent: "#4DA3FF" },
-  { title: "Multi-brand Service", fa: "سرویس مولتی‌برند", brands: ["ANI2203"], accent: "#BDE9FF" },
-  { title: "Digital CRM Platform", fa: "پلتفرم دیجیتال", brands: ["Auto Makhsus", "All Brands"], accent: "#0B5CFF" },
+  { title: "Technical Hub", fa: "خدمات فنی خودروهای خارجی", brands: ["Auto Makhsus", "All Imported Cars"], accent: "#0B5CFF" },
+  { title: "Interior Division", fa: "صندلی، سالن و ون VIP", brands: ["TehranSandali", "MrSeat", "TehranSeat"], accent: "#2F80ED" },
+  { title: "Upholstery Division", fa: "تودوزی و بازسازی سالن", brands: ["Tuduzi"], accent: "#4DA3FF" },
+  { title: "Authorized Service", fa: "نمایندگی مولتی‌برند مجاز", brands: ["ANI2203"], accent: "#BDE9FF" },
+  { title: "Commerce Platform", fa: "فروشگاه قطعات و نصب", brands: ["Marketplace", "Buy + Install"], accent: "#8FD3FF" },
 ];
 
 type StyleVars = CSSProperties & Record<`--${string}`, string>;
@@ -30,13 +39,14 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
           {subtitle ? <h2 className="mt-4 text-2xl font-black text-[var(--ice)] md:text-4xl">{subtitle}</h2> : null}
           <p className="mt-6 text-base leading-9 text-white/74 md:text-lg">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-primary" href="/fa/brands">مشاهده برندها</Link>
-            <a className="btn-ghost-dark" href="https://tehransandali.ir">ورود به تهران صندلی</a>
+            <Link className="btn-primary" href="#lead">درخواست مشاوره</Link>
+            <Link className="btn-ghost-dark" href="/fa/services">رزرو سرویس</Link>
+            <Link className="btn-ghost-dark" href="/fa/ecosystem">خرید قطعه</Link>
+            <Link className="btn-ghost-dark" href="/fa/cooperation">درخواست نصب</Link>
             <a className="btn-ghost-dark" href="https://ani2203.com/fa/booking">رزرو خدمات آنی سرویس</a>
-            <Link className="btn-ghost-dark" href="/fa/cooperation">درخواست همکاری</Link>
           </div>
           <div className="mt-9 grid max-w-2xl grid-cols-3 gap-3">
-            {["5 برند", "6 حوزه تخصصی", "CRM مرکزی"].map((item) => (
+            {["خودروهای خارجی", "فروشگاه + نصب", "CRM مرکزی"].map((item) => (
               <div key={item} className="rounded-2xl border border-white/12 bg-white/[0.06] px-4 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
                 <span className="text-sm font-black text-white">{item}</span>
               </div>
@@ -48,11 +58,11 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
             <Image src={image} alt="نمای سینمایی از اکوسیستم خودرو Auto Makhsus" width={1000} height={760} priority sizes="(max-width: 1024px) 100vw, 52vw" className="aspect-[16/11] w-full rounded-[1.6rem] object-cover" />
             <div className="orbit-map" aria-hidden="true">
               <span className="orbit-center">Auto<br />Makhsus</span>
-              {brands.map((brand, index) => (
-                <span key={brand.slug} className={`orbit-node orbit-node-${index + 1}`} style={{ "--node-color": brand.color } as StyleVars}>
-                  {brand.name}
-                </span>
-              ))}
+              <span className="orbit-node orbit-node-1" style={{ "--node-color": "#0B5CFF" } as StyleVars}>Technical Hub</span>
+              <span className="orbit-node orbit-node-2" style={{ "--node-color": "#8FD3FF" } as StyleVars}>Marketplace</span>
+              <span className="orbit-node orbit-node-3" style={{ "--node-color": "#2F80ED" } as StyleVars}>TehranSandali</span>
+              <span className="orbit-node orbit-node-4" style={{ "--node-color": "#4DA3FF" } as StyleVars}>Tuduzi</span>
+              <span className="orbit-node orbit-node-5" style={{ "--node-color": "#BDE9FF" } as StyleVars}>ANI2203</span>
             </div>
           </div>
         </div>
@@ -67,16 +77,16 @@ export function EcosystemMap() {
       <div className="container-shell">
         <div className="max-w-3xl">
           <p className="eyebrow text-[var(--ice)]">Ecosystem Map</p>
-          <h2 className="mt-3 text-3xl font-black md:text-5xl">نقشه تصویری برندها و عملیات Auto Makhsus</h2>
+          <h2 className="mt-3 text-3xl font-black md:text-5xl">نقشه فنی، تجاری و عملیاتی Auto Makhsus</h2>
           <p className="mt-5 text-base leading-9 text-white/64">
-            هر برند بخشی از زنجیره تخصصی خودرو را پوشش می‌دهد و همه از یک هسته دیجیتال، عملیاتی و مدیریتی تغذیه می‌شوند.
+            Auto Makhsus فقط ویترین برندها نیست؛ مرکز فنی خودروهای خارجی، فروشگاه قطعات، شبکه نصب و پلتفرم دیجیتال عملیات است.
           </p>
         </div>
         <div className="ecosystem-map mt-10">
           <div className="ecosystem-core">
             <span className="text-sm font-black text-[var(--ice)]">Parent Brand</span>
             <strong>Auto Makhsus</strong>
-            <small>CRM • Operations • Lead Flow</small>
+            <small>Technical • Commerce • CRM</small>
           </div>
           {ecosystemBranches.map((branch, index) => (
             <article key={branch.title} className={`ecosystem-branch ecosystem-branch-${index + 1}`} style={{ "--branch-color": branch.accent } as StyleVars}>
@@ -101,19 +111,111 @@ export function EcosystemMap() {
 export function BrandEcosystem() {
   return (
     <section className="section bg-[linear-gradient(180deg,#f6f9ff_0%,#ffffff_100%)]">
-      <div className="container-shell">
+        <div className="container-shell">
         <p className="eyebrow">Brand Ecosystem</p>
-        <h2 className="mt-3 text-3xl font-black md:text-5xl">پنج برند تخصصی، یک اکوسیستم خودرو</h2>
-        <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-5">
+        <h2 className="mt-3 text-3xl font-black md:text-5xl">سه برند اصلی، یک هاب فنی و تجاری خودروهای خارجی</h2>
+        <p className="mt-5 max-w-4xl text-base leading-9 text-[var(--muted)]">
+          در معماری جدید، MrSeat و TehranSeat زیر برندهای تهران صندلی هستند و در سطح مادر کنار برندهای اصلی نمایش داده نمی‌شوند.
+        </p>
+        <div className="mt-9 grid gap-5 lg:grid-cols-3">
           {brands.map((brand) => (
             <a key={brand.slug} href={brand.url} className="brand-card motion-card group" style={{ "--brand-color": brand.color } as StyleVars}>
               <span className="brand-icon">{brand.icon}</span>
               <h3 className="mt-7 text-2xl font-black">{brand.name}</h3>
               <p className="mt-1 text-sm font-bold text-[var(--blue)]">{brand.fa}</p>
               <p className="mt-4 text-sm leading-8 text-[var(--muted)]">{brand.description}</p>
+              {"subBrands" in brand && brand.subBrands?.length ? (
+                <div className="mt-5 rounded-2xl border border-sky-200 bg-sky-50 px-4 py-3 text-xs font-black text-sky-900">
+                  زیر برندها: {brand.subBrands.join(" و ")}
+                </div>
+              ) : null}
               <span className="mt-auto inline-flex pt-6 text-sm font-black text-[var(--electric)]">مشاهده برند</span>
             </a>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function TechnicalServices() {
+  return (
+    <section className="section bg-white">
+      <div className="container-shell">
+        <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+          <div>
+            <p className="eyebrow">Foreign Car Technical Hub</p>
+            <h2 className="mt-3 text-3xl font-black md:text-5xl">مرکز تخصصی خودروهای خارجی، فراتر از نمایندگی‌های محدود</h2>
+            <p className="mt-5 text-base leading-9 text-[var(--muted)]">
+              Auto Makhsus برای همه خودروهای خارجی و وارداتی طراحی شده است؛ از دیاگ و برق تا بدنه، رنگ، دیتیلینگ، آپشن، قطعه و کارشناسی قبل خرید.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link className="btn-primary" href="#lead">درخواست مشاوره</Link>
+              <Link className="btn-secondary" href="/fa/contact">رزرو سرویس</Link>
+            </div>
+          </div>
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {technicalServices.map((item) => (
+              <article key={item.slug} className="technical-card">
+                <span className="technical-dot" />
+                <h3 className="text-lg font-black">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{item.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function ForeignCarBrands() {
+  return (
+    <section className="section bg-[#07111f] text-white">
+      <div className="container-shell">
+        <div className="grid gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
+          <div>
+            <p className="eyebrow text-[var(--ice)]">Imported Car Coverage</p>
+            <h2 className="mt-3 text-3xl font-black md:text-5xl">خدمات فنی برای همه برندهای خارجی و وارداتی</h2>
+            <p className="mt-5 text-base leading-9 text-white/66">
+              ANI2203 فقط محدوده برندهای مجاز خود را پوشش می‌دهد، اما Auto Makhsus به عنوان هاب فنی و تجاری برای طیف گسترده خودروهای خارجی تعریف شده است.
+            </p>
+          </div>
+          <div className="brand-cloud">
+            {foreignCarBrands.map((brand) => (
+              <span key={brand}>{brand}</span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function MarketplaceSection() {
+  return (
+    <section className="section bg-[linear-gradient(180deg,#f6f9ff_0%,#ffffff_100%)]">
+      <div className="container-shell">
+        <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
+          <div className="sticky-panel">
+            <p className="eyebrow">Marketplace</p>
+            <h2 className="mt-3 text-3xl font-black md:text-5xl">فروشگاه قطعات، مواد مصرفی و تجهیزات خودروهای خارجی</h2>
+            <p className="mt-5 text-base leading-9 text-[var(--muted)]">
+              فروشگاه Auto Makhsus برای خرید قطعه، خرید همراه نصب، سفارش خاص و اتصال سفارش به CRM، فاکتور، پروژه، انبار و گارانتی طراحی می‌شود.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <Link className="btn-primary" href="#lead">خرید قطعه</Link>
+              <Link className="btn-secondary" href="#lead">خرید + نصب در Auto Makhsus</Link>
+            </div>
+          </div>
+          <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {marketplaceCategories.map((item) => (
+              <article key={item.slug} className="market-card">
+                <h3 className="text-lg font-black">{item.title}</h3>
+                <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{item.description}</p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -125,7 +227,7 @@ export function ServicePillars() {
     <section className="section bg-white">
       <div className="container-shell">
         <p className="eyebrow">Core Pillars</p>
-        <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">شش ستون عملیاتی برای یک اکوسیستم خودرو لوکس و دیجیتال</h2>
+        <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">ستون‌های اصلی برای هاب فنی، فروشگاهی و دیجیتال Auto Makhsus</h2>
         <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {servicePillars.map((item) => (
             <article key={item.slug} className="infographic-card">
@@ -168,9 +270,9 @@ export function DigitalPlatform() {
         </div>
         <div>
           <p className="eyebrow text-[var(--ice)]">Digital Platform</p>
-          <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">زیرساخت دیجیتال برای CRM، مشتری و عملیات</h2>
+          <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">پلتفرم دیجیتال خودرو، از گذرنامه تا باشگاه مشتریان</h2>
           <p className="mt-5 text-base leading-9 text-white/68">
-            Auto Makhsus فقط مجموعه‌ای از سایت‌ها نیست؛ یک زیرساخت عملیاتی برای مدیریت لید، مشتری، پروژه، رزرو، رسانه، سفارش کار و رهگیری پیشرفت است.
+            Auto Makhsus روی CRM عملیاتی، Vehicle Digital Passport، Cloud Garage، سوابق گارانتی، Customer Portal و مسیرهای آینده Service Reminder و Customer Club ساخته می‌شود.
           </p>
           <div className="mt-7 grid gap-3 md:grid-cols-2">
             {platformModules.map((item) => (
@@ -192,9 +294,9 @@ export function LeadSection({ sourcePage, interest }: { sourcePage: string; inte
       <div className="container-shell grid gap-8 md:grid-cols-[0.85fr_1.15fr] md:items-center">
         <div>
           <p className="eyebrow">Cooperation</p>
-          <h2 className="mt-3 text-3xl font-black md:text-5xl">برای همکاری، اتصال برند یا خدمات سازمانی پیام بگذارید</h2>
+          <h2 className="mt-3 text-3xl font-black md:text-5xl">برای مشاوره، رزرو سرویس، خرید قطعه یا نصب درخواست ثبت کنید</h2>
           <p className="mt-5 text-base leading-9 text-[var(--muted)]">
-            فرم‌های Auto Makhsus با منبع automakhsus در CRM ثبت می‌شوند تا مسیر همکاری، معرفی برند یا درخواست سازمانی قابل پیگیری باشد.
+            فرم‌های Auto Makhsus با منبع automakhsus در CRM ثبت می‌شوند تا مسیر خدمات فنی، فروشگاه، خرید + نصب یا همکاری سازمانی قابل پیگیری باشد.
           </p>
         </div>
         <LeadForm sourcePage={sourcePage} interest={interest} />

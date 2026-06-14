@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!brand) return {};
   return pageMetadata({
     title: `${brand.name} در اکوسیستم Auto Makhsus`,
-    description: `${brand.fa} یکی از برندهای تخصصی Auto Makhsus برای توسعه خدمات ممتاز خودرو، طراحی داخلی، صندلی، تودوزی، سرویس و تجربه دیجیتال مشتریان است.`,
+    description: `${brand.fa} یکی از برندهای اصلی Auto Makhsus در معماری رسمی خودروهای خارجی، خدمات تخصصی، تودوزی، نمایندگی مجاز یا عملیات دیجیتال مشتریان است.`,
     path: `/fa/brands/${brand.slug}`,
     image: visual.network,
   });
@@ -33,7 +33,7 @@ export default async function BrandPage({ params }: { params: Promise<{ slug: st
       <PageHero
         eyebrow={brand.name}
         title={`${brand.fa} در شبکه Auto Makhsus`}
-        description={`${brand.description} این برند بخشی از معماری یکپارچه Auto Makhsus است و از مسیرهای دیجیتال، CRM، پرتال مشتریان و استانداردهای مشترک کیفیت استفاده می‌کند.`}
+        description={`${brand.description} این برند در کنار هاب فنی و فروشگاهی Auto Makhsus از مسیرهای دیجیتال، CRM، پرتال مشتریان و استانداردهای مشترک کیفیت استفاده می‌کند.`}
         image={visual.network}
       />
       <section className="section">
@@ -42,6 +42,11 @@ export default async function BrandPage({ params }: { params: Promise<{ slug: st
             <p className="eyebrow">نقش برند</p>
             <h2 className="mt-3 text-3xl font-black text-[var(--dark)]">{brand.fa}</h2>
             <p className="mt-4 leading-8 text-slate-600">{brand.description}</p>
+            {"subBrands" in brand && brand.subBrands?.length ? (
+              <p className="mt-4 rounded-2xl border border-sky-200 bg-sky-50 p-4 text-sm font-black leading-7 text-sky-900">
+                زیر برندهای تهران صندلی: {brand.subBrands.join(" و ")}
+              </p>
+            ) : null}
             <div className="mt-6 flex flex-wrap gap-3">
               <a className="btn-primary" href={brand.url}>ورود به سایت برند</a>
               <Link className="btn-secondary" href="/fa/contact">ارتباط با Auto Makhsus</Link>

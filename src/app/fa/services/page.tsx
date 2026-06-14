@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { LeadSection, PageHero, SeoJsonLd, ServicePillars } from "@/components/seo-page";
+import { ForeignCarBrands, LeadSection, MarketplaceSection, PageHero, SeoJsonLd, ServicePillars, TechnicalServices } from "@/components/seo-page";
 import { absolute, visual } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "خدمات Auto Makhsus | طراحی داخلی، صندلی، تودوزی، سرویس و CRM",
-  description: "ستون‌های خدماتی Auto Makhsus شامل طراحی داخلی خودرو، صندلی و ارتقا، تودوزی، ون VIP، سرویس مولتی‌برند و پلتفرم دیجیتال CRM.",
+  title: "خدمات Auto Makhsus | مرکز تخصصی خودروهای خارجی",
+  description: "خدمات Auto Makhsus شامل مکانیک، سرویس دوره‌ای، دیاگ، برق، گیربکس، جلوبندی، ترمز، آپشن، دیتیلینگ، PPF، سرامیک، صافکاری، نقاشی و کارشناسی قبل خرید خودروهای خارجی.",
   path: "/fa/services",
 });
 
@@ -13,9 +13,12 @@ export default function ServicesPage() {
   return (
     <main>
       <SeoJsonLd data={breadcrumbSchema([{ name: "Auto Makhsus", url: absolute("/fa") }, { name: "خدمات", url: absolute("/fa/services") }])} />
-      <PageHero eyebrow="Service Pillars" title="ستون‌های خدماتی Auto Makhsus" description="Auto Makhsus حوزه‌های تخصصی خودرو را در قالب برندهای مستقل و زیرساخت دیجیتال یکپارچه مدیریت می‌کند." image={visual.hero} />
+      <PageHero eyebrow="Technical Services" title="خدمات تخصصی خودروهای خارجی" description="Auto Makhsus برای خودروهای خارجی یک مسیر فنی، فروشگاهی و دیجیتال می‌سازد؛ از دیاگ و تعمیر تا خرید قطعه، نصب، گارانتی و سوابق خودرو." image={visual.hero} />
+      <TechnicalServices />
+      <ForeignCarBrands />
+      <MarketplaceSection />
       <ServicePillars />
-      <LeadSection sourcePage="/fa/services" interest="مشاوره اکوسیستم خودرو" />
+      <LeadSection sourcePage="/fa/services" interest="رزرو سرویس خودروهای خارجی" />
     </main>
   );
 }

@@ -3,13 +3,17 @@
 import { useState } from "react";
 
 const interests = [
+  "درخواست مشاوره خودروهای خارجی",
+  "رزرو سرویس خودروهای خارجی",
+  "خرید قطعه",
+  "خرید + نصب در Auto Makhsus",
+  "دیاگ تخصصی خودروهای خارجی",
+  "آپشن و ارتقا",
+  "دیتیلینگ خودروهای خارجی",
+  "فروشگاه قطعات",
   "درخواست همکاری",
-  "مشاوره اکوسیستم خودرو",
-  "ورود به شبکه برندها",
-  "CRM و پلتفرم دیجیتال",
   "خدمات ناوگان و سازمانی",
-  "پروژه VIP ون و کمپر",
-  "صندلی، تودوزی و طراحی داخلی",
+  "CRM و پلتفرم دیجیتال",
 ];
 
 type State = "idle" | "loading" | "success" | "error";
@@ -44,11 +48,12 @@ export function LeadForm({ sourcePage, interest = "درخواست همکاری" 
     <form id="lead" onSubmit={submit} className="lead-card grid gap-4 p-5 md:p-7">
       <input type="hidden" name="source" value="automakhsus" />
       <input type="hidden" name="sourcePage" value={sourcePage} />
+      <input type="hidden" name="businessUnit" value={interest.includes("قطعه") || interest.includes("فروشگاه") ? "AutoMakhsus Marketplace" : "AutoMakhsus Technical"} />
       <div>
         <p className="eyebrow">Auto Makhsus CRM</p>
-        <h2 className="mt-2 text-2xl font-black md:text-3xl">درخواست همکاری یا ارتباط با اکوسیستم</h2>
+        <h2 className="mt-2 text-2xl font-black md:text-3xl">درخواست خدمات فنی، قطعه یا نصب</h2>
         <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-          درخواست شما با منبع Auto Makhsus وارد CRM می‌شود تا مسیر همکاری، معرفی برند یا خدمات سازمانی پیگیری شود.
+          درخواست شما با منبع Auto Makhsus وارد CRM می‌شود تا واحد فنی یا فروشگاه قطعات مسیر پیگیری را مشخص کند.
         </p>
       </div>
       <div className="grid gap-3 md:grid-cols-2">
@@ -59,7 +64,7 @@ export function LeadForm({ sourcePage, interest = "درخواست همکاری" 
       <select className="field" name="interest" defaultValue={interest} required>
         {interests.map((item) => <option key={item} value={item}>{item}</option>)}
       </select>
-      <textarea className="field min-h-28" name="description" placeholder="موضوع همکاری، برند مورد نظر، نیاز سازمانی یا توضیح درخواست" />
+      <textarea className="field min-h-28" name="description" placeholder="برند خودرو، مدل، نیاز فنی، قطعه مورد نظر یا توضیح درخواست" />
       <button className="btn-primary w-full" disabled={state === "loading"} type="submit">
         {state === "loading" ? "در حال ثبت..." : "ثبت درخواست"}
       </button>

@@ -16,27 +16,10 @@ export const brands = [
     name: "TehranSandali",
     fa: "تهران صندلی",
     url: "https://tehransandali.ir",
-    description: "Specialist center for automotive seats, upholstery, vehicle interiors, VIP vans, campers, options, CRM and customer services.",
+    description: "Interior division for seats, upholstery, VIP van, camper, cabin upgrades, options, CRM and customer services.",
     color: "#2F80ED",
     icon: "ص",
-  },
-  {
-    slug: "mrseat",
-    name: "MrSeat",
-    fa: "مستر سیت",
-    url: "https://mrseat.ir",
-    description: "Specialist brand for automotive seats, imported stock seats, electric seats, installation and seat upgrades.",
-    color: "#8FD3FF",
-    icon: "S",
-  },
-  {
-    slug: "tehranseat",
-    name: "TehranSeat",
-    fa: "تهران سیت",
-    url: "https://tehranseat.ir",
-    description: "Premium brand for luxury seats, VIP seats, executive seats, and advanced seat options.",
-    color: "#0B5CFF",
-    icon: "VIP",
+    subBrands: ["MrSeat", "TehranSeat"],
   },
   {
     slug: "tuduzi",
@@ -59,28 +42,79 @@ export const brands = [
 ];
 
 export const servicePillars = [
-  ["seats", "صندلی و ارتقا", "صندلی خودرو، صندلی استوک خارجی، صندلی برقی، VIP و ارتقای امکانات نشیمن.", "01"],
-  ["upholstery", "تودوزی و بازسازی سالن", "تودوزی فابریکی، چرم، رودری، سقف، کفپوش، فرمان و بازسازی تریم داخلی.", "02"],
-  ["vip-van-camper", "ون VIP و کمپر", "طراحی و اجرای ون VIP، کمپر، کابین‌های تشریفاتی و فضای اختصاصی سفر.", "03"],
-  ["multi-brand-service", "سرویس مولتی‌برند", "سرویس تخصصی، دیاگ، برق، مکانیک، رنگ، بدنه و کنترل کیفیت برای خودروهای وارداتی.", "04"],
-  ["options-detailing", "آپشن و دیتیلینگ", "نصب آپشن، تجهیزات رفاهی، دیتیلینگ، آماده‌سازی و ارتقای تجربه کابین.", "05"],
-  ["digital-crm", "CRM و پلتفرم دیجیتال", "CRM، پرتال مشتریان، رزرو، کتابخانه رسانه، سفارش کار و رهگیری پیشرفت.", "06"],
+  ["technical-service", "خدمات فنی خودروهای خارجی", "مکانیک، سرویس دوره‌ای، دیاگ، برق، گیربکس، جلوبندی، ترمز و کارشناسی قبل خرید.", "01"],
+  ["marketplace", "فروشگاه قطعات و تجهیزات", "قطعات مصرفی، فنی، برق و الکترونیک، آپشن، مواد دیتیلینگ، ابزار، OEM و Special Order.", "02"],
+  ["interiors", "طراحی داخلی و صندلی", "صندلی، ارتقا، ون VIP، کمپر و کابین‌های اختصاصی از مسیر تهران صندلی، MrSeat و TehranSeat.", "03"],
+  ["upholstery", "تودوزی و بازسازی سالن", "تودوزی فابریکی، چرم، رودری، سقف، کفپوش، فرمان و بازسازی تریم داخلی از مسیر Tuduzi.", "04"],
+  ["authorized-service", "نمایندگی ANI2203", "مرکز مجاز مولتی‌برند برای Toyota، Lexus، Nissan، Suzuki، Hyundai، Skoda و Aion.", "05"],
+  ["digital-platform", "پلتفرم دیجیتال خودرو", "Vehicle Digital Passport، Customer Club، Cloud Garage، CRM، گارانتی و پرتال مشتریان.", "06"],
 ].map(([slug, title, description, index]) => ({ slug, title, description, index }));
 
+export const technicalServices = [
+  ["mechanics", "مکانیک و سرویس دوره‌ای", "سرویس و عیب‌یابی مکانیکی خودروهای خارجی با ثبت سابقه در CRM."],
+  ["diagnostics", "دیاگ تخصصی", "تحلیل خطا، سنسورها، ماژول‌ها و گزارش تشخیص پیش از تعمیر."],
+  ["electronics", "برق و الکترونیک", "عیب‌یابی سیم‌کشی، ماژول‌ها، شارژ، باتری و تجهیزات الکترونیکی."],
+  ["gearbox", "گیربکس", "تشخیص، سرویس، برنامه‌ریزی تعمیر و کنترل وضعیت گیربکس."],
+  ["suspension", "جلوبندی و تعلیق", "بررسی کیفیت سواری، صدا، لرزش و پیشنهاد قطعات مناسب."],
+  ["brake", "ترمز", "بازدید ایمنی، لنت، دیسک، سیستم ترمز و ثبت هشدارهای ایمنی."],
+  ["options", "آپشن و ارتقا", "نصب و ارتقای امکانات رفاهی، الکترونیکی و OEM-style."],
+  ["detailing", "دیتیلینگ", "دیتیلینگ داخلی و خارجی، آماده‌سازی، پولیش و نگهداری حرفه‌ای."],
+  ["ppf-ceramic-wrap", "PPF / سرامیک / کاور", "محافظت رنگ، پوشش سرامیک، کاور خودرو و پیگیری گارانتی."],
+  ["bodywork", "صافکاری", "بازدید، برنامه‌ریزی و اجرای پروژه‌های بدنه برای خودروهای خارجی."],
+  ["paint", "نقاشی", "نقاشی، اصلاح رنگ، مواد مصرفی و اتصال به انبار و پروژه."],
+  ["inspection", "کارشناسی قبل خرید", "دیاگ، بدنه، رنگ، کابین، سلامت فنی و گزارش دیجیتال کارشناسی."],
+].map(([slug, title, description]) => ({ slug, title, description }));
+
+export const foreignCarBrands = [
+  "BMW",
+  "Mercedes-Benz",
+  "Porsche",
+  "Audi",
+  "Volkswagen",
+  "Mini",
+  "Land Rover",
+  "Range Rover",
+  "Volvo",
+  "Maserati",
+  "Alfa Romeo",
+  "Jeep",
+  "Toyota",
+  "Lexus",
+  "Nissan",
+  "Hyundai",
+  "Kia",
+  "Skoda",
+  "Aion",
+];
+
+export const marketplaceCategories = [
+  ["consumables", "قطعات مصرفی", "فیلتر، روغن، لنت، شمع، تسمه و اقلام مصرفی خودروهای خارجی."],
+  ["technical-parts", "قطعات فنی", "قطعات موتور، گیربکس، جلوبندی، ترمز و سیستم‌های مکانیکی."],
+  ["electronics", "برق و الکترونیک", "سنسور، ماژول، سیم‌کشی، باتری، تجهیزات و قطعات الکترونیکی."],
+  ["options-accessories", "آپشن و لوازم جانبی", "آپشن، تجهیزات رفاهی، اکسسوری و ارتقای کابین یا بدنه."],
+  ["detailing-materials", "مواد دیتیلینگ", "مواد تخصصی شست‌وشو، پولیش، محافظت و نگهداری."],
+  ["paint-body", "مواد صافکاری و نقاشی", "مواد بدنه، رنگ، آماده‌سازی، پوشش و تعمیرات ظاهری."],
+  ["tools-equipment", "ابزار و تجهیزات", "ابزار تخصصی، تجهیزات کارگاهی و اقلام نصب و سرویس."],
+  ["oem", "OEM", "قطعات اصلی و سازگار با استاندارد کارخانه."],
+  ["aftermarket", "Aftermarket", "قطعات جایگزین معتبر با انتخاب فنی و کنترل کیفیت."],
+  ["used", "Used", "قطعات استوک و سالم برای خودروهای خارجی، با بررسی و ثبت وضعیت."],
+  ["special-order", "Special Order", "سفارش اختصاصی قطعات کمیاب یا غیراستوک با پیگیری تامین."],
+].map(([slug, title, description]) => ({ slug, title, description }));
+
 export const platformModules = [
-  ["CRM", "مدیریت لید، مشتری، پروژه، پیگیری، فروش و عملیات بین برندها."],
-  ["Customer Portal", "دسترسی مشتری به وضعیت پروژه، درخواست‌ها، گارانتی و سوابق خدمات."],
-  ["Booking", "رزرو خدمات، زمان‌بندی کارگاهی و هماهنگی مراجعه برای برندهای سرویس‌محور."],
-  ["Media Library", "مدیریت تصاویر و ویدئوهای واقعی پروژه‌ها برای سایت‌ها و CRM."],
-  ["Work Orders", "تبدیل آیتم‌های فاکتور به کار عملیاتی، وظایف، مسئول و زمان‌بندی."],
-  ["Progress Tracking", "رهگیری مرحله، درصد پیشرفت، تاخیرها، کنترل کیفیت و تحویل."],
+  ["Vehicle Digital Passport", "گذرنامه دیجیتال خودرو برای هویت، سوابق سرویس، فاکتور، پروژه، مدیا و گارانتی."],
+  ["Customer Club", "باشگاه مشتریان، سطح‌بندی، امتیاز، معرفی مشتری و ارتباط بلندمدت."],
+  ["Cloud Garage", "پارکینگ ابری مشتری برای خودروها، سوابق، گارانتی و توصیه‌های سرویس."],
+  ["Service Reminder", "یادآوری سرویس‌ها، گارانتی، بازدیدها و پیگیری‌های دوره‌ای."],
+  ["Warranty Records", "ثبت گارانتی خدمات و قطعات در کنار پروژه، فاکتور و خودرو."],
+  ["CRM-backed Operations", "لید، رزرو، سفارش کار، کنترل کیفیت، انبار، هزینه و پیشرفت پروژه."],
 ].map(([title, description]) => ({ title, description }));
 
 export const trustSignals = [
-  "بزرگترین مجموعه تخصصی صندلی و سالن خودرو",
-  "نمایندگی مولتی‌برند آنی سرویس 2203",
-  "پلتفرم دیجیتال CRM و مدیریت مشتریان",
-  "پوشش غرب تهران و البرز",
+  "مرکز تخصصی خودروهای خارجی و وارداتی",
+  "فروشگاه قطعات، مواد مصرفی و تجهیزات خودروهای خارجی",
+  "نمایندگی مولتی‌برند ANI Service 2203 برای برندهای مجاز",
+  "پلتفرم دیجیتال CRM، گارانتی و گذرنامه خودرو",
 ];
 
 export const faRoutes = [
