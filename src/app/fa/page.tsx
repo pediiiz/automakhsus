@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { EcosystemContentLinks } from "@/components/content/content-sections";
 import {
   BrandEcosystem,
   DigitalPlatform,
@@ -38,6 +39,7 @@ export default function HomePage() {
       <BrandEcosystem />
       <TechnicalServices />
       <ForeignCarBrands />
+      <EcosystemContentLinks />
       <MarketplaceSection />
       <ServicePillars />
       <TrustStats />

@@ -4,6 +4,11 @@ import { brands, phone, whatsapp } from "@/lib/site-data";
 const nav = [
   ["برندها", "/fa/brands"],
   ["خدمات فنی", "/fa/services"],
+  ["آکادمی", "/fa/academy"],
+  ["ویدئو", "/fa/videos"],
+  ["نمونه‌کارها", "/fa/projects"],
+  ["دانشنامه خودرو", "/fa/cars"],
+  ["کامیونیتی", "/fa/community"],
   ["اکوسیستم", "/fa/ecosystem"],
   ["فروشگاه", "/fa/ecosystem"],
   ["پلتفرم دیجیتال", "/fa/digital-platform"],
@@ -56,6 +61,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
             <div className="mt-4 grid gap-3 text-sm text-white/64">
               <Link href="/fa/cooperation">درخواست همکاری</Link>
               <Link href="/fa/services">رزرو سرویس خودروهای خارجی</Link>
+              <Link href="/fa/academy">آکادمی فنی</Link>
+              <Link href="/fa/cars">دانشنامه خودروهای خارجی</Link>
               <Link href="/fa/digital-platform">پلتفرم دیجیتال</Link>
               <a href={`tel:${phone}`}>{phone}</a>
             </div>
@@ -65,8 +72,8 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
       <div className="fixed inset-x-3 bottom-3 z-50 grid grid-cols-4 gap-2 rounded-2xl border border-white/10 bg-[#07111f]/95 p-2 text-xs font-black text-white shadow-2xl backdrop-blur md:hidden">
         <a className="rounded-xl bg-white/10 py-3 text-center" href={`tel:${phone}`}>تماس</a>
         <a className="rounded-xl bg-white/10 py-3 text-center" href={`https://wa.me/${whatsapp}`}>واتساپ</a>
-        <Link className="rounded-xl bg-[var(--electric)] py-3 text-center" href="/fa/services">رزرو سرویس</Link>
-        <a className="rounded-xl bg-white/10 py-3 text-center" href="#lead">خرید قطعه</a>
+        <Link className="rounded-xl bg-[var(--electric)] py-3 text-center" href="/fa/services">رزرو</Link>
+        <Link className="rounded-xl bg-white/10 py-3 text-center" href="/fa/cars">خودروها</Link>
       </div>
     </div>
   );
