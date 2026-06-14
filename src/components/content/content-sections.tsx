@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
 import { LeadSection, SeoJsonLd } from "@/components/seo-page";
-import type { ContentCard, ProjectContent, QuestionContent, VehicleBrand, VehicleModel, VideoContent } from "@/lib/content-data";
+import type { ContentCard, ProjectContent, QuestionContent, VehicleBrand, VehicleGeneration, VehicleModel, VideoContent } from "@/lib/content-data";
 import { academyArticles, ecosystemLinks, projects, videos } from "@/lib/content-data";
 import { absolute, marketplaceCategories, technicalServices } from "@/lib/site-data";
 import { breadcrumbSchema } from "@/lib/seo";
@@ -348,14 +348,16 @@ export function VehicleBrandGrid({ brands }: { brands: VehicleBrand[] }) {
   );
 }
 
-export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBrand; model?: VehicleModel; schema: object }) {
-  const title = model ? `${model.fa} در Auto Makhsus` : `خدمات ${brand.fa} در Auto Makhsus`;
-  const description = model?.intro || brand.description;
+export function VehicleBrandDetail({ brand, model, generation, schema }: { brand: VehicleBrand; model?: VehicleModel; generation?: VehicleGeneration; schema: object }) {
+  const title = generation && model ? `${model.fa} نسل ${generation.name} در Auto Makhsus` : model ? `${model.fa} در Auto Makhsus` : `خدمات ${brand.fa} در Auto Makhsus`;
+  const description = generation?.note || model?.intro || brand.description;
   const issues = model?.commonIssues || brand.commonIssues;
   const diagnostics = model?.diagnostics || brand.diagnostics;
   const parts = model?.parts || brand.parts;
   const packages = model?.servicePackages || brand.servicePackages;
   const faqs = model?.faqs || brand.faqs;
+  const imageMeta = generation?.image || model?.image;
+  const sourcePage = generation && model ? `/fa/cars/${brand.slug}/${model.slug}/${generation.slug}` : model ? `/fa/cars/${brand.slug}/${model.slug}` : `/fa/cars/${brand.slug}`;
   const relatedProjects = projects.filter((item) => item.brand === brand.name || item.brand === brand.fa || (model && item.model === model.name)).slice(0, 2);
   const relatedVideos = videos.filter((item) => item.relatedCars.some((car) => car.href.includes(`/fa/cars/${brand.slug}`)) || item.tags.includes(brand.name)).slice(0, 2);
   const relatedArticles = academyArticles.filter((item) => item.tags.some((tag) => ["دیاگ", "سرویس دوره‌ای", "کارشناسی قبل خرید", "قطعات مصرفی"].includes(tag))).slice(0, 2);
@@ -389,7 +391,7 @@ export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBra
         <div className="container-shell mt-8">
           <article className="card p-7">
             <p className="eyebrow">Service Packages</p>
-            <h2 className="mt-3 text-3xl font-black">پکیج‌های پیشنهادی {model?.fa || brand.fa}</h2>
+            <h2 className="mt-3 text-3xl font-black">پکیج‌های پیشنهادی {generation && model ? `${model.fa} نسل ${generation.name}` : model?.fa || brand.fa}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {packages.map((entry) => (
                 <div key={entry.title} className="service-package-card">
@@ -409,6 +411,44 @@ export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBra
                 <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{entry.intro}</p>
               </Link>
             ))}
+          </div>
+        ) : null}
+        {model?.generations?.length ? (
+          <div className="container-shell mt-8">
+            <article className="card p-7">
+              <p className="eyebrow">Generations</p>
+              <h2 className="mt-3 text-3xl font-black">نسل‌ها و بازه‌های سال {model.fa}</h2>
+              <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+                {model.generations.map((entry) => {
+                  const active = generation?.slug === entry.slug;
+                  return (
+                    <Link
+                      key={entry.slug}
+                      href={`/fa/cars/${brand.slug}/${model.slug}/${entry.slug}`}
+                      className={`rounded-[1.2rem] border p-5 transition hover:-translate-y-1 ${active ? "border-[var(--electric)] bg-sky-50 shadow-[0_20px_55px_rgba(11,92,255,0.16)]" : "border-[var(--border)] bg-white hover:border-[var(--electric)]"}`}
+                    >
+                      <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-black text-white">{entry.years}</span>
+                      <h3 className="mt-4 text-2xl font-black">{entry.name}</h3>
+                      <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{entry.note}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+            </article>
+          </div>
+        ) : null}
+        {imageMeta ? (
+          <div className="container-shell mt-8">
+            <article className="rounded-[1.25rem] border border-dashed border-sky-200 bg-sky-50/70 p-6">
+              <p className="eyebrow">Image Policy</p>
+              <h2 className="mt-2 text-2xl font-black">وضعیت تصویر و مجوز استفاده</h2>
+              <div className="mt-4 grid gap-3 text-sm leading-8 text-slate-700 md:grid-cols-3">
+                <p><strong className="text-slate-950">مسیر:</strong> {imageMeta.path}</p>
+                <p><strong className="text-slate-950">منبع:</strong> {imageMeta.source}</p>
+                <p><strong className="text-slate-950">مجوز:</strong> {imageMeta.license}</p>
+              </div>
+              <p className="mt-3 text-xs leading-7 text-slate-500">تا زمانی که تصویر دارای مجوز روشن و قابل استناد نباشد، از تصویر عمومی داخلی/خنثی استفاده می‌شود و هیچ تصویر نامطمئن یا هات‌لینک‌شده در تولید قرار نمی‌گیرد.</p>
+            </article>
           </div>
         ) : null}
       </section>
@@ -431,7 +471,7 @@ export function VehicleBrandDetail({ brand, model, schema }: { brand: VehicleBra
           <Link href="/fa/projects" className="dark-mini-card">نمونه‌کارهای مرتبط</Link>
         </div>
       </section>
-      <LeadSection sourcePage={model ? `/fa/cars/${brand.slug}/${model.slug}` : `/fa/cars/${brand.slug}`} interest={`رزرو سرویس ${model?.fa || brand.fa}`} />
+      <LeadSection sourcePage={sourcePage} interest={`رزرو سرویس ${generation && model ? `${model.fa} نسل ${generation.name}` : model?.fa || brand.fa}`} />
     </main>
   );
 }

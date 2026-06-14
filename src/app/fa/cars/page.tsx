@@ -6,8 +6,8 @@ import { absolute } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "دانشنامه خودروهای خارجی Auto Makhsus | برند و مدل",
-  description: "دانشنامه برندها و مدل‌های خودروهای خارجی شامل خدمات مرتبط، مشکلات رایج، مقالات، ویدئوها، نمونه‌کارها و رزرو سرویس.",
+  title: "دانشنامه جهانی خودروهای خارجی Auto Makhsus | برند، مدل و نسل",
+  description: "دانشنامه برندها، مدل‌ها، نسل‌ها و سال‌های خودروهای خارجی شامل خدمات، مشکلات رایج، قطعات، مقالات، ویدئوها، نمونه‌کارها و رزرو سرویس.",
   path: "/fa/cars",
 });
 
@@ -15,7 +15,7 @@ export default function CarsPage() {
   return (
     <main>
       <SeoJsonLd data={breadcrumbSchema([{ name: "Auto Makhsus", url: absolute("/fa") }, { name: "دانشنامه خودرو", url: absolute("/fa/cars") }])} />
-      <ContentHero eyebrow="Vehicle Knowledge Base" title="دانشنامه خودروهای خارجی" description="هاب برند و مدل برای BMW، Mercedes-Benz، Porsche، Audi، Toyota، Lexus، Hyundai، Kia و سایر خودروهای وارداتی با لینک به خدمات، محتوا و رزرو سرویس." image={contentVisual.cars} />
+      <ContentHero eyebrow="Vehicle Knowledge Base" title="دانشنامه جهانی خودروهای خارجی" description="هاب برند، مدل، نسل و سال برای خودروهای معتبر جهانی؛ از BMW، Mercedes-Benz، Porsche، Audi و Toyota تا Lexus، Hyundai، Kia، Tesla، Ferrari و برندهای وارداتی با لینک به خدمات، قطعات، محتوا و رزرو سرویس." image={contentVisual.cars} />
       <VehicleBrandGrid brands={vehicleBrands} />
     </main>
   );

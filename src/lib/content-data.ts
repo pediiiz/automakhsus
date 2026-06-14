@@ -65,6 +65,13 @@ export type VehicleModel = {
   name: string;
   fa: string;
   years: string;
+  image?: {
+    path: string;
+    source: string;
+    license: string;
+    attribution?: string;
+  };
+  generations?: VehicleGeneration[];
   intro: string;
   commonIssues: string[];
   maintenance: string[];
@@ -72,6 +79,19 @@ export type VehicleModel = {
   parts: string[];
   servicePackages: { title: string; body: string }[];
   faqs: { question: string; answer: string }[];
+};
+
+export type VehicleGeneration = {
+  slug: string;
+  name: string;
+  years: string;
+  note: string;
+  image?: {
+    path: string;
+    source: string;
+    license: string;
+    attribution?: string;
+  };
 };
 
 export const contentVisual = {
@@ -549,27 +569,372 @@ const priorityModels: Record<string, VehicleModel[]> = {
   ],
 };
 
-export const vehicleBrands: VehicleBrand[] = [
-  ["bmw", "BMW", "بی‌ام‌و", "خدمات BMW در Auto Makhsus شامل دیاگ، برق، سرویس دوره‌ای، گیربکس، تعلیق، قطعه و کارشناسی است."],
-  ["mercedes-benz", "Mercedes-Benz", "مرسدس بنز", "خدمات Mercedes-Benz با تمرکز روی دیاگ، برق، نگهداری، آپشن، قطعات و سوابق دیجیتال خودرو انجام می‌شود."],
-  ["porsche", "Porsche", "پورشه", "پورشه نیازمند تشخیص دقیق، قطعه معتبر، دیتیلینگ و نگهداری مستند است."],
-  ["audi", "Audi", "آئودی", "خدمات Audi برای خودروهای وارداتی با محور دیاگ، برق، گیربکس و قطعات تخصصی تعریف می‌شود."],
-  ["volkswagen", "Volkswagen", "فولکس‌واگن", "فولکس‌واگن در هاب خودروهای خارجی Auto Makhsus برای سرویس، قطعه و عیب‌یابی پوشش داده می‌شود."],
-  ["mini", "Mini", "مینی", "مینی به سرویس دقیق، قطعات سازگار و عیب‌یابی تخصصی نیاز دارد."],
-  ["land-rover", "Land Rover", "لندرور", "لندرور و رنج‌روور با تمرکز روی تعلیق، برق، دیاگ و نگهداری تخصصی پوشش داده می‌شوند."],
-  ["range-rover", "Range Rover", "رنج‌روور", "رنج‌روور به سرویس مستند، برق دقیق، قطعه مناسب و گزارش فنی نیاز دارد."],
-  ["volvo", "Volvo", "ولوو", "ولوو با استاندارد ایمنی بالا، نیازمند عیب‌یابی و نگهداری دقیق است."],
-  ["maserati", "Maserati", "مازراتی", "مازراتی در خدمات خودروهای وارداتی با تمرکز بر نگهداری خاص و قطعات معتبر دیده می‌شود."],
-  ["alfa-romeo", "Alfa Romeo", "آلفارومئو", "آلفارومئو نیازمند شناخت فنی مدل، قطعه و سرویس‌های حساس است."],
-  ["jeep", "Jeep", "جیپ", "جیپ برای سرویس فنی، تعلیق، برق و قطعات کاربردی در هاب خودروهای خارجی پوشش داده می‌شود."],
-  ["toyota", "Toyota", "تویوتا", "خدمات Toyota شامل سرویس دوره‌ای، قطعات مصرفی، کارشناسی، دیاگ و نگهداری مطمئن است."],
-  ["lexus", "Lexus", "لکسوس", "لکسوس به سرویس لوکس، دیتیلینگ، قطعات معتبر و سوابق دیجیتال خودرو نیاز دارد."],
-  ["nissan", "Nissan", "نیسان", "نیسان در خدمات خودروهای خارجی برای سرویس، قطعه، دیاگ و نگهداری پوشش دارد."],
-  ["hyundai", "Hyundai", "هیوندای", "هیوندای در ایران نیازمند قطعات معتبر، سرویس دقیق و عیب‌یابی مستند است."],
-  ["kia", "Kia", "کیا", "کیا برای مدل‌های پرمصرف ایران با خدمات فنی، قطعه، دیاگ و نگهداری پوشش داده می‌شود."],
-  ["skoda", "Skoda", "اشکودا", "اشکودا در کنار ANI2203 و هاب Auto Makhsus برای سرویس و نگهداری دیده می‌شود."],
-  ["aion", "Aion", "آیون", "Aion به عنوان برند جدیدتر نیازمند معماری فنی، برق و پشتیبانی تخصصی است."],
-].map(([slug, name, fa, description]) => ({
+const neutralVehicleImage = {
+  path: visual.hero,
+  source: "Auto Makhsus internal generated placeholder",
+  license: "Internal generated/owned visual. Used when legally certain brand/model imagery is not available.",
+};
+
+type ModelSeed = {
+  slug: string;
+  name: string;
+  fa: string;
+  generations: [string, string, string][];
+};
+
+type BrandSeed = [slug: string, name: string, fa: string, description: string, models: ModelSeed[]];
+
+function generation(slug: string, name: string, years: string): [string, string, string] {
+  return [slug, name, years];
+}
+
+function seedModel(slug: string, name: string, fa: string, generations: [string, string, string][]): VehicleModel {
+  const years = generations.map((entry) => entry[2]).join(" / ");
+  return {
+    slug,
+    name,
+    fa,
+    years,
+    image: neutralVehicleImage,
+    generations: generations.map(([generationSlug, generationName, generationYears]) => ({
+      slug: generationSlug,
+      name: generationName,
+      years: generationYears,
+      note: `${fa} نسل ${generationName} در بازه ${generationYears} باید از نظر دیاگ، قطعات مصرفی، سرویس دوره‌ای، برق، آپشن و سابقه نگهداری بر اساس وضعیت واقعی خودرو بررسی شود.`,
+      image: neutralVehicleImage,
+    })),
+    intro: `${fa} در دانشنامه Auto Makhsus به عنوان یک مدل مهم بازار خودروهای خارجی پوشش داده می‌شود؛ تمرکز صفحه روی سرویس، دیاگ، قطعات، آپشن، دیتیلینگ و مسیر استعلام قطعه یا رزرو سرویس است.`,
+    commonIssues: ["حساسیت به قطعات مصرفی و کیفیت نصب", "نیاز به دیاگ تخصصی قبل از تعویض قطعه", "اهمیت بررسی سابقه سرویس و وضعیت برق/ماژول‌ها"],
+    maintenance: ["سرویس دوره‌ای بر اساس نسل و کارکرد", "بازدید ترمز، تعلیق، روغن‌ها و مصرفی‌ها", "ثبت سوابق سرویس و قطعات در پرونده خودرو"],
+    diagnostics: ["دیاگ موتور، گیربکس و ماژول‌های اصلی", "بررسی داده زنده و خطاهای مقطعی", "تهیه گزارش ریسک ادامه رانندگی یا خرید"],
+    parts: ["قطعات مصرفی معتبر", "قطعات فنی و برقی با سازگاری مدل/نسل", "مسیر OEM، Aftermarket، Used یا Special Order براساس ریسک"],
+    servicePackages: [
+      { title: `بازدید فنی ${fa}`, body: "دیاگ، سرویس مصرفی، ترمز، تعلیق، برق و وضعیت قطعات مهم بررسی می‌شود." },
+      { title: `استعلام قطعه ${fa}`, body: "کد فنی، نسل، سال ساخت و سازگاری قطعه قبل از خرید یا خرید + نصب بررسی می‌شود." },
+      { title: `کارشناسی ${fa}`, body: "برای خرید خودرو کارکرده، دیاگ، بدنه، رنگ، گیربکس، آپشن‌ها و سابقه سرویس بررسی می‌شود." },
+    ],
+    faqs: [
+      { question: `برای ${fa} چه اطلاعاتی قبل از سرویس لازم است؟`, answer: "مدل، سال ساخت، نسل، علائم، کارکرد، سابقه سرویس و در صورت امکان VIN یا کد قطعه کمک می‌کند مسیر تشخیص دقیق‌تر باشد." },
+      { question: `آیا قطعات ${fa} از فروشگاه Auto Makhsus قابل استعلام است؟`, answer: "بله، مسیر فروشگاه فعلاً به صورت استعلام و خرید + نصب طراحی شده و به CRM متصل می‌شود." },
+    ],
+  };
+}
+
+function mergeSeedModels(slug: string, seeds: ModelSeed[]) {
+  const existing = priorityModels[slug] || [];
+  const existingSlugs = new Set(existing.map((model) => model.slug));
+  const seedBySlug = new Map(seeds.map((model) => [model.slug, model]));
+  const generated = seeds.filter((model) => !existingSlugs.has(model.slug)).map((model) => seedModel(model.slug, model.name, model.fa, model.generations));
+  return [...existing.map((model) => ({
+    ...model,
+    image: model.image || neutralVehicleImage,
+    generations: model.generations || (seedBySlug.get(model.slug)?.generations || [generation("current", model.name, model.years)]).map(([generationSlug, generationName, generationYears]) => ({
+      slug: generationSlug,
+      name: generationName,
+      years: generationYears,
+      note: `${model.fa} در بازه ${generationYears} برای سرویس، قطعه، دیاگ و نگهداری دقیق بررسی می‌شود.`,
+      image: neutralVehicleImage,
+    })),
+  })), ...generated];
+}
+
+const globalBrandCatalog: BrandSeed[] = [
+  ["bmw", "BMW", "بی‌ام‌و", "خدمات BMW در Auto Makhsus شامل دیاگ، برق، سرویس دوره‌ای، گیربکس، تعلیق، قطعه و کارشناسی است.", [
+    { slug: "x3", name: "X3", fa: "BMW X3", generations: [generation("e83", "E83", "2003-2010"), generation("f25", "F25", "2010-2017"), generation("g01", "G01", "2017-2024"), generation("g45", "G45", "2024-present")] },
+    { slug: "x5", name: "X5", fa: "BMW X5", generations: [generation("e53", "E53", "1999-2006"), generation("e70", "E70", "2006-2013"), generation("f15", "F15", "2013-2018"), generation("g05", "G05", "2018-present")] },
+    { slug: "3-series", name: "3 Series", fa: "BMW سری 3", generations: [generation("e90", "E90/E91/E92/E93", "2005-2013"), generation("f30", "F30/F31/F34", "2011-2019"), generation("g20", "G20/G21", "2018-present")] },
+    { slug: "5-series", name: "5 Series", fa: "BMW سری 5", generations: [generation("e60", "E60/E61", "2003-2010"), generation("f10", "F10/F11", "2010-2017"), generation("g30", "G30/G31", "2017-2023"), generation("g60", "G60/G61", "2023-present")] },
+    { slug: "7-series", name: "7 Series", fa: "BMW سری 7", generations: [generation("f01", "F01/F02", "2008-2015"), generation("g11", "G11/G12", "2015-2022"), generation("g70", "G70", "2022-present")] },
+    { slug: "x6", name: "X6", fa: "BMW X6", generations: [generation("e71", "E71", "2008-2014"), generation("f16", "F16", "2014-2019"), generation("g06", "G06", "2019-present")] },
+  ]],
+  ["mercedes-benz", "Mercedes-Benz", "مرسدس بنز", "خدمات Mercedes-Benz با تمرکز روی دیاگ، برق، نگهداری، آپشن، قطعات و سوابق دیجیتال خودرو انجام می‌شود.", [
+    { slug: "c200", name: "C200", fa: "Mercedes-Benz C200", generations: [generation("w204", "W204", "2007-2014"), generation("w205", "W205", "2014-2021"), generation("w206", "W206", "2021-present")] },
+    { slug: "e200", name: "E200", fa: "Mercedes-Benz E200", generations: [generation("w212", "W212", "2009-2016"), generation("w213", "W213", "2016-2023"), generation("w214", "W214", "2023-present")] },
+    { slug: "s-class", name: "S-Class", fa: "مرسدس بنز S-Class", generations: [generation("w221", "W221", "2005-2013"), generation("w222", "W222", "2013-2020"), generation("w223", "W223", "2020-present")] },
+    { slug: "glc", name: "GLC", fa: "مرسدس بنز GLC", generations: [generation("x253", "X253", "2015-2022"), generation("x254", "X254", "2022-present")] },
+    { slug: "gle", name: "GLE", fa: "مرسدس بنز GLE", generations: [generation("w166", "W166", "2015-2019"), generation("w167", "W167", "2019-present")] },
+  ]],
+  ["porsche", "Porsche", "پورشه", "پورشه نیازمند تشخیص دقیق، قطعه معتبر، دیتیلینگ و نگهداری مستند است.", [
+    { slug: "cayenne", name: "Cayenne", fa: "Porsche Cayenne", generations: [generation("955-957", "955/957", "2002-2010"), generation("958", "958", "2010-2017"), generation("9y0", "9Y0", "2017-present")] },
+    { slug: "panamera", name: "Panamera", fa: "Porsche Panamera", generations: [generation("970", "970", "2009-2016"), generation("971", "971", "2016-2023"), generation("g3", "G3", "2023-present")] },
+    { slug: "macan", name: "Macan", fa: "Porsche Macan", generations: [generation("95b", "95B", "2014-2024"), generation("electric", "Electric", "2024-present")] },
+    { slug: "911", name: "911", fa: "Porsche 911", generations: [generation("997", "997", "2004-2012"), generation("991", "991", "2011-2019"), generation("992", "992", "2019-present")] },
+  ]],
+  ["audi", "Audi", "آئودی", "خدمات Audi برای خودروهای وارداتی با محور دیاگ، برق، گیربکس و قطعات تخصصی تعریف می‌شود.", [
+    { slug: "a4", name: "A4", fa: "Audi A4", generations: [generation("b8", "B8", "2008-2015"), generation("b9", "B9", "2015-2024"), generation("b10", "B10/A5 family", "2024-present")] },
+    { slug: "a6", name: "A6", fa: "Audi A6", generations: [generation("c6", "C6", "2004-2011"), generation("c7", "C7", "2011-2018"), generation("c8", "C8", "2018-present")] },
+    { slug: "q5", name: "Q5", fa: "Audi Q5", generations: [generation("8r", "8R", "2008-2017"), generation("fy", "FY", "2017-2024"), generation("gu", "GU", "2024-present")] },
+    { slug: "q7", name: "Q7", fa: "Audi Q7", generations: [generation("4l", "4L", "2005-2015"), generation("4m", "4M", "2015-present")] },
+  ]],
+  ["volkswagen", "Volkswagen", "فولکس‌واگن", "فولکس‌واگن در هاب خودروهای خارجی Auto Makhsus برای سرویس، قطعه و عیب‌یابی پوشش داده می‌شود.", [
+    { slug: "golf", name: "Golf", fa: "Volkswagen Golf", generations: [generation("mk6", "Mk6", "2008-2012"), generation("mk7", "Mk7", "2012-2020"), generation("mk8", "Mk8", "2019-present")] },
+    { slug: "passat", name: "Passat", fa: "Volkswagen Passat", generations: [generation("b6", "B6", "2005-2010"), generation("b7", "B7", "2010-2015"), generation("b8", "B8", "2014-2023"), generation("b9", "B9", "2023-present")] },
+    { slug: "tiguan", name: "Tiguan", fa: "Volkswagen Tiguan", generations: [generation("5n", "5N", "2007-2016"), generation("ad-bw", "AD/BW", "2016-2024"), generation("ct", "CT", "2024-present")] },
+    { slug: "touareg", name: "Touareg", fa: "Volkswagen Touareg", generations: [generation("7l", "7L", "2002-2010"), generation("7p", "7P", "2010-2018"), generation("cr", "CR", "2018-present")] },
+  ]],
+  ["mini", "Mini", "مینی", "مینی به سرویس دقیق، قطعات سازگار و عیب‌یابی تخصصی نیاز دارد.", [
+    { slug: "cooper", name: "Cooper", fa: "Mini Cooper", generations: [generation("r56", "R56", "2006-2013"), generation("f56", "F56", "2014-2024"), generation("f66", "F66", "2024-present")] },
+    { slug: "countryman", name: "Countryman", fa: "Mini Countryman", generations: [generation("r60", "R60", "2010-2016"), generation("f60", "F60", "2017-2023"), generation("u25", "U25", "2023-present")] },
+    { slug: "clubman", name: "Clubman", fa: "Mini Clubman", generations: [generation("r55", "R55", "2007-2014"), generation("f54", "F54", "2015-2024")] },
+  ]],
+  ["land-rover", "Land Rover", "لندرور", "لندرور و رنج‌روور با تمرکز روی تعلیق، برق، دیاگ و نگهداری تخصصی پوشش داده می‌شوند.", [
+    { slug: "defender", name: "Defender", fa: "Land Rover Defender", generations: [generation("classic", "Classic", "1983-2016"), generation("l663", "L663", "2020-present")] },
+    { slug: "discovery", name: "Discovery", fa: "Land Rover Discovery", generations: [generation("lr3", "LR3", "2004-2009"), generation("lr4", "LR4", "2009-2016"), generation("l462", "L462", "2017-present")] },
+    { slug: "freelander", name: "Freelander", fa: "Land Rover Freelander", generations: [generation("l314", "L314", "1997-2006"), generation("l359", "L359", "2006-2014")] },
+  ]],
+  ["range-rover", "Range Rover", "رنج‌روور", "رنج‌روور به سرویس مستند، برق دقیق، قطعه مناسب و گزارش فنی نیاز دارد.", [
+    { slug: "range-rover", name: "Range Rover", fa: "Range Rover", generations: [generation("l322", "L322", "2001-2012"), generation("l405", "L405", "2012-2021"), generation("l460", "L460", "2021-present")] },
+    { slug: "sport", name: "Range Rover Sport", fa: "Range Rover Sport", generations: [generation("l320", "L320", "2005-2013"), generation("l494", "L494", "2013-2022"), generation("l461", "L461", "2022-present")] },
+    { slug: "evoque", name: "Evoque", fa: "Range Rover Evoque", generations: [generation("l538", "L538", "2011-2018"), generation("l551", "L551", "2018-present")] },
+    { slug: "velar", name: "Velar", fa: "Range Rover Velar", generations: [generation("l560", "L560", "2017-present")] },
+  ]],
+  ["volvo", "Volvo", "ولوو", "ولوو با استاندارد ایمنی بالا، نیازمند عیب‌یابی و نگهداری دقیق است.", [
+    { slug: "xc60", name: "XC60", fa: "Volvo XC60", generations: [generation("p3", "P3", "2008-2017"), generation("spa", "SPA", "2017-present")] },
+    { slug: "xc90", name: "XC90", fa: "Volvo XC90", generations: [generation("p2", "P2", "2002-2014"), generation("spa", "SPA", "2015-present")] },
+    { slug: "s60", name: "S60", fa: "Volvo S60", generations: [generation("p3", "P3", "2010-2018"), generation("spa", "SPA", "2019-present")] },
+  ]],
+  ["maserati", "Maserati", "مازراتی", "مازراتی در خدمات خودروهای وارداتی با تمرکز بر نگهداری خاص و قطعات معتبر دیده می‌شود.", [
+    { slug: "ghibli", name: "Ghibli", fa: "Maserati Ghibli", generations: [generation("m157", "M157", "2013-2023")] },
+    { slug: "quattroporte", name: "Quattroporte", fa: "Maserati Quattroporte", generations: [generation("m139", "M139", "2003-2012"), generation("m156", "M156", "2013-2023")] },
+    { slug: "levante", name: "Levante", fa: "Maserati Levante", generations: [generation("m161", "M161", "2016-2024")] },
+  ]],
+  ["alfa-romeo", "Alfa Romeo", "آلفارومئو", "آلفارومئو نیازمند شناخت فنی مدل، قطعه و سرویس‌های حساس است.", [
+    { slug: "giulia", name: "Giulia", fa: "Alfa Romeo Giulia", generations: [generation("952", "952", "2016-present")] },
+    { slug: "stelvio", name: "Stelvio", fa: "Alfa Romeo Stelvio", generations: [generation("949", "949", "2017-present")] },
+    { slug: "giulietta", name: "Giulietta", fa: "Alfa Romeo Giulietta", generations: [generation("940", "940", "2010-2020")] },
+  ]],
+  ["jeep", "Jeep", "جیپ", "جیپ برای سرویس فنی، تعلیق، برق و قطعات کاربردی در هاب خودروهای خارجی پوشش داده می‌شود.", [
+    { slug: "grand-cherokee", name: "Grand Cherokee", fa: "Jeep Grand Cherokee", generations: [generation("wk", "WK", "2005-2010"), generation("wk2", "WK2", "2010-2021"), generation("wl", "WL", "2021-present")] },
+    { slug: "wrangler", name: "Wrangler", fa: "Jeep Wrangler", generations: [generation("jk", "JK", "2006-2018"), generation("jl", "JL", "2018-present")] },
+    { slug: "cherokee", name: "Cherokee", fa: "Jeep Cherokee", generations: [generation("kl", "KL", "2013-2023")] },
+  ]],
+  ["toyota", "Toyota", "تویوتا", "خدمات Toyota شامل سرویس دوره‌ای، قطعات مصرفی، کارشناسی، دیاگ و نگهداری مطمئن است.", [
+    { slug: "prado", name: "Prado", fa: "Toyota Prado", generations: [generation("j120", "J120", "2002-2009"), generation("j150", "J150", "2009-2023"), generation("j250", "J250", "2023-present")] },
+    { slug: "camry", name: "Camry", fa: "Toyota Camry", generations: [generation("xv40", "XV40", "2006-2011"), generation("xv50", "XV50", "2011-2018"), generation("xv70", "XV70", "2017-2024"), generation("xv80", "XV80", "2024-present")] },
+    { slug: "hilux", name: "Hilux", fa: "Toyota Hilux", generations: [generation("an10-an20-an30", "AN10/20/30", "2004-2015"), generation("an120-an130", "AN120/130", "2015-present")] },
+    { slug: "land-cruiser", name: "Land Cruiser", fa: "Toyota Land Cruiser", generations: [generation("j100", "J100", "1998-2007"), generation("j200", "J200", "2007-2021"), generation("j300", "J300", "2021-present")] },
+    { slug: "rav4", name: "RAV4", fa: "Toyota RAV4", generations: [generation("xa40", "XA40", "2012-2018"), generation("xa50", "XA50", "2018-present")] },
+  ]],
+  ["lexus", "Lexus", "لکسوس", "لکسوس به سرویس لوکس، دیتیلینگ، قطعات معتبر و سوابق دیجیتال خودرو نیاز دارد.", [
+    { slug: "rx", name: "RX", fa: "Lexus RX", generations: [generation("al10", "AL10", "2008-2015"), generation("al20", "AL20", "2015-2022"), generation("ala10", "ALA10", "2022-present")] },
+    { slug: "nx", name: "NX", fa: "Lexus NX", generations: [generation("az10", "AZ10", "2014-2021"), generation("az20", "AZ20", "2021-present")] },
+    { slug: "lx", name: "LX", fa: "Lexus LX", generations: [generation("j200", "J200", "2007-2021"), generation("j310", "J310", "2021-present")] },
+    { slug: "es", name: "ES", fa: "Lexus ES", generations: [generation("xv60", "XV60", "2012-2018"), generation("xz10", "XZ10", "2018-present")] },
+  ]],
+  ["nissan", "Nissan", "نیسان", "نیسان در خدمات خودروهای خارجی برای سرویس، قطعه، دیاگ و نگهداری پوشش دارد.", [
+    { slug: "x-trail", name: "X-Trail", fa: "Nissan X-Trail", generations: [generation("t31", "T31", "2007-2013"), generation("t32", "T32", "2013-2021"), generation("t33", "T33", "2021-present")] },
+    { slug: "patrol", name: "Patrol", fa: "Nissan Patrol", generations: [generation("y61", "Y61", "1997-2016"), generation("y62", "Y62", "2010-present")] },
+    { slug: "murano", name: "Murano", fa: "Nissan Murano", generations: [generation("z51", "Z51", "2008-2014"), generation("z52", "Z52", "2014-2024")] },
+    { slug: "maxima", name: "Maxima", fa: "Nissan Maxima", generations: [generation("a33", "A33", "2000-2006"), generation("a35", "A35", "2008-2014"), generation("a36", "A36", "2015-2023")] },
+  ]],
+  ["infiniti", "Infiniti", "اینفینیتی", "Infiniti به عنوان شاخه لوکس نیسان نیازمند قطعه، دیاگ و سرویس دقیق خودروهای وارداتی است.", [
+    { slug: "fx", name: "FX/QX70", fa: "Infiniti FX / QX70", generations: [generation("s50", "S50", "2002-2008"), generation("s51", "S51", "2008-2017")] },
+    { slug: "q50", name: "Q50", fa: "Infiniti Q50", generations: [generation("v37", "V37", "2013-present")] },
+    { slug: "qx60", name: "QX60", fa: "Infiniti QX60", generations: [generation("l50", "L50", "2012-2021"), generation("l51", "L51", "2021-present")] },
+  ]],
+  ["hyundai", "Hyundai", "هیوندای", "هیوندای در ایران نیازمند قطعات معتبر، سرویس دقیق و عیب‌یابی مستند است.", [
+    { slug: "santa-fe", name: "Santa Fe", fa: "Hyundai Santa Fe", generations: [generation("cm", "CM", "2006-2012"), generation("dm", "DM", "2012-2018"), generation("tm", "TM", "2018-2023"), generation("mx5", "MX5", "2023-present")] },
+    { slug: "tucson", name: "Tucson", fa: "Hyundai Tucson", generations: [generation("lm", "LM", "2009-2015"), generation("tl", "TL", "2015-2020"), generation("nx4", "NX4", "2020-present")] },
+    { slug: "sonata", name: "Sonata", fa: "Hyundai Sonata", generations: [generation("yf", "YF", "2009-2014"), generation("lf", "LF", "2014-2019"), generation("dn8", "DN8", "2019-present")] },
+    { slug: "elantra", name: "Elantra", fa: "Hyundai Elantra", generations: [generation("md", "MD", "2010-2015"), generation("ad", "AD", "2015-2020"), generation("cn7", "CN7", "2020-present")] },
+  ]],
+  ["kia", "Kia", "کیا", "کیا برای مدل‌های پرمصرف ایران با خدمات فنی، قطعه، دیاگ و نگهداری پوشش داده می‌شود.", [
+    { slug: "cerato", name: "Cerato", fa: "Kia Cerato", generations: [generation("td", "TD", "2008-2013"), generation("yd", "YD", "2013-2018"), generation("bd", "BD", "2018-present")] },
+    { slug: "optima", name: "Optima", fa: "Kia Optima", generations: [generation("tf", "TF", "2010-2015"), generation("jf", "JF", "2015-2020"), generation("k5-dl3", "K5 DL3", "2019-present")] },
+    { slug: "sportage", name: "Sportage", fa: "Kia Sportage", generations: [generation("sl", "SL", "2010-2015"), generation("ql", "QL", "2015-2021"), generation("nq5", "NQ5", "2021-present")] },
+    { slug: "sorento", name: "Sorento", fa: "Kia Sorento", generations: [generation("xm", "XM", "2009-2014"), generation("um", "UM", "2014-2020"), generation("mq4", "MQ4", "2020-present")] },
+  ]],
+  ["genesis", "Genesis", "جنسیس", "Genesis به سرویس لوکس، برق دقیق، قطعات باکیفیت و نگهداری مستند نیاز دارد.", [
+    { slug: "g70", name: "G70", fa: "Genesis G70", generations: [generation("ik", "IK", "2017-present")] },
+    { slug: "g80", name: "G80", fa: "Genesis G80", generations: [generation("dh", "DH", "2016-2020"), generation("rg3", "RG3", "2020-present")] },
+    { slug: "gv70", name: "GV70", fa: "Genesis GV70", generations: [generation("jk1", "JK1", "2020-present")] },
+    { slug: "gv80", name: "GV80", fa: "Genesis GV80", generations: [generation("jx1", "JX1", "2020-present")] },
+  ]],
+  ["suzuki", "Suzuki", "سوزوکی", "سوزوکی با تمرکز روی مصرفی‌ها، گیربکس، تعلیق و قطعات قابل اعتماد پوشش داده می‌شود.", [
+    { slug: "grand-vitara", name: "Grand Vitara", fa: "Suzuki Grand Vitara", generations: [generation("jt", "JT", "2005-2015"), generation("new", "New generation", "2022-present")] },
+    { slug: "vitara", name: "Vitara", fa: "Suzuki Vitara", generations: [generation("ly", "LY", "2015-present")] },
+    { slug: "swift", name: "Swift", fa: "Suzuki Swift", generations: [generation("zc72", "ZC72", "2010-2017"), generation("zc83", "ZC83", "2017-2023"), generation("zcd", "ZCD", "2023-present")] },
+  ]],
+  ["skoda", "Skoda", "اشکودا", "اشکودا در کنار ANI2203 و هاب Auto Makhsus برای سرویس و نگهداری دیده می‌شود.", [
+    { slug: "octavia", name: "Octavia", fa: "Skoda Octavia", generations: [generation("a5", "A5", "2004-2013"), generation("a7", "A7", "2013-2020"), generation("a8", "A8", "2020-present")] },
+    { slug: "superb", name: "Superb", fa: "Skoda Superb", generations: [generation("b6", "B6", "2008-2015"), generation("b8", "B8", "2015-2023"), generation("b9", "B9", "2023-present")] },
+    { slug: "kodiaq", name: "Kodiaq", fa: "Skoda Kodiaq", generations: [generation("ns", "NS", "2016-2024"), generation("ps", "PS", "2024-present")] },
+  ]],
+  ["aion", "Aion", "آیون", "Aion به عنوان برند جدیدتر نیازمند معماری فنی، برق و پشتیبانی تخصصی است.", [
+    { slug: "s", name: "Aion S", fa: "Aion S", generations: [generation("first", "First generation", "2019-present")] },
+    { slug: "y", name: "Aion Y", fa: "Aion Y", generations: [generation("first", "First generation", "2021-present")] },
+    { slug: "lx", name: "Aion LX", fa: "Aion LX", generations: [generation("first", "First generation", "2019-present")] },
+  ]],
+  ["byd", "BYD", "بی‌وای‌دی", "BYD در خدمات آینده خودروهای برقی و پلاگین هیبرید با تمرکز بر برق، باتری و دیاگ پوشش داده می‌شود.", [
+    { slug: "han", name: "Han", fa: "BYD Han", generations: [generation("first", "First generation", "2020-present")] },
+    { slug: "tang", name: "Tang", fa: "BYD Tang", generations: [generation("second", "Second generation", "2018-present")] },
+    { slug: "song-plus", name: "Song Plus", fa: "BYD Song Plus", generations: [generation("first", "First generation", "2020-present")] },
+    { slug: "atto-3", name: "Atto 3", fa: "BYD Atto 3", generations: [generation("first", "First generation", "2022-present")] },
+  ]],
+  ["mg", "MG", "ام‌جی", "MG برای بازار وارداتی و چینی-بریتانیایی با تمرکز بر قطعه، برق، گیربکس و سرویس پوشش داده می‌شود.", [
+    { slug: "mg6", name: "MG6", fa: "MG6", generations: [generation("first", "First generation", "2010-2016"), generation("second", "Second generation", "2016-2023")] },
+    { slug: "zs", name: "ZS", fa: "MG ZS", generations: [generation("zs", "ZS", "2017-present")] },
+    { slug: "hs", name: "HS", fa: "MG HS", generations: [generation("first", "First generation", "2018-present")] },
+  ]],
+  ["mazda", "Mazda", "مزدا", "مزدا با تمرکز روی سرویس مصرفی، موتور، گیربکس و قطعات معتبر پوشش داده می‌شود.", [
+    { slug: "mazda3", name: "Mazda3", fa: "Mazda3", generations: [generation("bk", "BK", "2003-2009"), generation("bl", "BL", "2009-2013"), generation("bm", "BM/BN", "2013-2019"), generation("bp", "BP", "2019-present")] },
+    { slug: "mazda6", name: "Mazda6", fa: "Mazda6", generations: [generation("gh", "GH", "2007-2012"), generation("gj", "GJ/GL", "2012-2024")] },
+    { slug: "cx-5", name: "CX-5", fa: "Mazda CX-5", generations: [generation("ke", "KE", "2012-2016"), generation("kf", "KF", "2017-present")] },
+  ]],
+  ["mitsubishi", "Mitsubishi", "میتسوبیشی", "میتسوبیشی برای SUVها، قطعات مصرفی، گیربکس و سرویس دوره‌ای پوشش دارد.", [
+    { slug: "outlander", name: "Outlander", fa: "Mitsubishi Outlander", generations: [generation("cw", "CW", "2006-2012"), generation("gf", "GF", "2012-2021"), generation("gm", "GM", "2021-present")] },
+    { slug: "asx", name: "ASX", fa: "Mitsubishi ASX", generations: [generation("ga", "GA", "2010-2023")] },
+    { slug: "pajero", name: "Pajero", fa: "Mitsubishi Pajero", generations: [generation("v80", "V80/V90", "2006-2021")] },
+  ]],
+  ["subaru", "Subaru", "سوبارو", "سوبارو با سیستم AWD و موتورهای خاص به تشخیص دقیق و قطعات سازگار نیاز دارد.", [
+    { slug: "forester", name: "Forester", fa: "Subaru Forester", generations: [generation("sh", "SH", "2008-2012"), generation("sj", "SJ", "2012-2018"), generation("sk", "SK", "2018-present")] },
+    { slug: "outback", name: "Outback", fa: "Subaru Outback", generations: [generation("br", "BR", "2009-2014"), generation("bs", "BS", "2014-2019"), generation("bt", "BT", "2020-present")] },
+    { slug: "wrx", name: "WRX", fa: "Subaru WRX", generations: [generation("va", "VA", "2014-2021"), generation("vb", "VB", "2021-present")] },
+  ]],
+  ["honda", "Honda", "هوندا", "هوندا با تمرکز بر سرویس دوره‌ای، قطعات مصرفی و عیب‌یابی فنی پوشش داده می‌شود.", [
+    { slug: "accord", name: "Accord", fa: "Honda Accord", generations: [generation("cu", "CU", "2008-2012"), generation("cr", "CR", "2012-2017"), generation("cv", "CV", "2017-2022"), generation("cy", "CY", "2022-present")] },
+    { slug: "civic", name: "Civic", fa: "Honda Civic", generations: [generation("fb", "FB", "2011-2015"), generation("fc", "FC", "2015-2021"), generation("fl", "FL", "2021-present")] },
+    { slug: "cr-v", name: "CR-V", fa: "Honda CR-V", generations: [generation("rm", "RM", "2011-2016"), generation("rw", "RW", "2016-2022"), generation("rs", "RS", "2022-present")] },
+  ]],
+  ["acura", "Acura", "آکورا", "Acura به عنوان شاخه لوکس هوندا با تمرکز بر قطعه، سرویس و آپشن‌های رفاهی پوشش داده می‌شود.", [
+    { slug: "mdx", name: "MDX", fa: "Acura MDX", generations: [generation("yd2", "YD2", "2006-2013"), generation("yd3", "YD3", "2013-2020"), generation("yd4", "YD4", "2021-present")] },
+    { slug: "rdx", name: "RDX", fa: "Acura RDX", generations: [generation("tb3", "TB3", "2012-2018"), generation("tc1", "TC1/2", "2018-present")] },
+    { slug: "tlx", name: "TLX", fa: "Acura TLX", generations: [generation("ub", "UB", "2014-2020"), generation("yc", "YC", "2020-present")] },
+  ]],
+  ["ford", "Ford", "فورد", "فورد در دانشنامه خودروهای خارجی برای SUV، پیکاپ و خودروهای وارداتی مهم پوشش دارد.", [
+    { slug: "mustang", name: "Mustang", fa: "Ford Mustang", generations: [generation("s197", "S197", "2005-2014"), generation("s550", "S550", "2015-2023"), generation("s650", "S650", "2023-present")] },
+    { slug: "explorer", name: "Explorer", fa: "Ford Explorer", generations: [generation("u502", "U502", "2011-2019"), generation("u625", "U625", "2020-present")] },
+    { slug: "f-150", name: "F-150", fa: "Ford F-150", generations: [generation("p552", "13th gen", "2015-2020"), generation("p702", "14th gen", "2021-present")] },
+  ]],
+  ["chevrolet", "Chevrolet", "شورولت", "شورولت برای مدل‌های آمریکایی، SUV، اسپرت و پیکاپ با قطعه و تشخیص تخصصی پوشش داده می‌شود.", [
+    { slug: "camaro", name: "Camaro", fa: "Chevrolet Camaro", generations: [generation("fifth", "Fifth generation", "2010-2015"), generation("sixth", "Sixth generation", "2016-2024")] },
+    { slug: "corvette", name: "Corvette", fa: "Chevrolet Corvette", generations: [generation("c6", "C6", "2005-2013"), generation("c7", "C7", "2014-2019"), generation("c8", "C8", "2020-present")] },
+    { slug: "tahoe", name: "Tahoe", fa: "Chevrolet Tahoe", generations: [generation("gmt900", "GMT900", "2007-2014"), generation("k2uc", "K2UC", "2015-2020"), generation("t1uc", "T1UC", "2021-present")] },
+  ]],
+  ["cadillac", "Cadillac", "کادیلاک", "کادیلاک به عنوان برند لوکس آمریکایی نیازمند سرویس مستند، برق و قطعات خاص است.", [
+    { slug: "escalade", name: "Escalade", fa: "Cadillac Escalade", generations: [generation("gmt900", "GMT900", "2007-2014"), generation("k2xl", "K2XL", "2015-2020"), generation("t1xl", "T1XL", "2021-present")] },
+    { slug: "cts", name: "CTS", fa: "Cadillac CTS", generations: [generation("second", "Second generation", "2008-2013"), generation("third", "Third generation", "2014-2019")] },
+    { slug: "ct5", name: "CT5", fa: "Cadillac CT5", generations: [generation("first", "First generation", "2020-present")] },
+  ]],
+  ["lincoln", "Lincoln", "لینکلن", "لینکلن برای خودروهای لوکس آمریکایی با تمرکز روی راحتی، برق و قطعات کمیاب پوشش دارد.", [
+    { slug: "navigator", name: "Navigator", fa: "Lincoln Navigator", generations: [generation("third", "Third generation", "2007-2017"), generation("fourth", "Fourth generation", "2018-present")] },
+    { slug: "aviator", name: "Aviator", fa: "Lincoln Aviator", generations: [generation("u611", "U611", "2020-present")] },
+    { slug: "continental", name: "Continental", fa: "Lincoln Continental", generations: [generation("tenth", "Tenth generation", "2017-2020")] },
+  ]],
+  ["dodge", "Dodge", "داج", "داج برای خودروهای عضلانی و SUV با تمرکز بر موتور، گیربکس و قطعات خاص پوشش داده می‌شود.", [
+    { slug: "charger", name: "Charger", fa: "Dodge Charger", generations: [generation("lx", "LX", "2006-2010"), generation("ld", "LD", "2011-2023")] },
+    { slug: "challenger", name: "Challenger", fa: "Dodge Challenger", generations: [generation("lc", "LC", "2008-2023")] },
+    { slug: "durango", name: "Durango", fa: "Dodge Durango", generations: [generation("wd", "WD", "2011-present")] },
+  ]],
+  ["ram", "Ram", "رم", "Ram برای پیکاپ‌ها و خودروهای کاربری سنگین با قطعه و سرویس تخصصی پوشش دارد.", [
+    { slug: "1500", name: "1500", fa: "Ram 1500", generations: [generation("ds", "DS", "2009-2018"), generation("dt", "DT", "2019-present")] },
+    { slug: "2500", name: "2500", fa: "Ram 2500", generations: [generation("dj", "DJ", "2010-2018"), generation("dt", "DT", "2019-present")] },
+  ]],
+  ["chrysler", "Chrysler", "کرایسلر", "کرایسلر برای سدان‌ها و مینی‌ون‌های وارداتی با تمرکز روی قطعه و برق پوشش داده می‌شود.", [
+    { slug: "300", name: "300", fa: "Chrysler 300", generations: [generation("lx", "LX", "2005-2010"), generation("ld", "LD", "2011-2023")] },
+    { slug: "pacifica", name: "Pacifica", fa: "Chrysler Pacifica", generations: [generation("ru", "RU", "2017-present")] },
+  ]],
+  ["tesla", "Tesla", "تسلا", "تسلا به عنوان خودروی برقی نیازمند معماری سرویس برق، نرم‌افزار، بدنه و قطعات خاص است.", [
+    { slug: "model-s", name: "Model S", fa: "Tesla Model S", generations: [generation("first", "First generation", "2012-present")] },
+    { slug: "model-3", name: "Model 3", fa: "Tesla Model 3", generations: [generation("first", "First generation", "2017-present")] },
+    { slug: "model-x", name: "Model X", fa: "Tesla Model X", generations: [generation("first", "First generation", "2015-present")] },
+    { slug: "model-y", name: "Model Y", fa: "Tesla Model Y", generations: [generation("first", "First generation", "2020-present")] },
+  ]],
+  ["polestar", "Polestar", "پولستار", "Polestar برای خودروهای برقی پریمیوم با تمرکز بر برق، نرم‌افزار و بدنه پوشش داده می‌شود.", [
+    { slug: "2", name: "2", fa: "Polestar 2", generations: [generation("first", "First generation", "2020-present")] },
+    { slug: "3", name: "3", fa: "Polestar 3", generations: [generation("first", "First generation", "2023-present")] },
+    { slug: "4", name: "4", fa: "Polestar 4", generations: [generation("first", "First generation", "2023-present")] },
+  ]],
+  ["peugeot", "Peugeot", "پژو", "پژوهای جهانی و وارداتی با تمرکز بر قطعه، برق و سرویس فنی در دانشنامه پوشش داده می‌شوند.", [
+    { slug: "508", name: "508", fa: "Peugeot 508", generations: [generation("w2", "W2", "2010-2018"), generation("r8", "R8", "2018-present")] },
+    { slug: "3008", name: "3008", fa: "Peugeot 3008", generations: [generation("t84", "T84", "2008-2016"), generation("p84", "P84", "2016-2024"), generation("p64", "P64", "2024-present")] },
+    { slug: "5008", name: "5008", fa: "Peugeot 5008", generations: [generation("t87", "T87", "2009-2017"), generation("p87", "P87", "2017-2024")] },
+  ]],
+  ["citroen", "Citroen", "سیتروئن", "سیتروئن با تمرکز روی تعلیق، برق، قطعات و مدل‌های وارداتی پوشش دارد.", [
+    { slug: "c5", name: "C5", fa: "Citroen C5", generations: [generation("x7", "X7", "2008-2017"), generation("c5x", "C5 X", "2021-present")] },
+    { slug: "c4", name: "C4", fa: "Citroen C4", generations: [generation("b7", "B7", "2010-2018"), generation("c41", "C41", "2020-present")] },
+    { slug: "ds5", name: "DS5", fa: "Citroen DS5", generations: [generation("b81", "B81", "2011-2018")] },
+  ]],
+  ["renault", "Renault", "رنو", "رنوهای وارداتی با قطعه، گیربکس، برق و سرویس دوره‌ای پوشش داده می‌شوند.", [
+    { slug: "koleos", name: "Koleos", fa: "Renault Koleos", generations: [generation("hy", "HY", "2007-2016"), generation("hzg", "HZG", "2016-present")] },
+    { slug: "talisman", name: "Talisman", fa: "Renault Talisman", generations: [generation("l2m", "L2M", "2015-2022")] },
+    { slug: "megane", name: "Megane", fa: "Renault Megane", generations: [generation("iii", "Third generation", "2008-2016"), generation("iv", "Fourth generation", "2016-2024")] },
+  ]],
+  ["ds", "DS", "دی‌اس", "DS به عنوان برند پریمیوم فرانسوی با تمرکز بر برق، آپشن، قطعات و سرویس دقیق پوشش داده می‌شود.", [
+    { slug: "ds5", name: "DS 5", fa: "DS 5", generations: [generation("b81", "B81", "2011-2018")] },
+    { slug: "ds7", name: "DS 7", fa: "DS 7", generations: [generation("x74", "X74", "2017-present")] },
+    { slug: "ds9", name: "DS 9", fa: "DS 9", generations: [generation("x83", "X83", "2020-present")] },
+  ]],
+  ["fiat", "Fiat", "فیات", "فیات برای خودروهای شهری و وارداتی با تمرکز روی قطعات مصرفی و برق پوشش دارد.", [
+    { slug: "500", name: "500", fa: "Fiat 500", generations: [generation("312", "312", "2007-present")] },
+    { slug: "tipo", name: "Tipo", fa: "Fiat Tipo", generations: [generation("356", "356", "2015-present")] },
+    { slug: "panda", name: "Panda", fa: "Fiat Panda", generations: [generation("319", "319", "2011-present")] },
+  ]],
+  ["seat", "SEAT", "سئات", "SEAT برای خودروهای اروپایی گروه فولکس با سرویس، قطعه و دیاگ پوشش داده می‌شود.", [
+    { slug: "leon", name: "Leon", fa: "SEAT Leon", generations: [generation("1p", "1P", "2005-2012"), generation("5f", "5F", "2012-2020"), generation("kl", "KL", "2020-present")] },
+    { slug: "ateca", name: "Ateca", fa: "SEAT Ateca", generations: [generation("kh7", "KH7", "2016-present")] },
+    { slug: "ibiza", name: "Ibiza", fa: "SEAT Ibiza", generations: [generation("6j", "6J", "2008-2017"), generation("kj", "KJ", "2017-present")] },
+  ]],
+  ["cupra", "Cupra", "کوپرا", "Cupra به عنوان برند اسپرت گروه فولکس با قطعه و سرویس تخصصی پوشش داده می‌شود.", [
+    { slug: "formentor", name: "Formentor", fa: "Cupra Formentor", generations: [generation("km7", "KM7", "2020-present")] },
+    { slug: "leon", name: "Leon", fa: "Cupra Leon", generations: [generation("kl", "KL", "2020-present")] },
+    { slug: "born", name: "Born", fa: "Cupra Born", generations: [generation("first", "First generation", "2021-present")] },
+  ]],
+  ["opel", "Opel", "اوپل", "اوپلهای وارداتی با قطعه، برق، گیربکس و سرویس فنی پوشش داده می‌شوند.", [
+    { slug: "insignia", name: "Insignia", fa: "Opel Insignia", generations: [generation("a", "A", "2008-2017"), generation("b", "B", "2017-2022")] },
+    { slug: "mokka", name: "Mokka", fa: "Opel Mokka", generations: [generation("mokka-a", "Mokka A", "2012-2019"), generation("mokka-b", "Mokka B", "2020-present")] },
+    { slug: "astra", name: "Astra", fa: "Opel Astra", generations: [generation("j", "J", "2009-2015"), generation("k", "K", "2015-2021"), generation("l", "L", "2021-present")] },
+  ]],
+  ["jaguar", "Jaguar", "جگوار", "جگوار برای خودروهای لوکس بریتانیایی با برق، قطعه، بدنه و نگهداری دقیق پوشش دارد.", [
+    { slug: "xf", name: "XF", fa: "Jaguar XF", generations: [generation("x250", "X250", "2007-2015"), generation("x260", "X260", "2015-present")] },
+    { slug: "f-pace", name: "F-Pace", fa: "Jaguar F-Pace", generations: [generation("x761", "X761", "2016-present")] },
+    { slug: "f-type", name: "F-Type", fa: "Jaguar F-Type", generations: [generation("x152", "X152", "2013-2024")] },
+  ]],
+  ["bentley", "Bentley", "بنتلی", "بنتلی به سرویس بسیار دقیق، قطعات خاص، دیتیلینگ لوکس و نگهداری مستند نیاز دارد.", [
+    { slug: "continental-gt", name: "Continental GT", fa: "Bentley Continental GT", generations: [generation("first", "First generation", "2003-2011"), generation("second", "Second generation", "2011-2018"), generation("third", "Third generation", "2018-present")] },
+    { slug: "bentayga", name: "Bentayga", fa: "Bentley Bentayga", generations: [generation("first", "First generation", "2015-present")] },
+    { slug: "flying-spur", name: "Flying Spur", fa: "Bentley Flying Spur", generations: [generation("second", "Second generation", "2013-2019"), generation("third", "Third generation", "2019-present")] },
+  ]],
+  ["rolls-royce", "Rolls-Royce", "رولزرویس", "رولزرویس به نگهداری بسیار خاص، دیتیلینگ، قطعات کمیاب و سرویس فوق دقیق نیاز دارد.", [
+    { slug: "ghost", name: "Ghost", fa: "Rolls-Royce Ghost", generations: [generation("rr4", "RR4", "2009-2020"), generation("rr21", "RR21", "2020-present")] },
+    { slug: "phantom", name: "Phantom", fa: "Rolls-Royce Phantom", generations: [generation("vii", "Phantom VII", "2003-2017"), generation("viii", "Phantom VIII", "2017-present")] },
+    { slug: "cullinan", name: "Cullinan", fa: "Rolls-Royce Cullinan", generations: [generation("rr31", "RR31", "2018-present")] },
+  ]],
+  ["aston-martin", "Aston Martin", "استون مارتین", "استون مارتین برای خودروهای اسپرت لوکس با سرویس، قطعات خاص و نگهداری مستند پوشش داده می‌شود.", [
+    { slug: "db11", name: "DB11", fa: "Aston Martin DB11", generations: [generation("first", "First generation", "2016-2023")] },
+    { slug: "vantage", name: "Vantage", fa: "Aston Martin Vantage", generations: [generation("vh2", "VH2", "2005-2017"), generation("am6", "AM6", "2018-present")] },
+    { slug: "dbx", name: "DBX", fa: "Aston Martin DBX", generations: [generation("first", "First generation", "2020-present")] },
+  ]],
+  ["ferrari", "Ferrari", "فراری", "فراری نیازمند سرویس بسیار تخصصی، قطعات خاص، دیتیلینگ و نگهداری دقیق است.", [
+    { slug: "458", name: "458", fa: "Ferrari 458", generations: [generation("f142", "F142", "2009-2015")] },
+    { slug: "488", name: "488", fa: "Ferrari 488", generations: [generation("f142m", "F142M", "2015-2019")] },
+    { slug: "roma", name: "Roma", fa: "Ferrari Roma", generations: [generation("f169", "F169", "2019-present")] },
+    { slug: "purosangue", name: "Purosangue", fa: "Ferrari Purosangue", generations: [generation("f175", "F175", "2022-present")] },
+  ]],
+  ["lamborghini", "Lamborghini", "لامبورگینی", "لامبورگینی با تمرکز روی خودروهای سوپراسپرت، قطعات کمیاب و نگهداری مستند پوشش دارد.", [
+    { slug: "gallardo", name: "Gallardo", fa: "Lamborghini Gallardo", generations: [generation("first", "First generation", "2003-2013")] },
+    { slug: "huracan", name: "Huracan", fa: "Lamborghini Huracan", generations: [generation("lp610", "LP610 family", "2014-2024")] },
+    { slug: "aventador", name: "Aventador", fa: "Lamborghini Aventador", generations: [generation("lp700", "LP700 family", "2011-2022")] },
+    { slug: "urus", name: "Urus", fa: "Lamborghini Urus", generations: [generation("first", "First generation", "2018-present")] },
+  ]],
+  ["mclaren", "McLaren", "مک‌لارن", "مک‌لارن به سرویس فوق تخصصی، قطعات کمیاب و مراقبت دقیق بدنه و فنی نیاز دارد.", [
+    { slug: "570s", name: "570S", fa: "McLaren 570S", generations: [generation("sports-series", "Sports Series", "2015-2021")] },
+    { slug: "720s", name: "720S", fa: "McLaren 720S", generations: [generation("super-series", "Super Series", "2017-2023")] },
+    { slug: "artura", name: "Artura", fa: "McLaren Artura", generations: [generation("first", "First generation", "2021-present")] },
+  ]],
+  ["bugatti", "Bugatti", "بوگاتی", "بوگاتی به عنوان هایپرکار بسیار خاص فقط با مسیر مشاوره، نگهداری و قطعه فوق تخصصی پوشش داده می‌شود.", [
+    { slug: "veyron", name: "Veyron", fa: "Bugatti Veyron", generations: [generation("first", "First generation", "2005-2015")] },
+    { slug: "chiron", name: "Chiron", fa: "Bugatti Chiron", generations: [generation("first", "First generation", "2016-2024")] },
+    { slug: "tourbillon", name: "Tourbillon", fa: "Bugatti Tourbillon", generations: [generation("first", "First generation", "2026-present")] },
+  ]],
+  ["lotus", "Lotus", "لوتوس", "لوتوس برای خودروهای سبک اسپرت و برقی جدید با نگهداری دقیق و قطعات خاص پوشش دارد.", [
+    { slug: "elise", name: "Elise", fa: "Lotus Elise", generations: [generation("s2", "Series 2", "2000-2010"), generation("s3", "Series 3", "2010-2021")] },
+    { slug: "emira", name: "Emira", fa: "Lotus Emira", generations: [generation("first", "First generation", "2022-present")] },
+    { slug: "eletre", name: "Eletre", fa: "Lotus Eletre", generations: [generation("first", "First generation", "2023-present")] },
+  ]],
+];
+
+export const vehicleBrands: VehicleBrand[] = globalBrandCatalog.map(([slug, name, fa, description, modelSeeds]) => ({
   slug,
   name,
   fa,
@@ -582,7 +947,7 @@ export const vehicleBrands: VehicleBrand[] = [
   detailing: brandDetailing(slug, fa),
   servicePackages: brandPackages(slug, fa),
   faqs: brandFaqs(slug, fa),
-  models: priorityModels[slug] || [],
+  models: mergeSeedModels(slug, modelSeeds),
 }));
 
 function brandServices(slug: string, fa: string) {
@@ -703,6 +1068,10 @@ export function findVehicleModel(brandSlug: string, modelSlug: string) {
   return findVehicleBrand(brandSlug)?.models.find((model) => model.slug === modelSlug);
 }
 
+export function findVehicleGeneration(brandSlug: string, modelSlug: string, generationSlug: string) {
+  return findVehicleModel(brandSlug, modelSlug)?.generations?.find((generationItem) => generationItem.slug === generationSlug);
+}
+
 export function articleSchema(item: ContentCard) {
   return {
     "@context": "https://schema.org",
@@ -770,13 +1139,21 @@ export function qaSchema(item: QuestionContent) {
   };
 }
 
-export function vehicleSchema(brand: VehicleBrand, model?: VehicleModel) {
+export function vehicleSchema(brand: VehicleBrand, model?: VehicleModel, generationItem?: VehicleGeneration) {
+  const entityName = generationItem && model ? `${model.fa} نسل ${generationItem.name}` : model ? model.fa : brand.fa;
+  const entityDescription = generationItem?.note || model?.intro || brand.description;
+  const entityPath = generationItem && model
+    ? `/fa/cars/${brand.slug}/${model.slug}/${generationItem.slug}`
+    : model
+      ? `/fa/cars/${brand.slug}/${model.slug}`
+      : `/fa/cars/${brand.slug}`;
+
   return {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: model ? `${model.fa} در Auto Makhsus` : `${brand.fa} در Auto Makhsus`,
-    description: model?.intro || brand.description,
-    url: absolute(model ? `/fa/cars/${brand.slug}/${model.slug}` : `/fa/cars/${brand.slug}`),
+    name: `${entityName} در Auto Makhsus`,
+    description: entityDescription,
+    url: absolute(entityPath),
     inLanguage: "fa-IR",
     about: {
       "@type": "Brand",
@@ -784,12 +1161,12 @@ export function vehicleSchema(brand: VehicleBrand, model?: VehicleModel) {
     },
     mainEntity: {
       "@type": "Service",
-      name: model ? `خدمات ${model.fa}` : `خدمات ${brand.fa}`,
+      name: `خدمات ${entityName}`,
       serviceType: [...brand.services, ...(model?.maintenance || [])].join(", "),
       provider: { "@type": "Organization", name: "Auto Makhsus" },
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: model ? `پکیج‌های خدمات ${model.fa}` : `پکیج‌های خدمات ${brand.fa}`,
+        name: `پکیج‌های خدمات ${entityName}`,
         itemListElement: (model?.servicePackages || brand.servicePackages).map((entry) => ({
           "@type": "Offer",
           itemOffered: {
@@ -828,4 +1205,5 @@ export const contentRoutes = [
   "/fa/cars",
   ...vehicleBrands.map((brand) => `/fa/cars/${brand.slug}`),
   ...vehicleBrands.flatMap((brand) => brand.models.map((model) => `/fa/cars/${brand.slug}/${model.slug}`)),
+  ...vehicleBrands.flatMap((brand) => brand.models.flatMap((model) => (model.generations || []).map((generationItem) => `/fa/cars/${brand.slug}/${model.slug}/${generationItem.slug}`))),
 ];
