@@ -349,7 +349,7 @@ export function VehicleBrandGrid({ brands }: { brands: VehicleBrand[] }) {
 }
 
 export function VehicleBrandDetail({ brand, model, generation, schema }: { brand: VehicleBrand; model?: VehicleModel; generation?: VehicleGeneration; schema: object }) {
-  const title = generation && model ? `${model.fa} نسل ${generation.name} در Auto Makhsus` : model ? `${model.fa} در Auto Makhsus` : `خدمات ${brand.fa} در Auto Makhsus`;
+  const title = generation && model ? `${model.fa} نسل ${generation.name}` : model ? `${model.fa}` : `خدمات ${brand.fa}`;
   const description = generation?.note || model?.intro || brand.description;
   const issues = model?.commonIssues || brand.commonIssues;
   const diagnostics = model?.diagnostics || brand.diagnostics;
@@ -361,11 +361,91 @@ export function VehicleBrandDetail({ brand, model, generation, schema }: { brand
   const relatedProjects = projects.filter((item) => item.brand === brand.name || item.brand === brand.fa || (model && item.model === model.name)).slice(0, 2);
   const relatedVideos = videos.filter((item) => item.relatedCars.some((car) => car.href.includes(`/fa/cars/${brand.slug}`)) || item.tags.includes(brand.name)).slice(0, 2);
   const relatedArticles = academyArticles.filter((item) => item.tags.some((tag) => ["دیاگ", "سرویس دوره‌ای", "کارشناسی قبل خرید", "قطعات مصرفی"].includes(tag))).slice(0, 2);
+  const breadcrumbs = [
+    { name: "Auto Makhsus", url: absolute("/fa") },
+    { name: "دانشنامه خودرو", url: absolute("/fa/cars") },
+    { name: brand.fa, url: absolute(`/fa/cars/${brand.slug}`) },
+    ...(model ? [{ name: model.fa, url: absolute(`/fa/cars/${brand.slug}/${model.slug}`) }] : []),
+    ...(generation && model ? [{ name: generation.name, url: absolute(sourcePage) }] : []),
+  ];
   return (
     <main>
       <SeoJsonLd data={schema} />
-      <ContentHero eyebrow={brand.name} title={title} description={description} image="/uploads/automakhsus/generated/hero-automotive-ecosystem.png" />
+      <SeoJsonLd data={breadcrumbSchema(breadcrumbs)} />
+      <section className="vehicle-detail-hero">
+        <div className="vehicle-orbit vehicle-orbit-a" />
+        <div className="vehicle-orbit vehicle-orbit-b" />
+        <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-end">
+          <div>
+            <div className="vehicle-detail-mark">{brand.brandMark.text}</div>
+            <p className="mt-5 text-sm font-black text-[var(--ice)]">{brand.name} / {brand.originCountry} / {brand.category}</p>
+            <h1 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">{title}</h1>
+            <p className="mt-5 text-base leading-9 text-white/72 md:text-lg">{description}</p>
+            <div className="mt-7 flex flex-wrap gap-3">
+              <Link className="btn-primary" href="#lead">رزرو سرویس</Link>
+              <Link className="btn-ghost-dark" href="/fa/store">استعلام قطعه</Link>
+              <Link className="btn-ghost-dark" href="/fa/academy">مطالب آموزشی</Link>
+            </div>
+          </div>
+          <div className="vehicle-detail-console">
+            <VehicleConsoleMetric label="مدل‌ها" value={brand.models.length.toLocaleString("fa-IR")} />
+            <VehicleConsoleMetric label="نسل‌ها" value={brand.models.reduce((sum, entry) => sum + (entry.generations?.length || 0), 0).toLocaleString("fa-IR")} />
+            <VehicleConsoleMetric label="کشور مبدا" value={brand.originCountry} />
+            <VehicleConsoleMetric label="کلاس" value={model?.bodyType || brand.category} />
+          </div>
+        </div>
+      </section>
       <section className="section bg-white">
+        {!model && brand.models.length ? (
+          <div className="container-shell mb-8">
+            <div className="flex flex-wrap items-end justify-between gap-4">
+              <div>
+                <p className="eyebrow">Models</p>
+                <h2 className="mt-3 text-3xl font-black md:text-5xl">مدل‌های {brand.fa}</h2>
+              </div>
+              <Link href="/fa/store" className="btn-secondary">قطعات و خرید + نصب</Link>
+            </div>
+            <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+              {brand.models.map((entry) => (
+                <Link key={entry.slug} className="vehicle-model-card" href={`/fa/cars/${brand.slug}/${entry.slug}`}>
+                  <span className="vehicle-model-type">{entry.bodyType || "مدل خودرو"}</span>
+                  <h3 className="mt-4 text-2xl font-black">{entry.fa}</h3>
+                  <p className="mt-2 text-sm font-black text-[var(--electric)]">{entry.name}</p>
+                  <p className="mt-4 line-clamp-3 text-sm leading-8 text-[var(--muted)]">{entry.intro}</p>
+                  <div className="mt-5 grid grid-cols-2 gap-3">
+                    <span className="vehicle-model-metric"><strong>{(entry.generations?.length || 0).toLocaleString("fa-IR")}</strong><small>نسل</small></span>
+                    <span className="vehicle-model-metric"><strong>{entry.years.split(" / ")[0]}</strong><small>شروع بازه</small></span>
+                  </div>
+                  <span className="mt-5 inline-flex text-sm font-black text-[var(--electric)]">مشاهده نسل‌ها ←</span>
+                </Link>
+              ))}
+            </div>
+          </div>
+        ) : null}
+        {model?.generations?.length ? (
+          <div className="container-shell mb-8">
+            <article className="vehicle-generation-timeline">
+              <p className="eyebrow text-[var(--ice)]">Generation Timeline</p>
+              <h2 className="mt-3 text-3xl font-black text-white md:text-5xl">نسل‌ها و بازه‌های سال {model.fa}</h2>
+              <div className="mt-7 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+                {model.generations.map((entry) => {
+                  const active = generation?.slug === entry.slug;
+                  return (
+                    <Link
+                      key={entry.slug}
+                      href={`/fa/cars/${brand.slug}/${model.slug}/${entry.slug}`}
+                      className={`vehicle-generation-card ${active ? "is-active" : ""}`}
+                    >
+                      <span>{entry.years}</span>
+                      <h3>{entry.name}</h3>
+                      <p>{entry.note}</p>
+                    </Link>
+                  );
+                })}
+              </div>
+            </article>
+          </div>
+        ) : null}
         <div className="container-shell grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
           <article className="card p-7">
             <p className="eyebrow">Services</p>
@@ -402,41 +482,6 @@ export function VehicleBrandDetail({ brand, model, generation, schema }: { brand
             </div>
           </article>
         </div>
-        {!model && brand.models.length ? (
-          <div className="container-shell mt-8 grid gap-4 md:grid-cols-2">
-            {brand.models.map((entry) => (
-              <Link key={entry.slug} className="card p-6 transition hover:-translate-y-1 hover:border-[var(--electric)]" href={`/fa/cars/${brand.slug}/${entry.slug}`}>
-                <p className="eyebrow">Model Hub</p>
-                <h3 className="mt-2 text-2xl font-black">{entry.fa}</h3>
-                <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{entry.intro}</p>
-              </Link>
-            ))}
-          </div>
-        ) : null}
-        {model?.generations?.length ? (
-          <div className="container-shell mt-8">
-            <article className="card p-7">
-              <p className="eyebrow">Generations</p>
-              <h2 className="mt-3 text-3xl font-black">نسل‌ها و بازه‌های سال {model.fa}</h2>
-              <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                {model.generations.map((entry) => {
-                  const active = generation?.slug === entry.slug;
-                  return (
-                    <Link
-                      key={entry.slug}
-                      href={`/fa/cars/${brand.slug}/${model.slug}/${entry.slug}`}
-                      className={`rounded-[1.2rem] border p-5 transition hover:-translate-y-1 ${active ? "border-[var(--electric)] bg-sky-50 shadow-[0_20px_55px_rgba(11,92,255,0.16)]" : "border-[var(--border)] bg-white hover:border-[var(--electric)]"}`}
-                    >
-                      <span className="rounded-full bg-slate-950 px-3 py-1 text-xs font-black text-white">{entry.years}</span>
-                      <h3 className="mt-4 text-2xl font-black">{entry.name}</h3>
-                      <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{entry.note}</p>
-                    </Link>
-                  );
-                })}
-              </div>
-            </article>
-          </div>
-        ) : null}
         {imageMeta ? (
           <div className="container-shell mt-8">
             <article className="rounded-[1.25rem] border border-dashed border-sky-200 bg-sky-50/70 p-6">
@@ -473,6 +518,15 @@ export function VehicleBrandDetail({ brand, model, generation, schema }: { brand
       </section>
       <LeadSection sourcePage={sourcePage} interest={`رزرو سرویس ${generation && model ? `${model.fa} نسل ${generation.name}` : model?.fa || brand.fa}`} />
     </main>
+  );
+}
+
+function VehicleConsoleMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="vehicle-console-metric">
+      <span>{label}</span>
+      <strong>{value}</strong>
+    </div>
   );
 }
 

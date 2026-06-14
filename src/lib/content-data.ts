@@ -49,6 +49,18 @@ export type VehicleBrand = {
   name: string;
   fa: string;
   description: string;
+  originCountry: string;
+  category: string;
+  regions: string[];
+  featured?: boolean;
+  brandMark: {
+    text: string;
+    source: string;
+    license: string;
+    usageStatus: "official" | "licensed" | "internal" | "typographic-placeholder";
+    path?: string;
+    attribution?: string;
+  };
   services: string[];
   commonIssues: string[];
   diagnostics: string[];
@@ -65,6 +77,7 @@ export type VehicleModel = {
   name: string;
   fa: string;
   years: string;
+  bodyType?: string;
   image?: {
     path: string;
     source: string;
@@ -575,6 +588,78 @@ const neutralVehicleImage = {
   license: "Internal generated/owned visual. Used when legally certain brand/model imagery is not available.",
 };
 
+const brandRegionMap: Record<string, { originCountry: string; category: string; regions: string[]; featured?: boolean }> = {
+  bmw: { originCountry: "آلمان", category: "لوکس / اسپرت", regions: ["German", "Supercar/Luxury"], featured: true },
+  "mercedes-benz": { originCountry: "آلمان", category: "لوکس / اجرایی", regions: ["German", "Supercar/Luxury"], featured: true },
+  porsche: { originCountry: "آلمان", category: "اسپرت / لوکس", regions: ["German", "Supercar/Luxury"], featured: true },
+  audi: { originCountry: "آلمان", category: "لوکس / تکنولوژی", regions: ["German", "Supercar/Luxury"], featured: true },
+  volkswagen: { originCountry: "آلمان", category: "اروپایی", regions: ["German"], featured: true },
+  mini: { originCountry: "بریتانیا", category: "شهری پریمیوم", regions: ["British"] },
+  "land-rover": { originCountry: "بریتانیا", category: "SUV لوکس", regions: ["British", "Supercar/Luxury"], featured: true },
+  "range-rover": { originCountry: "بریتانیا", category: "SUV لوکس", regions: ["British", "Supercar/Luxury"], featured: true },
+  volvo: { originCountry: "سوئد", category: "ایمنی / پریمیوم", regions: ["European"] },
+  maserati: { originCountry: "ایتالیا", category: "لوکس / اسپرت", regions: ["Italian", "Supercar/Luxury"] },
+  "alfa-romeo": { originCountry: "ایتالیا", category: "اسپرت اروپایی", regions: ["Italian"] },
+  jeep: { originCountry: "آمریکا", category: "SUV / آفرود", regions: ["American"] },
+  toyota: { originCountry: "ژاپن", category: "ژاپنی / SUV", regions: ["Japanese"], featured: true },
+  lexus: { originCountry: "ژاپن", category: "لوکس ژاپنی", regions: ["Japanese", "Supercar/Luxury"], featured: true },
+  nissan: { originCountry: "ژاپن", category: "ژاپنی", regions: ["Japanese"], featured: true },
+  infiniti: { originCountry: "ژاپن", category: "لوکس ژاپنی", regions: ["Japanese", "Supercar/Luxury"] },
+  hyundai: { originCountry: "کره جنوبی", category: "کره‌ای", regions: ["Korean"], featured: true },
+  kia: { originCountry: "کره جنوبی", category: "کره‌ای", regions: ["Korean"], featured: true },
+  genesis: { originCountry: "کره جنوبی", category: "لوکس کره‌ای", regions: ["Korean", "Supercar/Luxury"] },
+  suzuki: { originCountry: "ژاپن", category: "ژاپنی", regions: ["Japanese"] },
+  skoda: { originCountry: "چک", category: "اروپایی", regions: ["European"] },
+  aion: { originCountry: "چین", category: "برقی", regions: ["Chinese", "Electric"] },
+  byd: { originCountry: "چین", category: "برقی / هیبرید", regions: ["Chinese", "Electric"] },
+  mg: { originCountry: "بریتانیا / چین", category: "وارداتی", regions: ["Chinese", "British"] },
+  mazda: { originCountry: "ژاپن", category: "ژاپنی", regions: ["Japanese"] },
+  mitsubishi: { originCountry: "ژاپن", category: "ژاپنی / SUV", regions: ["Japanese"] },
+  subaru: { originCountry: "ژاپن", category: "ژاپنی / AWD", regions: ["Japanese"] },
+  honda: { originCountry: "ژاپن", category: "ژاپنی", regions: ["Japanese"] },
+  acura: { originCountry: "ژاپن", category: "لوکس ژاپنی", regions: ["Japanese", "Supercar/Luxury"] },
+  ford: { originCountry: "آمریکا", category: "آمریکایی", regions: ["American"] },
+  chevrolet: { originCountry: "آمریکا", category: "آمریکایی / اسپرت", regions: ["American"] },
+  cadillac: { originCountry: "آمریکا", category: "لوکس آمریکایی", regions: ["American", "Supercar/Luxury"] },
+  lincoln: { originCountry: "آمریکا", category: "لوکس آمریکایی", regions: ["American", "Supercar/Luxury"] },
+  dodge: { originCountry: "آمریکا", category: "عضلانی / SUV", regions: ["American"] },
+  ram: { originCountry: "آمریکا", category: "پیکاپ", regions: ["American"] },
+  chrysler: { originCountry: "آمریکا", category: "آمریکایی", regions: ["American"] },
+  tesla: { originCountry: "آمریکا", category: "برقی", regions: ["American", "Electric"], featured: true },
+  polestar: { originCountry: "سوئد", category: "برقی پریمیوم", regions: ["European", "Electric"] },
+  peugeot: { originCountry: "فرانسه", category: "فرانسوی", regions: ["French"] },
+  citroen: { originCountry: "فرانسه", category: "فرانسوی", regions: ["French"] },
+  renault: { originCountry: "فرانسه", category: "فرانسوی", regions: ["French"] },
+  ds: { originCountry: "فرانسه", category: "پریمیوم فرانسوی", regions: ["French", "Supercar/Luxury"] },
+  fiat: { originCountry: "ایتالیا", category: "ایتالیایی", regions: ["Italian"] },
+  seat: { originCountry: "اسپانیا", category: "اروپایی", regions: ["European"] },
+  cupra: { originCountry: "اسپانیا", category: "اسپرت اروپایی", regions: ["European"] },
+  opel: { originCountry: "آلمان", category: "آلمانی", regions: ["German"] },
+  jaguar: { originCountry: "بریتانیا", category: "لوکس / اسپرت", regions: ["British", "Supercar/Luxury"] },
+  bentley: { originCountry: "بریتانیا", category: "فوق لوکس", regions: ["British", "Supercar/Luxury"] },
+  "rolls-royce": { originCountry: "بریتانیا", category: "فوق لوکس", regions: ["British", "Supercar/Luxury"] },
+  "aston-martin": { originCountry: "بریتانیا", category: "اسپرت لوکس", regions: ["British", "Supercar/Luxury"] },
+  ferrari: { originCountry: "ایتالیا", category: "سوپراسپرت", regions: ["Italian", "Supercar/Luxury"] },
+  lamborghini: { originCountry: "ایتالیا", category: "سوپراسپرت", regions: ["Italian", "Supercar/Luxury"] },
+  mclaren: { originCountry: "بریتانیا", category: "سوپراسپرت", regions: ["British", "Supercar/Luxury"] },
+  bugatti: { originCountry: "فرانسه", category: "هایپرکار", regions: ["French", "Supercar/Luxury"] },
+  lotus: { originCountry: "بریتانیا", category: "اسپرت سبک", regions: ["British", "Electric"] },
+};
+
+function brandMeta(slug: string) {
+  return brandRegionMap[slug] || { originCountry: "جهانی", category: "خودرو خارجی", regions: ["Global"] };
+}
+
+function bodyTypeForModel(slug: string, name: string) {
+  const value = `${slug} ${name}`.toLowerCase();
+  if (/(x3|x5|x6|glc|gle|cayenne|macan|q5|q7|tiguan|touareg|countryman|defender|discovery|range-rover|sport|evoque|velar|xc60|xc90|levante|stelvio|cherokee|wrangler|prado|hilux|land-cruiser|rav4|rx|nx|lx|x-trail|patrol|murano|santa-fe|tucson|sportage|sorento|gv70|gv80|grand-vitara|vitara|kodiaq|tang|hs|cx-5|outlander|forester|cr-v|rdx|explorer|tahoe|escalade|navigator|aviator|durango|model-x|model-y|3008|5008|koleos|ds7|ateca|formentor|mokka|f-pace|bentayga|cullinan|dbx|urus|eletre)/.test(value)) return "SUV / کراس‌اوور";
+  if (/(911|corvette|camaro|challenger|charger|f-type|continental|db11|vantage|458|488|roma|gallardo|huracan|aventador|570s|720s|artura|veyron|chiron|tourbillon|elise|emira)/.test(value)) return "اسپرت / سوپراسپرت";
+  if (/(f-150|1500|2500|ram|hilux)/.test(value)) return "پیکاپ";
+  if (/(model-s|model-3|polestar|aion|byd|han|dolphin|seal|born)/.test(value)) return "برقی / سدان";
+  if (/(golf|cooper|swift|mazda3|civic|500|panda|leon|ibiza|astra)/.test(value)) return "هاچ‌بک / شهری";
+  return "سدان / اجرایی";
+}
+
 type ModelSeed = {
   slug: string;
   name: string;
@@ -595,6 +680,7 @@ function seedModel(slug: string, name: string, fa: string, generations: [string,
     name,
     fa,
     years,
+    bodyType: bodyTypeForModel(slug, name),
     image: neutralVehicleImage,
     generations: generations.map(([generationSlug, generationName, generationYears]) => ({
       slug: generationSlug,
@@ -627,6 +713,7 @@ function mergeSeedModels(slug: string, seeds: ModelSeed[]) {
   const generated = seeds.filter((model) => !existingSlugs.has(model.slug)).map((model) => seedModel(model.slug, model.name, model.fa, model.generations));
   return [...existing.map((model) => ({
     ...model,
+    bodyType: model.bodyType || bodyTypeForModel(model.slug, model.name),
     image: model.image || neutralVehicleImage,
     generations: model.generations || (seedBySlug.get(model.slug)?.generations || [generation("current", model.name, model.years)]).map(([generationSlug, generationName, generationYears]) => ({
       slug: generationSlug,
@@ -939,6 +1026,13 @@ export const vehicleBrands: VehicleBrand[] = globalBrandCatalog.map(([slug, name
   name,
   fa,
   description,
+  ...brandMeta(slug),
+  brandMark: {
+    text: name.split(/\s|-/).map((part) => part[0]).join("").slice(0, 3).toUpperCase(),
+    source: "Auto Makhsus generated typographic brand mark",
+    license: "Internal typographic placeholder. This is not an official manufacturer logo.",
+    usageStatus: "typographic-placeholder",
+  },
   services: brandServices(slug, fa),
   commonIssues: brandIssues(slug, fa),
   diagnostics: brandDiagnostics(slug, fa),

@@ -23,7 +23,7 @@ export async function generateMetadata({ params }: { params: Promise<{ brand: st
   const generation = findVehicleGeneration(brandSlug, modelSlug, generationSlug);
   if (!brand || !model || !generation) return {};
   return pageMetadata({
-    title: `خدمات ${model.fa} نسل ${generation.name} | Auto Makhsus`,
+    title: `خدمات ${model.fa} نسل ${generation.name}`,
     description: generation.note,
     path: `/fa/cars/${brand.slug}/${model.slug}/${generation.slug}`,
   });

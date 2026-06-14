@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ brand: st
   const brand = findVehicleBrand(brandSlug);
   const model = findVehicleModel(brandSlug, modelSlug);
   if (!brand || !model) return {};
-  return pageMetadata({ title: `خدمات ${model.fa} | Auto Makhsus`, description: model.intro, path: `/fa/cars/${brand.slug}/${model.slug}` });
+  return pageMetadata({ title: `خدمات ${model.fa}`, description: model.intro, path: `/fa/cars/${brand.slug}/${model.slug}` });
 }
 
 export default async function VehicleModelPage({ params }: { params: Promise<{ brand: string; model: string }> }) {
