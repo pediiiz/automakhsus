@@ -39,14 +39,14 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
           {subtitle ? <h2 className="mt-4 text-2xl font-black text-[var(--ice)] md:text-4xl">{subtitle}</h2> : null}
           <p className="mt-6 text-base leading-9 text-white/74 md:text-lg">{description}</p>
           <div className="mt-8 flex flex-wrap gap-3">
-            <Link className="btn-primary" href="#lead">درخواست مشاوره</Link>
-            <Link className="btn-ghost-dark" href="/fa/services">رزرو سرویس</Link>
-            <Link className="btn-ghost-dark" href="/fa/store">خرید قطعه</Link>
-            <Link className="btn-ghost-dark" href="/fa/cooperation">درخواست نصب</Link>
+            <Link className="btn-primary" href="/fa/services">رزرو سرویس</Link>
+            <Link className="btn-ghost-dark" href="/fa/store">استعلام قطعه</Link>
+            <Link className="btn-ghost-dark" href="/fa/cars">ورود به دانشنامه خودرو</Link>
+            <Link className="btn-ghost-dark" href="#lead">درخواست مشاوره</Link>
             <a className="btn-ghost-dark" href="https://ani2203.com/fa/booking">رزرو خدمات آنی سرویس</a>
           </div>
-          <div className="mt-9 grid max-w-2xl grid-cols-3 gap-3">
-            {["خودروهای خارجی", "فروشگاه + نصب", "CRM مرکزی"].map((item) => (
+          <div className="hero-superbar mt-9 grid max-w-3xl grid-cols-3 gap-3">
+            {["دیاگ و خدمات فنی", "فروشگاه + نصب", "دانشنامه و CRM"].map((item) => (
               <div key={item} className="rounded-2xl border border-white/12 bg-white/[0.06] px-4 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
                 <span className="text-sm font-black text-white">{item}</span>
               </div>
@@ -156,7 +156,7 @@ export function TechnicalServices() {
           </div>
           <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             {technicalServices.map((item) => (
-              <article key={item.slug} className="technical-card">
+              <article key={item.slug} id={item.slug} className="technical-card scroll-mt-28">
                 <span className="technical-dot" />
                 <h3 className="text-lg font-black">{item.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-[var(--muted)]">{item.description}</p>

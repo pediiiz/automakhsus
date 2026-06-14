@@ -1,48 +1,11 @@
 import Link from "next/link";
-import { ContentDiscoveryNav } from "@/components/content/content-sections";
+import { PremiumHeader } from "@/components/premium-header";
 import { brands, phone, whatsapp } from "@/lib/site-data";
-
-const nav = [
-  ["برندها", "/fa/brands"],
-  ["خدمات فنی", "/fa/services"],
-  ["آکادمی", "/fa/academy"],
-  ["ویدئو", "/fa/videos"],
-  ["نمونه‌کارها", "/fa/projects"],
-  ["دانشنامه خودرو", "/fa/cars"],
-  ["کامیونیتی", "/fa/community"],
-  ["اکوسیستم", "/fa/ecosystem"],
-  ["فروشگاه", "/fa/store"],
-  ["پلتفرم دیجیتال", "/fa/digital-platform"],
-  ["رزرو/همکاری", "/fa/cooperation"],
-  ["تماس", "/fa/contact"],
-];
 
 export function SiteShell({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#07111f]/86 text-white backdrop-blur-2xl">
-        <div className="container-shell flex min-h-20 items-center justify-between gap-5">
-          <Link href="/fa" className="flex items-center gap-3" aria-label="Auto Makhsus">
-              <span className="grid size-12 place-items-center rounded-2xl bg-[var(--electric)] text-base font-black text-white shadow-[0_14px_38px_rgba(11,92,255,0.35)]">AM</span>
-            <span>
-              <span className="block text-xl font-black tracking-normal">Auto Makhsus</span>
-              <span className="block text-xs font-bold text-white/58">Foreign Car Technical Hub</span>
-            </span>
-          </Link>
-          <nav className="hidden items-center gap-1 xl:flex">
-            {nav.map(([label, href]) => (
-              <Link key={href} href={href} className="rounded-full px-4 py-2 text-sm font-bold text-white/70 transition hover:bg-white/10 hover:text-white">
-                {label}
-              </Link>
-            ))}
-          </nav>
-          <div className="hidden items-center gap-3 md:flex">
-            <a className="btn-ghost-dark" href={`https://wa.me/${whatsapp}`}>واتساپ</a>
-            <a className="btn-primary" href={`tel:${phone}`}>تماس</a>
-          </div>
-        </div>
-        <ContentDiscoveryNav />
-      </header>
+      <PremiumHeader />
       {children}
       <footer className="border-t border-white/10 bg-[#07111f] py-12 text-white">
         <div className="container-shell grid gap-8 md:grid-cols-[1.2fr_0.8fr_0.8fr]">
