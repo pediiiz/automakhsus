@@ -1,17 +1,11 @@
 import type { Metadata } from "next";
 import { EcosystemContentLinks } from "@/components/content/content-sections";
 import {
-  BrandEcosystem,
-  DigitalPlatform,
-  EcosystemMap,
   ForeignCarBrands,
   LeadSection,
   MarketplaceSection,
   PageHero,
   SeoJsonLd,
-  ServicePillars,
-  TechnicalServices,
-  TrustStats,
   WhatWeDoSection,
   PromotionSupportSection,
 } from "@/components/seo-page";
@@ -38,16 +32,10 @@ export default function HomePage() {
         image={visual.hero}
       />
       <WhatWeDoSection />
-      <EcosystemMap />
-      <BrandEcosystem />
-      <TechnicalServices />
       <ForeignCarBrands />
-      <EcosystemContentLinks />
       <MarketplaceSection />
-      <ServicePillars />
       <PromotionSupportSection />
-      <TrustStats />
-      <DigitalPlatform />
+      <EcosystemContentLinks />
       <LeadSection sourcePage="/fa" interest="درخواست مشاوره خودروهای خارجی" />
     </main>
   );

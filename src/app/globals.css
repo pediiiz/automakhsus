@@ -3423,3 +3423,422 @@ footer {
   .shift-spec-strip,
   .parts-rack { grid-template-columns: 1fr; }
 }
+
+/* Auto Makhsus WOW phase: homepage, cars and store */
+.am-hero {
+  min-height: calc(100svh - 24px);
+  padding-block: clamp(7rem, 12vw, 12rem);
+  background:
+    linear-gradient(90deg, rgba(7, 17, 31, 0.98) 0%, rgba(5, 10, 20, 0.9) 36%, rgba(11, 92, 255, 0.54) 100%),
+    radial-gradient(circle at 78% 12%, rgba(143, 211, 255, 0.28), transparent 34%),
+    #07111f;
+}
+
+.am-hero::before {
+  content: "";
+  position: absolute;
+  inset: 7rem 0 auto;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(143, 211, 255, 0.5), transparent);
+}
+
+.am-hero .container-shell {
+  width: min(100% - 3rem, 1720px);
+  grid-template-columns: minmax(0, 1.18fr) minmax(440px, 0.82fr);
+}
+
+.am-hero h1 {
+  max-width: 980px;
+  font-size: clamp(5.4rem, 9.6vw, 10.8rem);
+  letter-spacing: 0;
+  line-height: 0.78;
+  text-transform: none;
+}
+
+.am-hero h2 {
+  max-width: 740px;
+  font-size: clamp(3.25rem, 6.4vw, 7rem);
+  line-height: 1.05;
+}
+
+.am-hero p:not(.eyebrow) {
+  max-width: 820px;
+  font-size: clamp(1.05rem, 1.35vw, 1.42rem);
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.orbit-card {
+  min-height: clamp(520px, 48vw, 720px);
+  border-radius: 0;
+  border: 1px solid rgba(143, 211, 255, 0.26);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.025)),
+    #050b16;
+  padding: clamp(0.75rem, 1vw, 1.1rem);
+  box-shadow: 0 42px 110px rgba(0, 0, 0, 0.42);
+}
+
+.orbit-card > img {
+  height: 100%;
+  min-height: clamp(500px, 46vw, 690px);
+  border-radius: 0 !important;
+  filter: saturate(1.25) contrast(1.08);
+}
+
+.orbit-map {
+  inset: 2rem;
+  border-color: rgba(143, 211, 255, 0.34);
+  background: radial-gradient(circle at center, rgba(11, 92, 255, 0.24), transparent 56%);
+}
+
+.hero-dashboard-card {
+  border-radius: 0;
+  border-color: rgba(143, 211, 255, 0.38);
+  background: rgba(3, 7, 17, 0.82);
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.38);
+}
+
+.shift-spec-strip {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  background: rgba(143, 211, 255, 0.18);
+  gap: 1px;
+  border: 1px solid rgba(143, 211, 255, 0.16);
+}
+
+.shift-spec-strip article {
+  border: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.08);
+  padding: clamp(1.25rem, 2vw, 1.8rem);
+}
+
+.shift-spec-strip strong {
+  font-size: clamp(2.2rem, 5vw, 4.8rem);
+  line-height: 0.9;
+}
+
+.what-we-do-section {
+  background: #f4f7fb;
+  padding-block: clamp(5rem, 8vw, 8rem);
+}
+
+.shift-section-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.88fr) minmax(320px, 0.52fr);
+  gap: clamp(2rem, 6vw, 6rem);
+  align-items: end;
+}
+
+.shift-section-head h2 {
+  max-width: 1040px;
+  font-size: clamp(3.8rem, 8vw, 9rem);
+  line-height: 0.9;
+}
+
+.shift-section-head p:not(.eyebrow) {
+  font-size: 1.08rem;
+  line-height: 2.15;
+}
+
+.what-we-do-grid {
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 0;
+  margin-top: clamp(2.5rem, 5vw, 5rem);
+  border: 1px solid rgba(7, 17, 31, 0.12);
+  background: rgba(7, 17, 31, 0.12);
+}
+
+.shift-feature-card {
+  min-height: 360px;
+  border: 0;
+  border-radius: 0;
+  background: white;
+  padding: clamp(2rem, 4.8vw, 5rem);
+}
+
+.shift-feature-card:first-child {
+  grid-row: span 2;
+  min-height: 720px;
+  color: white;
+  background:
+    linear-gradient(180deg, rgba(7, 17, 31, 0.22), rgba(7, 17, 31, 0.92)),
+    radial-gradient(circle at 70% 15%, rgba(143, 211, 255, 0.34), transparent 34%),
+    linear-gradient(135deg, #07111f, #0b5cff);
+}
+
+.shift-feature-card:first-child h3 {
+  max-width: 760px;
+  color: white;
+  font-size: clamp(3.4rem, 6vw, 7rem);
+  line-height: 0.95;
+}
+
+.shift-feature-card:first-child p { color: rgba(255, 255, 255, 0.72); }
+.shift-feature-card:first-child span { color: rgba(143, 211, 255, 0.84); }
+
+.shift-feature-card h3 {
+  font-size: clamp(2.1rem, 3.2vw, 4rem);
+}
+
+.brand-cloud {
+  min-height: 520px;
+  align-content: stretch;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+}
+
+.brand-cloud span {
+  display: grid;
+  min-height: 104px;
+  place-items: center;
+  font-size: clamp(0.92rem, 1.4vw, 1.45rem);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.025));
+}
+
+.market-card,
+.store-card,
+.product-card {
+  min-height: 340px;
+  border-radius: 0;
+  padding: clamp(1.8rem, 3vw, 3rem);
+}
+
+.market-card h3,
+.store-card h3,
+.product-card h3 {
+  font-size: clamp(1.7rem, 2.3vw, 3rem);
+  line-height: 1.12;
+}
+
+.shop-hero,
+.shop-product-hero {
+  min-height: 86svh;
+  padding-block: clamp(7rem, 10vw, 11rem);
+  background:
+    linear-gradient(90deg, rgba(7, 17, 31, 0.98), rgba(7, 17, 31, 0.76) 44%, rgba(11, 92, 255, 0.54)),
+    radial-gradient(circle at 78% 8%, rgba(143, 211, 255, 0.3), transparent 38%),
+    #07111f !important;
+}
+
+.shop-hero .container-shell,
+.shop-product-hero .container-shell {
+  width: min(100% - 3rem, 1720px);
+}
+
+.shop-hero h1,
+.shop-product-hero h1 {
+  max-width: 950px;
+  font-size: clamp(4.5rem, 9vw, 10.5rem) !important;
+  line-height: 0.88;
+}
+
+.shop-visual-panel,
+.product-hero-visual {
+  min-height: clamp(560px, 52vw, 780px);
+}
+
+.parts-rack {
+  min-height: clamp(500px, 48vw, 700px);
+}
+
+.parts-rack span {
+  min-height: 240px;
+}
+
+.shop-spec-console {
+  inset-inline: 2.2rem;
+  bottom: 2.2rem;
+}
+
+.shop-listing-layout {
+  grid-template-columns: 360px minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 4rem);
+}
+
+.shop-catalog-section .mt-7.grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.product-card {
+  min-height: 520px;
+}
+
+.product-visual {
+  min-height: 280px;
+}
+
+.product-packshot {
+  min-height: clamp(430px, 46vw, 640px);
+}
+
+.store-console {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: rgba(143, 211, 255, 0.18);
+}
+
+.store-console span {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(143, 211, 255, 0.14);
+  color: white;
+  padding: 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 950;
+}
+
+.vehicle-gallery-hero {
+  min-height: 88svh;
+  padding-block: clamp(7rem, 11vw, 12rem);
+}
+
+.vehicle-gallery-hero .container-shell {
+  width: min(100% - 3rem, 1720px);
+  grid-template-columns: minmax(0, 1.1fr) minmax(460px, 0.8fr);
+}
+
+.vehicle-gallery-hero h1 {
+  max-width: 1120px;
+  font-size: clamp(4.8rem, 9vw, 11rem) !important;
+  line-height: 0.88;
+}
+
+.vehicle-gallery-hero p:not(.eyebrow) {
+  max-width: 820px;
+  font-size: 1.16rem;
+}
+
+.vehicle-search-panel {
+  border-radius: 0;
+  padding: clamp(1.5rem, 3vw, 3rem);
+}
+
+.vehicle-filter-chip {
+  min-height: 44px;
+  border-radius: 0;
+  padding-inline: 1rem;
+}
+
+.vehicle-stat-card {
+  min-height: 148px;
+  border-radius: 0;
+  padding: 1.35rem;
+}
+
+.vehicle-stat-card strong {
+  font-size: clamp(2.5rem, 5vw, 5rem);
+  line-height: 0.9;
+}
+
+.vehicle-gallery-card {
+  min-height: 420px;
+  border-radius: 0;
+  padding: clamp(1.4rem, 2.6vw, 2.4rem);
+}
+
+.vehicle-gallery-card.is-featured:first-child {
+  grid-column: span 2;
+  min-height: 560px;
+}
+
+.vehicle-gallery-card.is-featured:first-child h3 {
+  font-size: clamp(3rem, 5vw, 6rem);
+}
+
+#all-brands .grid,
+.vehicle-gallery-hero ~ .section .mt-8.grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.vehicle-detail-hero {
+  min-height: 84svh;
+  padding-block: clamp(6.5rem, 10vw, 10rem);
+}
+
+.vehicle-detail-hero .container-shell {
+  width: min(100% - 3rem, 1720px);
+}
+
+.vehicle-detail-hero h1 {
+  font-size: clamp(4.5rem, 8.5vw, 10rem) !important;
+  line-height: 0.86;
+}
+
+.vehicle-model-card,
+.vehicle-generation-card {
+  min-height: 260px;
+  padding: clamp(1.4rem, 2.8vw, 2.5rem);
+}
+
+@media (max-width: 1180px) {
+  .am-hero .container-shell,
+  .shop-hero .container-shell,
+  .shop-product-hero .container-shell,
+  .vehicle-gallery-hero .container-shell {
+    width: min(100% - 2rem, 100%);
+    grid-template-columns: 1fr;
+  }
+
+  .orbit-card,
+  .shop-visual-panel,
+  .product-hero-visual {
+    min-height: 520px;
+  }
+
+  .shop-listing-layout,
+  .shift-section-head {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 900px) {
+  .am-hero,
+  .shop-hero,
+  .shop-product-hero,
+  .vehicle-gallery-hero,
+  .vehicle-detail-hero {
+    min-height: auto;
+    padding-block: 5.5rem;
+  }
+
+  .am-hero h1,
+  .shop-hero h1,
+  .shop-product-hero h1,
+  .vehicle-gallery-hero h1,
+  .vehicle-detail-hero h1 {
+    font-size: clamp(4.1rem, 18vw, 6.2rem) !important;
+  }
+
+  .am-hero h2,
+  .shift-section-head h2 {
+    font-size: clamp(2.5rem, 12vw, 4rem);
+  }
+
+  .what-we-do-grid,
+  .brand-cloud,
+  #all-brands .grid,
+  .vehicle-gallery-hero ~ .section .mt-8.grid,
+  .shop-catalog-section .mt-7.grid,
+  .store-console {
+    grid-template-columns: 1fr;
+  }
+
+  .shift-feature-card,
+  .shift-feature-card:first-child,
+  .vehicle-gallery-card,
+  .vehicle-gallery-card.is-featured:first-child,
+  .product-card {
+    grid-column: auto;
+    min-height: 340px;
+  }
+
+  .orbit-card,
+  .orbit-card > img,
+  .shop-visual-panel,
+  .parts-rack,
+  .product-packshot {
+    min-height: 380px;
+  }
+}
