@@ -56,6 +56,24 @@ const storeLinks = [
 
 const menuGroups = [
   {
+    key: "home",
+    label: "خانه",
+    eyebrow: "Auto Makhsus",
+    title: "هاب فنی و تجاری خودروهای خارجی",
+    description: "صفحه اصلی Auto Makhsus برای سرویس، قطعه، دانشنامه و پلتفرم دیجیتال خودرو.",
+    href: "/fa",
+    accent: "#8FD3FF",
+    links: [
+      { label: "صفحه اصلی", href: "/fa", description: "معرفی اکوسیستم فنی، فروشگاهی و محتوایی Auto Makhsus" },
+      { label: "رزرو سرویس", href: "/fa/services", description: "ثبت درخواست سرویس خودروهای خارجی" },
+      { label: "استعلام قطعه", href: "/fa/store", description: "استعلام قطعات و خرید + نصب" },
+    ],
+    featured: [
+      { label: "ورود به سایت", href: "/fa" },
+      { label: "ثبت درخواست", href: "/fa#lead" },
+    ],
+  },
+  {
     key: "services",
     label: "خدمات خودرو",
     eyebrow: "Technical Services",
@@ -71,7 +89,7 @@ const menuGroups = [
   },
   {
     key: "knowledge",
-    label: "دانش و محتوا",
+    label: "دانشنامه خودرو",
     eyebrow: "Knowledge Platform",
     title: "محتوا، آموزش، ویدئو و دانشنامه خودرو",
     description: "مسیر محتوایی Auto Makhsus برای سئو، آموزش مشتری و تبدیل مسئله به لید.",
@@ -85,7 +103,7 @@ const menuGroups = [
   },
   {
     key: "store",
-    label: "فروشگاه",
+    label: "فروشگاه قطعات",
     eyebrow: "Marketplace",
     title: "قطعات، مواد و خرید + نصب",
     description: "کاتالوگ فروشگاهی برای قطعات، آپشن، دیتیلینگ، ابزار و سفارش خاص.",
@@ -95,6 +113,56 @@ const menuGroups = [
     featured: [
       { label: "استعلام قطعه", href: "/fa/store" },
       { label: "خرید + نصب", href: "/fa/store" },
+    ],
+  },
+  {
+    key: "academy",
+    label: "آکادمی",
+    eyebrow: "Academy",
+    title: "آموزش، مقاله، ویدئو و راهنمای فنی",
+    description: "راهنمای نگهداری، عیب‌یابی، ویدئو، نمونه‌کار و سوالات پرتکرار برای مالک خودرو خارجی.",
+    href: "/fa/academy",
+    accent: "#4DA3FF",
+    links: knowledgeLinks.filter((item) => ["/fa/academy", "/fa/videos", "/fa/projects", "/fa/feed", "/fa/community"].includes(item.href)),
+    featured: [
+      { label: "مطالب آکادمی", href: "/fa/academy" },
+      { label: "ویدئوها", href: "/fa/videos" },
+    ],
+  },
+  {
+    key: "projects",
+    label: "نمونه کارها",
+    eyebrow: "Project Showcase",
+    title: "نمونه کار، پروژه، قبل و بعد",
+    description: "نمایش پروژه‌های فنی، دیاگ، قطعه، نصب، دیتیلینگ و مسیرهای اجرایی Auto Makhsus.",
+    href: "/fa/projects",
+    accent: "#2F80ED",
+    links: [
+      { label: "نمونه کارها", href: "/fa/projects", description: "پروژه‌های انجام‌شده و مسیر اجرا" },
+      { label: "فید روزانه", href: "/fa/feed", description: "به‌روزرسانی‌های روزانه و فعالیت مجموعه" },
+      { label: "ویدئوها", href: "/fa/videos", description: "ویدئوهای خدمات، دیاگ و نصب" },
+    ],
+    featured: [
+      { label: "دیدن پروژه‌ها", href: "/fa/projects" },
+      { label: "ثبت پروژه جدید", href: "/fa/services" },
+    ],
+  },
+  {
+    key: "community",
+    label: "انجمن",
+    eyebrow: "Community",
+    title: "پرسش و پاسخ کنترل‌شده خودروهای خارجی",
+    description: "پایه خواندنی کامیونیتی، سوالات فنی، پاسخ پذیرفته‌شده و لینک به خدمات.",
+    href: "/fa/community",
+    accent: "#BDE9FF",
+    links: [
+      { label: "کامیونیتی", href: "/fa/community", description: "دسته‌های سوال و پاسخ" },
+      { label: "سوالات", href: "/fa/community/questions", description: "سوالات پرتکرار و SEO-friendly" },
+      { label: "دانشنامه", href: "/fa/cars", description: "برند، مدل، نسل و خدمات مرتبط" },
+    ],
+    featured: [
+      { label: "ورود به انجمن", href: "/fa/community" },
+      { label: "سوالات پرتکرار", href: "/fa/community/questions" },
     ],
   },
   {
@@ -114,10 +182,8 @@ const menuGroups = [
 ];
 
 const quickLinks = [
-  { label: "دانشنامه خودرو", href: "/fa/cars" },
   { label: "فروشگاه", href: "/fa/store" },
-  { label: "آکادمی", href: "/fa/academy" },
-  { label: "نمونه‌کارها", href: "/fa/projects" },
+  { label: "دانشنامه", href: "/fa/cars" },
 ];
 
 export function PremiumHeader() {
@@ -201,6 +267,10 @@ export function PremiumHeader() {
               <Link key={item.href} href={item.href} onClick={closeNavigation}>{item.label}</Link>
             ))}
           </div>
+          <Link className="shop-access" href="/fa/store" onClick={closeNavigation} aria-label="فروشگاه قطعات">
+            <span>Catalog</span>
+            <strong>قطعات</strong>
+          </Link>
           <Link className="header-cta header-cta-secondary" href="/fa/store" onClick={closeNavigation}>استعلام قطعه</Link>
           <Link className="header-cta" href="/fa/services" onClick={closeNavigation}>رزرو سرویس</Link>
         </div>

@@ -1,16 +1,20 @@
 import Link from "next/link";
+import type { CSSProperties } from "react";
 import { LeadSection, SeoJsonLd } from "@/components/seo-page";
 import type { StoreCategory, StoreProduct } from "@/lib/store-data";
-import { storeCategoryPath, storeProductPath } from "@/lib/store-data";
+import { storeCategories, storeCategoryPath, storeProductPath } from "@/lib/store-data";
+
+const productKinds = ["OEM", "Aftermarket", "Used", "Special Order"];
+const stockFilters = ["موجود", "سفارشی", "نیازمند بررسی"];
 
 export function StoreHero() {
   return (
-    <section className="content-hero tech-grid relative isolate overflow-hidden bg-[#07111f] py-16 text-white md:py-24">
+    <section className="shop-hero tech-grid relative isolate overflow-hidden bg-[#07111f] py-16 text-white md:py-24">
       <div className="hero-glow hero-glow-a" />
-      <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.85fr_1.15fr] lg:items-center">
+      <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p className="eyebrow text-[var(--ice)]">Auto Makhsus Marketplace</p>
-          <h1 className="mt-4 text-4xl font-black leading-tight md:text-6xl">فروشگاه قطعات خودروهای خارجی</h1>
+          <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">فروشگاه قطعات خودروهای خارجی</h1>
           <p className="mt-5 text-base leading-9 text-white/70 md:text-lg">
             کاتالوگ قطعات مصرفی، فنی، برق و الکترونیک، آپشن، مواد دیتیلینگ، مواد بدنه، ابزار، OEM، Aftermarket، استوک و سفارش خارجی با مسیر استعلام قیمت و خرید + نصب در Auto Makhsus.
           </p>
@@ -20,10 +24,20 @@ export function StoreHero() {
             <Link className="btn-ghost-dark" href="/fa/services">رزرو نصب</Link>
           </div>
         </div>
-        <div className="store-console">
-          {["OEM", "Aftermarket", "Used", "Special Order", "Buy + Install", "CRM Linked"].map((item) => (
-            <span key={item}>{item}</span>
-          ))}
+        <div className="shop-visual-panel">
+          <div className="parts-rack" aria-hidden="true">
+            {["Oil Filter", "Brake", "Sensor", "Module", "Detailing", "Tools"].map((item, index) => (
+              <span key={item} style={{ "--part-index": `${index + 1}` } as CSSProperties}>
+                <strong>{item}</strong>
+                <small>{index % 2 === 0 ? "Buy + Install" : "Fitment Check"}</small>
+              </span>
+            ))}
+          </div>
+          <div className="shop-spec-console">
+            {["OEM", "Aftermarket", "Used", "Special Order", "Buy + Install", "CRM Linked"].map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -37,9 +51,9 @@ export function StoreCategoryGrid({ categories }: { categories: StoreCategory[] 
         <p className="eyebrow">Store Categories</p>
         <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">دسته‌بندی قطعات، مواد و تجهیزات برای خودروهای خارجی</h2>
         <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-          {categories.map((category) => (
+          {categories.map((category, index) => (
             <Link key={category.slug} href={storeCategoryPath(category.slug)} className="store-card group">
-              <span className="store-card-mark">{category.title.slice(0, 2)}</span>
+              <span className="store-card-mark">{String(index + 1).padStart(2, "0")}</span>
               <h3 className="mt-5 text-2xl font-black">{category.title}</h3>
               <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{category.description}</p>
               <span className="mt-6 inline-flex text-sm font-black text-[var(--electric)]">مشاهده محصولات</span>
@@ -53,13 +67,35 @@ export function StoreCategoryGrid({ categories }: { categories: StoreCategory[] 
 
 export function StoreProductGrid({ products, title = "محصولات پیشنهادی" }: { products: StoreProduct[]; title?: string }) {
   return (
-    <section className="section bg-white">
+    <section className="section shop-catalog-section bg-white">
       <div className="container-shell">
-        <p className="eyebrow">Catalog Foundation</p>
-        <h2 className="mt-3 text-3xl font-black md:text-5xl">{title}</h2>
-        <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+        <div className="shop-listing-layout">
+          <aside className="shop-filter-panel">
+            <p className="eyebrow">Shop Filters</p>
+            <h2>فیلتر کاتالوگ</h2>
+            <FilterGroup title="دسته‌بندی" items={storeCategories.slice(0, 7).map((item) => item.title)} />
+            <FilterGroup title="سازگاری برند" items={["BMW", "Mercedes-Benz", "Toyota", "Lexus", "Hyundai", "Kia"]} />
+            <FilterGroup title="نوع قطعه" items={productKinds} />
+            <FilterGroup title="وضعیت" items={stockFilters} />
+            <Link href="/fa/store/search" className="btn-primary mt-4 w-full">جست‌وجوی قطعه</Link>
+          </aside>
+          <div>
+            <div className="shop-toolbar">
+              <div>
+                <p className="eyebrow">Parts Catalog</p>
+                <h2>{title}</h2>
+              </div>
+              <div className="sort-placeholder">
+                <span>مرتب‌سازی</span>
+                <strong>پیشنهادی</strong>
+              </div>
+            </div>
+            <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {products.map((product) => (
             <Link key={product.slug} href={storeProductPath(product.slug)} className="product-card group">
+              <div className="product-visual" aria-hidden="true">
+                <span>{product.title.slice(0, 2)}</span>
+              </div>
               <div className="flex items-center justify-between gap-3">
                 <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{product.priceLabel}</span>
                 <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-black text-slate-700">{product.stockStatus}</span>
@@ -72,6 +108,8 @@ export function StoreProductGrid({ products, title = "محصولات پیشنه�
               <span className="mt-6 inline-flex text-sm font-black text-[var(--electric)]">استعلام و جزئیات</span>
             </Link>
           ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -112,7 +150,7 @@ export function StoreProductDetail({ product, schema }: { product: StoreProduct;
   return (
     <main>
       <SeoJsonLd data={schema} />
-      <section className="content-hero tech-grid relative isolate overflow-hidden bg-[#07111f] py-16 text-white md:py-24">
+      <section className="shop-product-hero tech-grid relative isolate overflow-hidden bg-[#07111f] py-16 text-white md:py-24">
         <div className="hero-glow hero-glow-a" />
         <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div>
@@ -125,8 +163,13 @@ export function StoreProductDetail({ product, schema }: { product: StoreProduct;
               <Link className="btn-ghost-dark" href="/fa/store">بازگشت به فروشگاه</Link>
             </div>
           </div>
-          <div className="store-console">
-            {[product.priceLabel, product.stockStatus, product.installOption ? "Install Option" : "Part Only", ...product.tags].map((item) => <span key={item}>{item}</span>)}
+          <div className="product-hero-visual">
+            <div className="product-packshot" aria-hidden="true">
+              <span>{product.title.slice(0, 2)}</span>
+            </div>
+            <div className="store-console">
+              {[product.priceLabel, product.stockStatus, product.installOption ? "Install Option" : "Part Only", ...product.tags].map((item) => <span key={item}>{item}</span>)}
+            </div>
           </div>
         </div>
       </section>
@@ -154,6 +197,44 @@ export function StoreProductDetail({ product, schema }: { product: StoreProduct;
       </section>
       <LeadSection sourcePage={storeProductPath(product.slug)} interest={`استعلام قطعه: ${product.title}`} />
     </main>
+  );
+}
+
+export function StoreSearch({ products }: { products: StoreProduct[] }) {
+  return (
+    <main>
+      <StoreHero />
+      <section className="section bg-white">
+        <div className="container-shell">
+          <div className="search-console">
+            <p className="eyebrow">Parts Search</p>
+            <h1>جست‌وجوی قطعه و سازگاری خودرو</h1>
+            <p>در این فاز، جست‌وجو به عنوان مسیر کاتالوگ و ثبت درخواست قطعه پیاده‌سازی شده است؛ پرداخت آنلاین فعال نیست.</p>
+            <div className="search-fields">
+              <input aria-label="نام قطعه" placeholder="نام قطعه، کد فنی یا خدمت..." />
+              <input aria-label="برند خودرو" placeholder="برند خودرو" />
+              <input aria-label="مدل خودرو" placeholder="مدل / سال" />
+              <Link href="#lead">ثبت استعلام</Link>
+            </div>
+          </div>
+        </div>
+      </section>
+      <StoreProductGrid products={products} title="نتایج پیشنهادی کاتالوگ" />
+      <LeadSection sourcePage="/fa/store/search" interest="جست‌وجوی قطعه" />
+    </main>
+  );
+}
+
+function FilterGroup({ title, items }: { title: string; items: string[] }) {
+  return (
+    <div className="filter-group">
+      <h3>{title}</h3>
+      <div>
+        {items.map((item) => (
+          <span key={item}>{item}</span>
+        ))}
+      </div>
+    </div>
   );
 }
 

@@ -7,16 +7,23 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-screen bg-[var(--background)] text-[var(--foreground)]">
       <PremiumHeader />
       {children}
-      <footer className="site-footer border-t border-white/10 bg-[#07111f] py-12 text-white">
+      <footer className="site-footer border-t border-white/10 bg-[#050b14] text-white">
         <div className="container-shell">
-          <div className="footer-topline">
+          <div className="footer-action-band">
             <div>
-              <p className="footer-kicker">Premium Foreign-Car Platform</p>
-              <h2>Auto Makhsus</h2>
+              <p className="footer-kicker">Auto Makhsus Support</p>
+              <h2>برای سرویس، قطعه یا همکاری سازمانی آماده‌ایم</h2>
+              <span>درخواست شما با منبع automakhsus در CRM ثبت می‌شود و به واحد فنی یا فروشگاه قطعات می‌رسد.</span>
             </div>
             <div className="footer-cta-row">
               <Link href="/fa/services">رزرو سرویس</Link>
               <Link href="/fa/store">استعلام قطعه</Link>
+            </div>
+          </div>
+          <div className="footer-topline">
+            <div>
+              <p className="footer-kicker">Premium Foreign-Car Platform</p>
+              <h2>Auto Makhsus</h2>
             </div>
           </div>
           <div className="footer-grid">
@@ -32,9 +39,29 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <div>
-              <p className="font-black">خدمات اصلی</p>
+              <p className="font-black">خدمات</p>
               <div className="mt-4 grid gap-2 text-sm text-white/64">
                 {technicalServices.slice(0, 7).map((service) => <Link key={service.slug} href={`/fa/services#${service.slug}`}>{service.title}</Link>)}
+              </div>
+            </div>
+            <div>
+              <p className="font-black">فروشگاه</p>
+              <div className="mt-4 grid gap-2 text-sm text-white/64">
+                <Link href="/fa/store">فروشگاه قطعات</Link>
+                <Link href="/fa/store/categories">دسته‌بندی‌ها</Link>
+                <Link href="/fa/store/search">جست‌وجوی قطعه</Link>
+                <Link href="/fa/store/categories/oem">قطعات OEM</Link>
+                <Link href="/fa/store/categories/special-order">سفارش خارجی</Link>
+              </div>
+            </div>
+            <div>
+              <p className="font-black">دانشنامه</p>
+              <div className="mt-4 grid gap-2 text-sm text-white/64">
+                <Link href="/fa/cars">دانشنامه خودرو</Link>
+                <Link href="/fa/academy">آکادمی فنی</Link>
+                <Link href="/fa/videos">ویدئوها</Link>
+                <Link href="/fa/projects">نمونه‌کارها</Link>
+                <Link href="/fa/community">انجمن</Link>
               </div>
             </div>
             <div>
@@ -45,16 +72,14 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               </div>
             </div>
             <div>
-              <p className="font-black">ارتباط و شبکه‌ها</p>
+              <p className="font-black">تماس</p>
               <div className="mt-4 grid gap-3 text-sm text-white/64">
               <Link href="/fa/cooperation">درخواست همکاری</Link>
               <Link href="/fa/services">رزرو سرویس خودروهای خارجی</Link>
-              <Link href="/fa/academy">آکادمی فنی</Link>
-              <Link href="/fa/cars">دانشنامه خودروهای خارجی</Link>
-                <Link href="/fa/store">فروشگاه قطعات</Link>
               <Link href="/fa/digital-platform">پلتفرم دیجیتال</Link>
               <a href={`tel:${phone}`}>{phone}</a>
                 <a href={`https://wa.me/${whatsapp}`}>واتساپ</a>
+                <span>آدرس: مرکز خدمات Auto Makhsus، غرب تهران و البرز</span>
               </div>
             </div>
           </div>
