@@ -21,6 +21,35 @@ const ecosystemBranches = [
   { title: "Commerce Platform", fa: "فروشگاه قطعات و نصب", brands: ["Marketplace", "Buy + Install"], accent: "#8FD3FF" },
 ];
 
+const heroSpecs = [
+  { value: "360", label: "پوشش خدمات", detail: "فنی، فروشگاه، دانشنامه" },
+  { value: "55", label: "برند جهانی", detail: "دانشنامه خودروهای خارجی" },
+  { value: "24/7", label: "ثبت درخواست", detail: "CRM-backed lead routing" },
+];
+
+const whatWeDo = [
+  {
+    number: "01",
+    title: "تشخیص و سرویس تخصصی",
+    description: "دیاگ، مکانیک، برق، گیربکس، جلوبندی، ترمز و کارشناسی قبل خرید برای خودروهای خارجی.",
+  },
+  {
+    number: "02",
+    title: "قطعه، خرید و نصب",
+    description: "کاتالوگ قطعات، استعلام قیمت، خرید + نصب و اتصال درخواست به CRM و پروژه خدمات.",
+  },
+  {
+    number: "03",
+    title: "دانش، رسانه و اعتماد",
+    description: "آکادمی، ویدئو، پروژه، پرسش‌وپاسخ و دانشنامه خودرو برای تصمیم‌گیری دقیق مشتری.",
+  },
+  {
+    number: "04",
+    title: "پلتفرم دیجیتال خودرو",
+    description: "Vehicle Passport، پرتال مشتری، رزرو، گارانتی، سفارش کار و مسیر آینده Cloud Garage.",
+  },
+];
+
 type StyleVars = CSSProperties & Record<`--${string}`, string>;
 
 export function SeoJsonLd({ data }: { data: object }) {
@@ -52,6 +81,15 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
               </div>
             ))}
           </div>
+          <div className="shift-spec-strip mt-7">
+            {heroSpecs.map((item) => (
+              <article key={item.label}>
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+                <small>{item.detail}</small>
+              </article>
+            ))}
+          </div>
         </div>
         <div className="relative">
           <div className="orbit-card">
@@ -74,6 +112,57 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
             </div>
           </div>
         </div>
+      </div>
+    </section>
+  );
+}
+
+export function WhatWeDoSection() {
+  return (
+    <section className="section what-we-do-section">
+      <div className="container-shell">
+        <div className="shift-section-head">
+          <p className="eyebrow">What We Do</p>
+          <h2>از سرویس فنی تا قطعه، رسانه و پلتفرم دیجیتال خودرو</h2>
+          <p>
+            Auto Makhsus برای خودروهای خارجی یک مسیر کامل می‌سازد: تشخیص مشکل، انتخاب قطعه، رزرو سرویس، ثبت سوابق، آموزش و پیگیری مشتری.
+          </p>
+        </div>
+        <div className="what-we-do-grid">
+          {whatWeDo.map((item) => (
+            <article key={item.number} className="shift-feature-card">
+              <span>{item.number}</span>
+              <h3>{item.title}</h3>
+              <p>{item.description}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export function PromotionSupportSection() {
+  return (
+    <section className="section promo-support-section">
+      <div className="container-shell grid gap-5 lg:grid-cols-[1.25fr_0.75fr]">
+        <article className="shift-promo-panel">
+          <p className="eyebrow text-[var(--ice)]">Service + Shop</p>
+          <h2>قطعه را فقط نخرید؛ سازگاری، نصب و سابقه خدمات را یک‌جا مدیریت کنید.</h2>
+          <p>
+            هر استعلام قطعه می‌تواند به بررسی فنی، رزرو نصب، فاکتور، سفارش کار، گارانتی و Vehicle Digital Passport متصل شود.
+          </p>
+          <div>
+            <Link className="btn-primary" href="/fa/store">استعلام قطعه</Link>
+            <Link className="btn-ghost-dark" href="/fa/services">رزرو سرویس</Link>
+          </div>
+        </article>
+        <article className="shift-support-panel">
+          <span>Support Center</span>
+          <h3>نیاز به راهنمایی دارید؟</h3>
+          <p>درخواست مشاوره، رزرو سرویس، خرید قطعه یا همکاری سازمانی را ثبت کنید تا در CRM پیگیری شود.</p>
+          <Link className="btn-secondary" href="#lead">ثبت درخواست</Link>
+        </article>
       </div>
     </section>
   );

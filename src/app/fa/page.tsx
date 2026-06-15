@@ -12,6 +12,8 @@ import {
   ServicePillars,
   TechnicalServices,
   TrustStats,
+  WhatWeDoSection,
+  PromotionSupportSection,
 } from "@/components/seo-page";
 import { absolute, visual } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata, technicalServiceSchema } from "@/lib/seo";
@@ -35,6 +37,7 @@ export default function HomePage() {
         description="خدمات فنی، دیاگ، برق، آپشن، دیتیلینگ، صافکاری، نقاشی، فروشگاه قطعات و پلتفرم دیجیتال خودرو."
         image={visual.hero}
       />
+      <WhatWeDoSection />
       <EcosystemMap />
       <BrandEcosystem />
       <TechnicalServices />
@@ -42,6 +45,7 @@ export default function HomePage() {
       <EcosystemContentLinks />
       <MarketplaceSection />
       <ServicePillars />
+      <PromotionSupportSection />
       <TrustStats />
       <DigitalPlatform />
       <LeadSection sourcePage="/fa" interest="درخواست مشاوره خودروهای خارجی" />
