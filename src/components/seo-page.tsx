@@ -46,7 +46,7 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
             <a className="btn-ghost-dark" href="https://ani2203.com/fa/booking">رزرو خدمات آنی سرویس</a>
           </div>
           <div className="hero-superbar mt-9 grid max-w-3xl grid-cols-3 gap-3">
-            {["دیاگ و خدمات فنی", "فروشگاه + نصب", "دانشنامه و CRM"].map((item) => (
+            {["خدمات فنی خودروهای خارجی", "فروشگاه قطعات + نصب", "دانشنامه خودرو و پلتفرم دیجیتال"].map((item) => (
               <div key={item} className="rounded-2xl border border-white/12 bg-white/[0.06] px-4 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
                 <span className="text-sm font-black text-white">{item}</span>
               </div>
@@ -56,6 +56,14 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
         <div className="relative">
           <div className="orbit-card">
             <Image src={image} alt="نمای سینمایی از اکوسیستم خودرو Auto Makhsus" width={1000} height={760} priority sizes="(max-width: 1024px) 100vw, 52vw" className="aspect-[16/11] w-full rounded-[1.6rem] object-cover" />
+            <div className="hero-dashboard-card hero-dashboard-card-a">
+              <strong>Diagnostics</strong>
+              <span>Live service routing</span>
+            </div>
+            <div className="hero-dashboard-card hero-dashboard-card-b">
+              <strong>Parts + Install</strong>
+              <span>CRM-backed inquiry</span>
+            </div>
             <div className="orbit-map" aria-hidden="true">
               <span className="orbit-center">Auto<br />Makhsus</span>
               <span className="orbit-node orbit-node-1" style={{ "--node-color": "#0B5CFF" } as StyleVars}>Technical Hub</span>

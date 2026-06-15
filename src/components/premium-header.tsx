@@ -174,6 +174,7 @@ export function PremiumHeader() {
           <span className="am-wordmark-copy">
             <strong>Auto Makhsus</strong>
             <small>مرکز تخصصی خودروهای خارجی</small>
+            <em>Technical + Commerce Platform</em>
           </span>
         </Link>
 
@@ -216,7 +217,10 @@ export function PremiumHeader() {
       <div className={`mobile-drawer ${mobileOpen ? "is-open" : ""}`} aria-hidden={!mobileOpen}>
         <div className="mobile-drawer-panel">
           <div className="mobile-drawer-head">
-            <span>Auto Makhsus</span>
+            <span>
+              Auto Makhsus
+              <small>مرکز تخصصی خودروهای خارجی</small>
+            </span>
             <button type="button" onClick={() => setMobileOpen(false)}>بستن</button>
           </div>
           <div className="mobile-cta-grid">
