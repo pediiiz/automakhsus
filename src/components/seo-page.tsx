@@ -92,8 +92,8 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
           </div>
         </div>
         <div className="relative">
-          <div className="orbit-card">
-            <Image src={image} alt="نمای سینمایی از اکوسیستم خودرو Auto Makhsus" width={1000} height={760} priority sizes="(max-width: 1024px) 100vw, 52vw" className="aspect-[16/11] w-full rounded-[1.6rem] object-cover" />
+          <div className="orbit-card premium-media-frame">
+            <Image src={image} alt="نمای سینمایی از اکوسیستم خودرو Auto Makhsus" width={1000} height={760} priority sizes="(max-width: 1024px) 100vw, 52vw" className="aspect-[16/11] w-full rounded-[1.6rem]" />
             <div className="hero-dashboard-card hero-dashboard-card-a">
               <strong>Diagnostics</strong>
               <span>Live service routing</span>

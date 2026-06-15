@@ -4,7 +4,9 @@ export const phone = process.env.NEXT_PUBLIC_PHONE_NUMBER || "02146063262";
 export const whatsapp = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "989122470048";
 
 export const visual = {
-  hero: "/uploads/automakhsus/generated/hero-automotive-ecosystem.png",
+  hero: "/uploads/automakhsus/premium/homepage-magazine.svg",
+  cars: "/uploads/automakhsus/premium/cars-gallery.svg",
+  store: "/uploads/automakhsus/premium/store-magazine.svg",
   platform: "/uploads/automakhsus/generated/platform-dashboard.png",
   network: "/uploads/automakhsus/hero/brand-network.svg",
   og: "/uploads/automakhsus/hero/automakhsus-og.svg",

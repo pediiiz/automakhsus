@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Auto Makhsus premium foreign car service magazine visual</title>
+  <desc id="desc">Original blue automotive-tech illustration with a luxury coupe silhouette, service bay lighting, diagnostics grid, and magazine-style panels.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#030713"/>
+      <stop offset=".45" stop-color="#071a35"/>
+      <stop offset="1" stop-color="#0b5cff"/>
+    </linearGradient>
+    <linearGradient id="paint" x1=".1" x2=".9" y1=".2" y2=".8">
+      <stop offset="0" stop-color="#edf8ff"/>
+      <stop offset=".22" stop-color="#8fd3ff"/>
+      <stop offset=".55" stop-color="#2f80ed"/>
+      <stop offset="1" stop-color="#06142b"/>
+    </linearGradient>
+    <linearGradient id="glass" x1="0" x2="1">
+      <stop offset="0" stop-color="#07111f" stop-opacity=".2"/>
+      <stop offset=".5" stop-color="#8fd3ff" stop-opacity=".65"/>
+      <stop offset="1" stop-color="#ffffff" stop-opacity=".16"/>
+    </linearGradient>
+    <radialGradient id="glow" cx=".68" cy=".32" r=".62">
+      <stop offset="0" stop-color="#8fd3ff" stop-opacity=".85"/>
+      <stop offset=".34" stop-color="#0b5cff" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#0b5cff" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="22"/>
+    </filter>
+    <clipPath id="frameClip">
+      <path d="M92 86h1416v928H92z"/>
+    </clipPath>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <rect width="1600" height="1100" fill="url(#glow)"/>
+  <g opacity=".28">
+    <path d="M0 207h1600M0 370h1600M0 533h1600M0 696h1600M0 859h1600" stroke="#8fd3ff" stroke-width="1"/>
+    <path d="M180 0v1100M372 0v1100M564 0v1100M756 0v1100M948 0v1100M1140 0v1100M1332 0v1100" stroke="#8fd3ff" stroke-width="1"/>
+  </g>
+  <g clip-path="url(#frameClip)">
+    <circle cx="1160" cy="230" r="310" fill="#0b5cff" opacity=".22" filter="url(#soft)"/>
+    <circle cx="315" cy="790" r="210" fill="#8fd3ff" opacity=".18" filter="url(#soft)"/>
+    <g opacity=".86">
+      <path d="M245 704c64-120 156-206 292-254 166-59 352-67 574-7 91 24 173 66 246 125 46 37 86 83 119 136h-93c-35-48-82-87-141-118-83-44-193-74-328-90-244-29-425 7-543 107-45 38-78 72-101 101h-25z" fill="url(#paint)"/>
+      <path d="M350 724c70-86 189-142 358-167 170-25 363-4 578 65 35 11 70 25 105 42 17 8 32 20 44 36H350z" fill="#07111f" opacity=".74"/>
+      <path d="M536 540c79-47 194-69 345-67 113 2 227 21 342 57l-45 76c-124-33-246-51-365-52-133-1-236 18-309 58l32-72z" fill="url(#glass)"/>
+      <path d="M428 706h820" stroke="#eaf7ff" stroke-width="9" stroke-linecap="round" opacity=".8"/>
+      <circle cx="508" cy="722" r="92" fill="#030713" stroke="#8fd3ff" stroke-width="10"/>
+      <circle cx="508" cy="722" r="46" fill="#0b5cff" opacity=".7"/>
+      <circle cx="1153" cy="722" r="92" fill="#030713" stroke="#8fd3ff" stroke-width="10"/>
+      <circle cx="1153" cy="722" r="46" fill="#0b5cff" opacity=".7"/>
+    </g>
+    <g opacity=".9">
+      <rect x="122" y="126" width="422" height="158" fill="#061325" stroke="#8fd3ff" stroke-opacity=".42"/>
+      <text x="157" y="184" fill="#8fd3ff" font-family="Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="2">DIAGNOSTICS</text>
+      <text x="157" y="233" fill="#fff" font-family="Arial, sans-serif" font-size="42" font-weight="900">Foreign Car Hub</text>
+      <rect x="1054" y="810" width="384" height="148" fill="#07111f" stroke="#fff" stroke-opacity=".22"/>
+      <text x="1092" y="870" fill="#fff" font-family="Arial, sans-serif" font-size="38" font-weight="900">Parts + Install</text>
+      <text x="1092" y="916" fill="#8fd3ff" font-family="Arial, sans-serif" font-size="22" font-weight="700">CRM-backed service flow</text>
+    </g>
+  </g>
+</svg>

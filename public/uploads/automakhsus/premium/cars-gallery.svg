@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1100" viewBox="0 0 1600 1100" role="img" aria-labelledby="title desc">
+  <title id="title">Premium global vehicle knowledge base gallery</title>
+  <desc id="desc">Original editorial automotive gallery visual with layered car silhouettes, brand wall, and generation timeline cards.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#06101f"/>
+      <stop offset=".5" stop-color="#0a2348"/>
+      <stop offset="1" stop-color="#0b5cff"/>
+    </linearGradient>
+    <linearGradient id="car" x1="0" x2="1">
+      <stop offset="0" stop-color="#ffffff"/>
+      <stop offset=".25" stop-color="#8fd3ff"/>
+      <stop offset=".62" stop-color="#2f80ed"/>
+      <stop offset="1" stop-color="#06111f"/>
+    </linearGradient>
+    <filter id="blur" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="26"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1100" fill="url(#bg)"/>
+  <g opacity=".22">
+    <path d="M152 0v1100M342 0v1100M532 0v1100M722 0v1100M912 0v1100M1102 0v1100M1292 0v1100M1482 0v1100" stroke="#8fd3ff"/>
+    <path d="M0 180h1600M0 360h1600M0 540h1600M0 720h1600M0 900h1600" stroke="#8fd3ff"/>
+  </g>
+  <circle cx="1180" cy="300" r="360" fill="#8fd3ff" opacity=".2" filter="url(#blur)"/>
+  <circle cx="310" cy="790" r="280" fill="#0b5cff" opacity=".38" filter="url(#blur)"/>
+  <g transform="translate(120 190)">
+    <rect width="520" height="720" fill="#020817" opacity=".72" stroke="#8fd3ff" stroke-opacity=".28"/>
+    <text x="44" y="72" fill="#8fd3ff" font-family="Arial, sans-serif" font-size="22" font-weight="900" letter-spacing="2">GLOBAL BRAND WALL</text>
+    <g font-family="Arial, sans-serif" font-weight="900" fill="#fff">
+      <text x="44" y="155" font-size="58">BMW</text>
+      <text x="260" y="155" font-size="42" opacity=".72">Porsche</text>
+      <text x="44" y="245" font-size="44" opacity=".78">Mercedes</text>
+      <text x="322" y="245" font-size="52">Audi</text>
+      <text x="44" y="335" font-size="48">Toyota</text>
+      <text x="302" y="335" font-size="42" opacity=".72">Lexus</text>
+      <text x="44" y="425" font-size="39" opacity=".82">Land Rover</text>
+      <text x="344" y="425" font-size="38">Jeep</text>
+      <text x="44" y="515" font-size="47">Hyundai</text>
+      <text x="322" y="515" font-size="42" opacity=".75">Kia</text>
+      <text x="44" y="605" font-size="38" opacity=".72">Volvo</text>
+      <text x="230" y="605" font-size="38">Tesla</text>
+      <text x="398" y="605" font-size="32" opacity=".72">BYD</text>
+    </g>
+  </g>
+  <g transform="translate(710 198)">
+    <path d="M46 486c56-104 135-178 252-219 143-51 303-58 494-6 79 21 149 57 212 108 40 32 74 71 103 117h-80c-31-42-71-75-122-102-72-38-166-64-283-78-210-25-366 6-468 93-39 33-67 62-87 87H46z" fill="url(#car)"/>
+    <path d="M137 502c60-74 163-122 309-144 147-22 313-3 498 56 31 10 61 22 91 36 15 8 28 18 38 31H137z" fill="#06101f" opacity=".78"/>
+    <path d="M298 344c68-40 167-59 297-58 98 2 196 18 295 49l-39 66c-107-29-212-44-315-45-114-1-203 15-266 50l28-62z" fill="#dff7ff" opacity=".55"/>
+    <circle cx="272" cy="522" r="76" fill="#020817" stroke="#8fd3ff" stroke-width="9"/>
+    <circle cx="272" cy="522" r="35" fill="#0b5cff"/>
+    <circle cx="825" cy="522" r="76" fill="#020817" stroke="#8fd3ff" stroke-width="9"/>
+    <circle cx="825" cy="522" r="35" fill="#0b5cff"/>
+    <g transform="translate(36 650)">
+      <rect width="1070" height="102" fill="#fff" opacity=".11" stroke="#fff" stroke-opacity=".16"/>
+      <text x="34" y="42" fill="#8fd3ff" font-family="Arial, sans-serif" font-size="19" font-weight="900">GENERATION TIMELINE</text>
+      <path d="M36 70h994" stroke="#8fd3ff" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="130" cy="70" r="13" fill="#fff"/>
+      <circle cx="352" cy="70" r="13" fill="#fff"/>
+      <circle cx="574" cy="70" r="13" fill="#fff"/>
+      <circle cx="796" cy="70" r="13" fill="#fff"/>
+      <circle cx="1018" cy="70" r="13" fill="#fff"/>
+    </g>
+  </g>
+</svg>

@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import type { VehicleBrand } from "@/lib/content-data";
+import { visual } from "@/lib/site-data";
 
 const filters = [
   { key: "all", fa: "همه برندها" },
@@ -38,7 +40,7 @@ export function VehicleGallery({ brands }: { brands: VehicleBrand[] }) {
       <section className="vehicle-gallery-hero">
         <div className="vehicle-orbit vehicle-orbit-a" />
         <div className="vehicle-orbit vehicle-orbit-b" />
-        <div className="container-shell relative z-10 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-end">
+        <div className="container-shell relative z-10 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <p className="eyebrow text-[var(--ice)]">Vehicle Knowledge Base</p>
             <h1 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">گالری دانشنامه خودروهای خارجی</h1>
@@ -51,24 +53,37 @@ export function VehicleGallery({ brands }: { brands: VehicleBrand[] }) {
               <StatCard value={brands.reduce((sum, brand) => sum + generationCount(brand), 0).toLocaleString("fa-IR")} label="نسل و بازه سال" />
             </div>
           </div>
-          <div className="vehicle-search-panel">
-            <label className="text-sm font-black text-white/80" htmlFor="vehicle-search">جست‌وجوی برند</label>
-            <input
-              id="vehicle-search"
-              className="vehicle-search-input"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="مثلاً BMW، Toyota، Porsche، تسلا..."
-            />
-            <div className="mt-5 flex flex-wrap gap-2">
-              {filters.map((item) => {
-                const active = filter === item.key;
-                return (
-                  <button key={item.key} type="button" onClick={() => setFilter(item.key)} className={`vehicle-filter-chip ${active ? "is-active" : ""}`}>
-                    {item.fa}
-                  </button>
-                );
-              })}
+          <div className="vehicle-gallery-media-stack">
+            <div className="premium-media-frame">
+              <Image
+                src={visual.cars}
+                alt="گالری تصویری دانشنامه خودروهای خارجی Auto Makhsus شامل برندها، مدل‌ها و نسل‌ها"
+                width={1600}
+                height={1100}
+                priority
+                sizes="(max-width: 1024px) 100vw, 52vw"
+                className="premium-media-image"
+              />
+            </div>
+            <div className="vehicle-search-panel">
+              <label className="text-sm font-black text-white/80" htmlFor="vehicle-search">جست‌وجوی برند</label>
+              <input
+                id="vehicle-search"
+                className="vehicle-search-input"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="مثلاً BMW، Toyota، Porsche، تسلا..."
+              />
+              <div className="mt-5 flex flex-wrap gap-2">
+                {filters.map((item) => {
+                  const active = filter === item.key;
+                  return (
+                    <button key={item.key} type="button" onClick={() => setFilter(item.key)} className={`vehicle-filter-chip ${active ? "is-active" : ""}`}>
+                      {item.fa}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         </div>
