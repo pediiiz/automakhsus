@@ -49,6 +49,26 @@ export function rewriteCrmLocationHeader(location: string | null, publicOrigin: 
   return location;
 }
 
+export function crmPublicHostFromHeaders(headers: Pick<Headers, "get">) {
+  const forwardedHost = headers.get("x-forwarded-host")?.split(",")[0]?.trim();
+  const host = forwardedHost || headers.get("host")?.trim();
+  const directHost = headers.get("host")?.trim();
+  const candidate = forwardedHost && !isInternalNextHost(forwardedHost) ? forwardedHost : directHost || host;
+  return candidate || "automakhsus.com";
+}
+
+export function crmPublicOriginFromRequest(request: Request) {
+  const forwardedProto = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim();
+  const requestProto = new URL(request.url).protocol.replace(":", "");
+  const proto = forwardedProto || requestProto || "https";
+  return `${proto}://${crmPublicHostFromHeaders(request.headers)}`;
+}
+
+function isInternalNextHost(host: string) {
+  const normalized = host.toLowerCase().split(":")[0];
+  return normalized === "0.0.0.0" || normalized === "127.0.0.1" || normalized === "localhost";
+}
+
 function proxiedRequestHeaders(request: Request, publicHost: string) {
   const incoming = new URL(request.url);
   const headers = new Headers(request.headers);
@@ -92,9 +112,8 @@ function shouldRewriteBody(contentType: string | null) {
 }
 
 export async function proxySharedCrmRequest(request: Request, pathOverride?: string) {
-  const incoming = new URL(request.url);
-  const publicOrigin = incoming.origin;
-  const publicHost = incoming.host;
+  const publicOrigin = crmPublicOriginFromRequest(request);
+  const publicHost = crmPublicHostFromHeaders(request.headers);
   const target = buildCrmProxyTargetUrl(request.url, pathOverride);
   const hasBody = !["GET", "HEAD"].includes(request.method);
   const init: RequestInit & { duplex?: "half" } = {

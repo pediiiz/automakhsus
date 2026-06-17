@@ -102,6 +102,40 @@ test("AutoMakhsus CRM proxy preserves domain and applies AutoMakhsus default con
   );
 });
 
+test("AutoMakhsus CRM proxy derives public origin from forwarded host instead of internal container URL", () => {
+  const request = new Request("http://0.0.0.0:3000/fa/admin/login?next=%2Fcrm", {
+    headers: {
+      host: "automakhsus.com",
+      "x-forwarded-proto": "https",
+    },
+  });
+
+  assert.equal(crmProxy.crmPublicHostFromHeaders(request.headers), "automakhsus.com");
+  assert.equal(crmProxy.crmPublicOriginFromRequest(request), "https://automakhsus.com");
+
+  const forwardedRequest = new Request("http://0.0.0.0:3000/fa/admin/login?next=%2Fcrm", {
+    headers: {
+      host: "0.0.0.0:3000",
+      "x-forwarded-host": "automakhsus.com",
+      "x-forwarded-proto": "https",
+    },
+  });
+
+  assert.equal(crmProxy.crmPublicHostFromHeaders(forwardedRequest.headers), "automakhsus.com");
+  assert.equal(crmProxy.crmPublicOriginFromRequest(forwardedRequest), "https://automakhsus.com");
+
+  const internalForwardedHostRequest = new Request("http://0.0.0.0:3000/fa/admin/login?next=%2Fcrm", {
+    headers: {
+      host: "automakhsus.com",
+      "x-forwarded-host": "0.0.0.0:3000",
+      "x-forwarded-proto": "https",
+    },
+  });
+
+  assert.equal(crmProxy.crmPublicHostFromHeaders(internalForwardedHostRequest.headers), "automakhsus.com");
+  assert.equal(crmProxy.crmPublicOriginFromRequest(internalForwardedHostRequest), "https://automakhsus.com");
+});
+
 test("academy video upload validation accepts safe formats and rejects dangerous files", () => {
   assert.equal(video.validateAcademyVideoUpload({ name: "lesson.mp4", type: "video/mp4", size: 1024 }).ok, true);
   assert.equal(video.validateAcademyVideoUpload({ name: "lesson.mov", type: "video/quicktime", size: 1024 }).ok, true);

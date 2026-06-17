@@ -1,0 +1,42 @@
+[
+  {
+    "host": "automakhsus.com",
+    "path": "/crm",
+    "code": "200",
+    "effective": "https://10.10.10.30/fa/admin/login?next=%2Fcrm%3Fbu%3DAUTOMAKHSUS_TECHNICAL%26entry%3Dautomakhsus",
+    "hasAutoLogin": true,
+    "hasTehranLogin": false,
+    "hasTemporaryError": false,
+    "hasServerActionError": false
+  },
+  {
+    "host": "automakhsus.com",
+    "path": "/fa/admin/login",
+    "code": "200",
+    "effective": "https://10.10.10.30/fa/admin/login",
+    "hasAutoLogin": true,
+    "hasTehranLogin": false,
+    "hasTemporaryError": false,
+    "hasServerActionError": false
+  },
+  {
+    "host": "automakhsus.com",
+    "path": "/fa/admin/login?next=%2Fcrm%3Fbu%3DAUTOMAKHSUS_TECHNICAL%26entry%3Dautomakhsus",
+    "code": "200",
+    "effective": "https://10.10.10.30/fa/admin/login?next=%2Fcrm%3Fbu%3DAUTOMAKHSUS_TECHNICAL%26entry%3Dautomakhsus",
+    "hasAutoLogin": true,
+    "hasTehranLogin": false,
+    "hasTemporaryError": false,
+    "hasServerActionError": false
+  },
+  {
+    "host": "tehransandali.ir",
+    "path": "/crm",
+    "code": "200",
+    "effective": "https://10.10.10.30/fa/admin/login?next=%2Fcrm%3Fbu%3DTEHRANSANDALI%26entry%3Dtehransandali",
+    "hasAutoLogin": false,
+    "hasTehranLogin": true,
+    "hasTemporaryError": false,
+    "hasServerActionError": false
+  }
+]
