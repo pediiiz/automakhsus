@@ -44,6 +44,47 @@ function loadVideoProcessingModule() {
 
 const video = loadVideoProcessingModule();
 
+function loadCrmProxyModule() {
+  const source = fs.readFileSync(new URL("../src/lib/crm-domain-proxy.ts", import.meta.url), "utf8");
+  const compiled = ts.transpileModule(source, {
+    compilerOptions: {
+      module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2022,
+      esModuleInterop: true,
+    },
+  }).outputText;
+  const cjsModule = { exports: {} };
+  const sandbox = {
+    module: cjsModule,
+    exports: cjsModule.exports,
+    process,
+    URL,
+    URLSearchParams,
+    Headers,
+  };
+  vm.runInNewContext(compiled, sandbox);
+  return cjsModule.exports;
+}
+
+const crmProxy = loadCrmProxyModule();
+
+test("AutoMakhsus CRM proxy preserves domain and applies AutoMakhsus default context", () => {
+  const target = crmProxy.buildCrmProxyTargetUrl("https://automakhsus.com/crm");
+  assert.equal(target.origin, "http://tehransandali:3000");
+  assert.equal(target.pathname, "/crm");
+  assert.equal(target.searchParams.get("bu"), "AUTOMAKHSUS_TECHNICAL");
+  assert.equal(target.searchParams.get("entry"), "automakhsus");
+
+  assert.equal(
+    crmProxy.rewriteCrmLocationHeader("https://tehransandali.ir/fa/admin/login?next=%2Fcrm", "https://automakhsus.com"),
+    "https://automakhsus.com/fa/admin/login?next=%2Fcrm",
+  );
+  assert.equal(
+    crmProxy.rewriteCrmTextPayload('<script src="/_next/static/chunk.js"></script>', "https://automakhsus.com"),
+    '<script src="/crm-next/static/chunk.js"></script>',
+  );
+});
+
 test("academy video upload validation accepts safe formats and rejects dangerous files", () => {
   assert.equal(video.validateAcademyVideoUpload({ name: "lesson.mp4", type: "video/mp4", size: 1024 }).ok, true);
   assert.equal(video.validateAcademyVideoUpload({ name: "lesson.mov", type: "video/quicktime", size: 1024 }).ok, true);
