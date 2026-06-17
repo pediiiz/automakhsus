@@ -189,6 +189,8 @@ const quickLinks = [
   { label: "CRM", href: "/crm" },
 ];
 
+const desktopMenuGroups = menuGroups.filter((group) => ["services", "knowledge", "store", "brands"].includes(group.key));
+
 export function PremiumHeader() {
   const pathname = usePathname();
   const [activeGroup, setActiveGroup] = useState<string | null>(null);
@@ -282,7 +284,16 @@ export function PremiumHeader() {
         </Link>
 
         <nav className="premium-nav" aria-label="ناوبری اصلی Auto Makhsus">
-          {menuGroups.map((group) => (
+          <Link
+            href="/fa"
+            className={`premium-nav-link premium-nav-home ${pathname === "/fa" ? "is-active" : ""}`}
+            style={{ "--nav-accent": "#8FD3FF" } as CSSProperties}
+            onClick={closeNavigation}
+          >
+            <span className="nav-token" aria-hidden="true" />
+            خانه
+          </Link>
+          {desktopMenuGroups.map((group) => (
             <div
               key={group.key}
               className="premium-nav-item"
