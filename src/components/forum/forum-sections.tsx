@@ -81,7 +81,7 @@ export function ForumHome() {
                 <h3 className="mt-4 text-xl font-black">{topic.title}</h3>
                 <p className="mt-3 text-sm leading-7 text-white/65">{topic.excerpt}</p>
                 <div className="mt-4 flex flex-wrap gap-2">
-                  {topic.tags.map((tag) => <span key={tag} className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-bold text-blue-100">{tag}</span>)}
+                  {topic.tags.map((tag, index) => <span key={`${topic.slug}-tag-${index}-${tag}`} className="rounded-full bg-blue-500/15 px-3 py-1 text-xs font-bold text-blue-100">{tag}</span>)}
                 </div>
               </Link>
             ))}

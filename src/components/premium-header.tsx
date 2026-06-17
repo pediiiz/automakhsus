@@ -226,7 +226,7 @@ export function PremiumHeader() {
     closeTimerRef.current = window.setTimeout(() => {
       setActiveGroup(null);
       closeTimerRef.current = null;
-    }, 220);
+    }, 360);
   }
 
   function cancelMegaMenuClose() {
@@ -283,7 +283,12 @@ export function PremiumHeader() {
 
         <nav className="premium-nav" aria-label="ناوبری اصلی Auto Makhsus">
           {menuGroups.map((group) => (
-            <div key={group.key} className="premium-nav-item" onMouseEnter={() => openMegaMenu(group.key)}>
+            <div
+              key={group.key}
+              className="premium-nav-item"
+              onMouseEnter={() => openMegaMenu(group.key)}
+              onPointerEnter={() => openMegaMenu(group.key)}
+            >
               <Link
                 href={group.href}
                 className={`premium-nav-link ${pathname.startsWith(group.href) || activeGroup === group.key ? "is-active" : ""}`}
@@ -310,7 +315,7 @@ export function PremiumHeader() {
           </Link>
           <Link className="header-cta header-cta-secondary" href="/fa/store" onClick={closeNavigation}>استعلام قطعه</Link>
           <Link className="header-cta header-cta-crm" href="/crm" onClick={closeNavigation}>CRM Login</Link>
-          <Link className="header-cta" href="/fa/services" onClick={closeNavigation}>رزرو سرویس</Link>
+          <Link className="header-cta header-cta-service" href="/fa/services" onClick={closeNavigation}>رزرو سرویس</Link>
         </div>
 
         <button className="mobile-menu-button" type="button" aria-label="باز کردن منو" aria-expanded={mobileOpen} onClick={() => setMobileOpen((value) => !value)}>
@@ -320,7 +325,14 @@ export function PremiumHeader() {
         </button>
       </div>
 
-      {active ? <MegaMenu group={active} onNavigate={closeNavigation} onMouseEnter={cancelMegaMenuClose} onMouseLeave={scheduleMegaMenuClose} /> : null}
+      {active ? (
+        <MegaMenu
+          group={active}
+          onNavigate={closeNavigation}
+          onMouseEnter={cancelMegaMenuClose}
+          onMouseLeave={scheduleMegaMenuClose}
+        />
+      ) : null}
 
       <div className={`mobile-drawer ${mobileOpen ? "is-open" : ""}`} aria-hidden={!mobileOpen}>
         <div className="mobile-drawer-panel">
@@ -375,7 +387,14 @@ function MegaMenu({
   onMouseLeave: () => void;
 }) {
   return (
-    <div className="mega-menu" style={{ "--mega-accent": group.accent } as CSSProperties} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
+    <div
+      className="mega-menu"
+      style={{ "--mega-accent": group.accent } as CSSProperties}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+      onPointerEnter={onMouseEnter}
+      onPointerLeave={onMouseLeave}
+    >
       <div className="mega-panel">
         <div className="mega-feature">
           <p>{group.eyebrow}</p>

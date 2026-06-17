@@ -86,8 +86,8 @@ export function ContentGrid({ items, basePath }: { items: ContentCard[]; basePat
               <h2 className="mt-2 text-2xl font-black">{item.title}</h2>
               <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{item.summary}</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {[item.category, ...item.tags.slice(0, 2)].map((tag) => (
-                  <span key={tag} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{tag}</span>
+                {[item.category, ...item.tags.slice(0, 2)].map((tag, index) => (
+                  <span key={`${item.slug}-grid-tag-${index}-${tag}`} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{tag}</span>
                 ))}
               </div>
             </div>
@@ -108,7 +108,7 @@ export function ContentDetail({ item, schema }: { item: ContentCard; schema?: ob
         <div className="container-shell grid gap-8 lg:grid-cols-[1fr_320px]">
           <article className="card p-6 md:p-9">
             <div className="flex flex-wrap gap-2">
-              {[item.category, item.service, ...item.tags].map((tag) => <span key={tag} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{tag}</span>)}
+              {[item.category, item.service, ...item.tags].map((tag, index) => <span key={`${item.slug}-detail-tag-${index}-${tag}`} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{tag}</span>)}
             </div>
             <p className="mt-7 text-lg leading-10 text-[var(--muted)]">{item.summary}</p>
             <div className="mt-8 grid gap-6">
@@ -180,7 +180,7 @@ export function VideoDetail({ item, schema }: { item: VideoContent; schema: obje
             <h2 className="mt-3 text-3xl font-black">آنچه در این ویدئو می‌بینید</h2>
             <p className="mt-4 text-lg leading-10 text-[var(--muted)]">{item.summary}</p>
             <div className="mt-6 grid gap-2">
-              {[item.category, item.service, ...item.tags].map((tag) => <span key={tag} className="rounded-full bg-sky-50 px-3 py-2 text-xs font-black text-sky-900">{tag}</span>)}
+              {[item.category, item.service, ...item.tags].map((tag, index) => <span key={`${item.slug}-video-tag-${index}-${tag}`} className="rounded-full bg-sky-50 px-3 py-2 text-xs font-black text-sky-900">{tag}</span>)}
             </div>
           </article>
         </div>
@@ -354,7 +354,7 @@ export function VehicleBrandGrid({ brands }: { brands: VehicleBrand[] }) {
             <p className="mt-2 text-sm font-black text-[var(--electric)]">{brand.name}</p>
             <p className="mt-4 text-sm leading-8 text-[var(--muted)]">{brand.description}</p>
             <div className="mt-5 flex flex-wrap gap-2">
-              {brand.services.slice(0, 3).map((service) => <span key={service} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{service}</span>)}
+              {brand.services.slice(0, 3).map((service, index) => <span key={`${brand.slug}-service-chip-${index}-${service}`} className="rounded-full bg-sky-50 px-3 py-1 text-xs font-black text-sky-900">{service}</span>)}
             </div>
           </Link>
         ))}
@@ -466,15 +466,15 @@ export function VehicleBrandDetail({ brand, model, generation, schema }: { brand
             <p className="eyebrow">Services</p>
             <h2 className="mt-3 text-3xl font-black">خدمات مرتبط</h2>
             <div className="mt-5 grid gap-3">
-              {brand.services.map((service) => <span key={service} className="rounded-2xl border border-[var(--border)] p-4 font-black">{service}</span>)}
+              {brand.services.map((service, index) => <span key={`${brand.slug}-service-list-${index}-${service}`} className="rounded-2xl border border-[var(--border)] p-4 font-black">{service}</span>)}
             </div>
           </article>
           <article className="card p-7">
             <p className="eyebrow">Common Issues</p>
             <h2 className="mt-3 text-3xl font-black">مشکلات رایج و نکات نگهداری</h2>
             <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {issues.map((issue) => <p key={issue} className="rounded-2xl bg-sky-50 p-4 text-sm font-black text-sky-950">{issue}</p>)}
-              {model?.maintenance.map((item) => <p key={item} className="rounded-2xl bg-slate-50 p-4 text-sm font-black text-slate-900">{item}</p>)}
+              {issues.map((issue, index) => <p key={`${sourcePage}-issue-${index}-${issue}`} className="rounded-2xl bg-sky-50 p-4 text-sm font-black text-sky-950">{issue}</p>)}
+              {model?.maintenance.map((item, index) => <p key={`${sourcePage}-maintenance-${index}-${item}`} className="rounded-2xl bg-slate-50 p-4 text-sm font-black text-slate-900">{item}</p>)}
             </div>
           </article>
         </div>

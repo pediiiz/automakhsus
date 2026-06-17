@@ -1,0 +1,864 @@
+{
+  "results": [
+    {
+      "width": 390,
+      "route": "/fa",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        },
+        {
+          "cls": "hero-glow hero-glow-b",
+          "left": -123,
+          "right": 498
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/store",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/store/categories",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/store/search",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/cars",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/cars/bmw",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/cars/bmw/x5",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/academy",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/videos",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/projects",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/feed",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/forum",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 390,
+      "route": "/fa/community",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": -90,
+          "right": 518
+        }
+      ],
+      "scrollWidth": 390,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        },
+        {
+          "cls": "hero-glow hero-glow-b",
+          "left": -123,
+          "right": 498
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/store",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/store/categories",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/store/search",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/cars",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/cars/bmw",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/cars/bmw/x5",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/academy",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/videos",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/projects",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/feed",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/forum",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 768,
+      "route": "/fa/community",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 273,
+          "right": 881
+        }
+      ],
+      "scrollWidth": 753,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        },
+        {
+          "cls": "hero-glow hero-glow-b",
+          "left": -123,
+          "right": 498
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/store",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/store/categories",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/store/search",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/cars",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/cars/bmw",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/cars/bmw/x5",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/academy",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/videos",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/projects",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/feed",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/forum",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1024,
+      "route": "/fa/community",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 529,
+          "right": 1137
+        }
+      ],
+      "scrollWidth": 1009,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        },
+        {
+          "cls": "hero-glow hero-glow-b",
+          "left": -123,
+          "right": 498
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/store",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/store/categories",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/store/search",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/cars",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/cars/bmw",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/cars/bmw/x5",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/academy",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/videos",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/projects",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/feed",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/forum",
+      "overflow": false,
+      "bad": [],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    },
+    {
+      "width": 1366,
+      "route": "/fa/community",
+      "overflow": true,
+      "bad": [
+        {
+          "cls": "hero-glow hero-glow-a",
+          "left": 871,
+          "right": 1479
+        }
+      ],
+      "scrollWidth": 1351,
+      "crmLinks": [
+        "/crm",
+        "/crm",
+        "/crm"
+      ]
+    }
+  ]
+}

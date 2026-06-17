@@ -105,7 +105,7 @@ export function StoreProductGrid({ products, title = "محصولات پیشنه�
               <h3 className="mt-5 text-2xl font-black">{product.title}</h3>
               <p className="mt-3 text-sm leading-8 text-[var(--muted)]">{product.shortDescription}</p>
               <div className="mt-5 flex flex-wrap gap-2">
-                {product.tags.slice(0, 3).map((tag) => <span key={tag} className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-black text-slate-700">{tag}</span>)}
+                {product.tags.slice(0, 3).map((tag, index) => <span key={`${product.slug}-tag-${index}-${tag}`} className="rounded-full border border-[var(--border)] px-3 py-1 text-xs font-black text-slate-700">{tag}</span>)}
               </div>
               <span className="mt-6 inline-flex text-sm font-black text-[var(--electric)]">استعلام و جزئیات</span>
             </Link>
@@ -170,7 +170,7 @@ export function StoreProductDetail({ product, schema }: { product: StoreProduct;
               <span>{product.tags[0] || "Parts"}</span>
             </div>
             <div className="store-console">
-              {[product.priceLabel, product.stockStatus, product.installOption ? "Install Option" : "Part Only", ...product.tags].map((item) => <span key={item}>{item}</span>)}
+              {[product.priceLabel, product.stockStatus, product.installOption ? "Install Option" : "Part Only", ...product.tags].map((item, index) => <span key={`${product.slug}-console-${index}-${item}`}>{item}</span>)}
             </div>
           </div>
         </div>
@@ -232,8 +232,8 @@ function FilterGroup({ title, items }: { title: string; items: string[] }) {
     <div className="filter-group">
       <h3>{title}</h3>
       <div>
-        {items.map((item) => (
-          <span key={item}>{item}</span>
+        {items.map((item, index) => (
+          <span key={`${title}-filter-${index}-${item}`}>{item}</span>
         ))}
       </div>
     </div>
@@ -245,7 +245,7 @@ function InfoBlock({ title, items }: { title: string; items: string[] }) {
     <div className="rounded-[1.2rem] border border-[var(--border)] bg-slate-50 p-5">
       <h3 className="font-black">{title}</h3>
       <div className="mt-4 flex flex-wrap gap-2">
-        {items.map((item) => <span key={item} className="rounded-full bg-white px-3 py-1 text-xs font-black text-slate-800 shadow-sm">{item}</span>)}
+        {items.map((item, index) => <span key={`${title}-info-${index}-${item}`} className="rounded-full bg-white px-3 py-1 text-xs font-black text-slate-800 shadow-sm">{item}</span>)}
       </div>
     </div>
   );
