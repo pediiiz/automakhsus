@@ -97,6 +97,7 @@ function CmsNav({ token }: { token?: string }) {
     ["ویدئوها", "/fa/admin/cms/videos"],
     ["نمونه‌کارها", "/fa/admin/cms/projects"],
     ["فید", "/fa/admin/cms/feed"],
+    ["پلتفرم", "/fa/admin/platform"],
   ];
   return (
     <nav className="cms-panel p-4">

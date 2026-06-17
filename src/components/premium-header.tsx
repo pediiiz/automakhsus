@@ -11,7 +11,8 @@ const knowledgeLinks = [
   { label: "ویدئوها", href: "/fa/videos", description: "دیاگ، نصب آپشن، پروژه و آموزش تصویری" },
   { label: "نمونه‌کارها", href: "/fa/projects", description: "قبل، حین و بعد از پروژه‌های واقعی" },
   { label: "فید روزانه", href: "/fa/feed", description: "جریان روزانه محتوا و فعالیت مجموعه" },
-  { label: "انجمن / سوالات", href: "/fa/community", description: "پایه read-only کامیونیتی و پرسش‌وپاسخ" },
+  { label: "انجمن", href: "/fa/forum", description: "انجمن کنترل‌شده، گروه‌ها، موضوعات و پرسش‌وپاسخ" },
+  { label: "سوالات", href: "/fa/community/questions", description: "سوالات پرتکرار و پاسخ‌های پذیرفته‌شده" },
 ];
 
 const brandLinks = [
@@ -153,15 +154,15 @@ const menuGroups = [
     eyebrow: "Community",
     title: "پرسش و پاسخ کنترل‌شده خودروهای خارجی",
     description: "پایه خواندنی کامیونیتی، سوالات فنی، پاسخ پذیرفته‌شده و لینک به خدمات.",
-    href: "/fa/community",
+    href: "/fa/forum",
     accent: "#BDE9FF",
     links: [
-      { label: "کامیونیتی", href: "/fa/community", description: "دسته‌های سوال و پاسخ" },
+      { label: "انجمن", href: "/fa/forum", description: "دسته‌ها، گروه‌ها، موضوعات و moderation foundation" },
       { label: "سوالات", href: "/fa/community/questions", description: "سوالات پرتکرار و SEO-friendly" },
       { label: "دانشنامه", href: "/fa/cars", description: "برند، مدل، نسل و خدمات مرتبط" },
     ],
     featured: [
-      { label: "ورود به انجمن", href: "/fa/community" },
+      { label: "ورود به انجمن", href: "/fa/forum" },
       { label: "سوالات پرتکرار", href: "/fa/community/questions" },
     ],
   },
@@ -184,6 +185,8 @@ const menuGroups = [
 const quickLinks = [
   { label: "فروشگاه", href: "/fa/store" },
   { label: "دانشنامه", href: "/fa/cars" },
+  { label: "تماس", href: "/fa/contact" },
+  { label: "CRM", href: "/crm" },
 ];
 
 export function PremiumHeader() {
@@ -272,6 +275,7 @@ export function PremiumHeader() {
             <strong>قطعات</strong>
           </Link>
           <Link className="header-cta header-cta-secondary" href="/fa/store" onClick={closeNavigation}>استعلام قطعه</Link>
+          <Link className="header-cta header-cta-crm" href="/crm" onClick={closeNavigation}>CRM Login</Link>
           <Link className="header-cta" href="/fa/services" onClick={closeNavigation}>رزرو سرویس</Link>
         </div>
 
@@ -296,6 +300,7 @@ export function PremiumHeader() {
           <div className="mobile-cta-grid">
             <Link href="/fa/services" onClick={closeNavigation}>رزرو سرویس</Link>
             <Link href="/fa/store" onClick={closeNavigation}>استعلام قطعه</Link>
+            <Link href="/crm" onClick={closeNavigation}>CRM Login</Link>
             <a href={`tel:${phone}`}>تماس فوری</a>
             <a href={`https://wa.me/${whatsapp}`}>واتساپ</a>
           </div>

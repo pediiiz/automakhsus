@@ -165,6 +165,7 @@ export const faRoutes = [
   "/fa/feed",
   "/fa/community",
   "/fa/community/questions",
+  "/fa/forum",
   "/fa/cars",
   "/fa/store",
   "/fa/store/categories",

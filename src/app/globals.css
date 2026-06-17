@@ -3006,6 +3006,16 @@ footer {
 .shop-access strong { font-size: 0.8rem; font-weight: 950; }
 .header-cta { border-radius: 0.35rem; min-height: 50px; padding-inline: 1rem; }
 .header-cta-secondary { background: white; color: var(--am-navy); }
+.header-cta-crm {
+  border-color: rgba(143, 211, 255, 0.55);
+  background: linear-gradient(135deg, rgba(143, 211, 255, 0.18), rgba(11, 92, 255, 0.22));
+  color: white;
+}
+.header-cta-crm:hover {
+  border-color: var(--ice);
+  background: var(--ice);
+  color: var(--am-navy);
+}
 
 .mega-menu { top: 100%; }
 .mega-panel {

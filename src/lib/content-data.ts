@@ -26,6 +26,7 @@ export type VideoContent = ContentCard & {
   duration: string;
   transcript: string;
   poster: string;
+  videoUrl?: string;
   chapters: { time: string; title: string; summary: string }[];
   relatedCars: { brand: string; model?: string; href: string }[];
 };

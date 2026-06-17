@@ -292,6 +292,7 @@ export function cmsRowToVideo(row: CmsContentRow): VideoContent {
   return {
     ...base,
     poster: row.coverImage || row.ogImage || contentVisual.videos,
+    videoUrl: row.videoUrl || undefined,
     duration: row.duration || "00:00",
     transcript: row.transcript || row.body || row.excerpt || "",
     chapters: [],

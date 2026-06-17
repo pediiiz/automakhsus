@@ -156,8 +156,23 @@ export function VideoDetail({ item, schema }: { item: VideoContent; schema: obje
       <section className="section bg-white">
         <div className="container-shell grid gap-8 lg:grid-cols-[1.05fr_0.95fr]">
           <div className="video-frame">
-            <Image src={item.poster} alt={`پوستر ${item.title}`} width={1100} height={620} sizes="(max-width: 1024px) 100vw, 56vw" className="aspect-video w-full rounded-[1.35rem] object-cover" />
-            <span className="video-play">▶</span>
+            {item.videoUrl ? (
+              <div className="rounded-[1.35rem] bg-black p-2">
+                <video className="aspect-video w-full rounded-[1rem] bg-black object-contain" controls preload="metadata" poster={item.poster}>
+                  <source src={item.videoUrl} type={item.videoUrl.endsWith(".m3u8") ? "application/vnd.apple.mpegurl" : "video/mp4"} />
+                  مرورگر شما پخش ویدئو را پشتیبانی نمی‌کند.
+                </video>
+                <div className="mt-3 flex flex-wrap items-center justify-between gap-2 px-2 text-xs font-bold text-white/70">
+                  <span>{item.videoUrl.endsWith(".m3u8") ? "Adaptive HLS playback" : "Direct video playback"}</span>
+                  <a className="text-[var(--ice)]" href={item.videoUrl}>دانلود / پخش جایگزین</a>
+                </div>
+              </div>
+            ) : (
+              <>
+                <Image src={item.poster} alt={`پوستر ${item.title}`} width={1100} height={620} sizes="(max-width: 1024px) 100vw, 56vw" className="aspect-video w-full rounded-[1.35rem] object-cover" />
+                <span className="video-play">▶</span>
+              </>
+            )}
             <span className="video-duration">{item.duration}</span>
           </div>
           <article className="card p-7 md:p-8">
