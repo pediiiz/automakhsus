@@ -195,6 +195,7 @@ export function PremiumHeader() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const headerRef = useRef<HTMLElement | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -204,8 +205,35 @@ export function PremiumHeader() {
   }, []);
 
   function closeNavigation() {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
     setMobileOpen(false);
     setActiveGroup(null);
+  }
+
+  function openMegaMenu(groupKey: string) {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+    setActiveGroup(groupKey);
+  }
+
+  function scheduleMegaMenuClose() {
+    if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
+    closeTimerRef.current = window.setTimeout(() => {
+      setActiveGroup(null);
+      closeTimerRef.current = null;
+    }, 220);
+  }
+
+  function cancelMegaMenuClose() {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
   }
 
   useEffect(() => {
@@ -230,13 +258,19 @@ export function PremiumHeader() {
       document.removeEventListener("keydown", onKeyDown);
       document.removeEventListener("pointerdown", onPointerDown);
       document.body.classList.remove("mobile-nav-open");
+      if (closeTimerRef.current) window.clearTimeout(closeTimerRef.current);
     };
   }, [mobileOpen]);
 
   const active = menuGroups.find((group) => group.key === activeGroup);
 
   return (
-    <header ref={headerRef} className={`premium-header ${scrolled ? "is-scrolled" : ""}`}>
+    <header
+      ref={headerRef}
+      className={`premium-header ${scrolled ? "is-scrolled" : ""}`}
+      onMouseEnter={cancelMegaMenuClose}
+      onMouseLeave={scheduleMegaMenuClose}
+    >
       <div className="premium-header-shell">
         <Link href="/fa" className="am-wordmark" aria-label="Auto Makhsus">
           <span className="am-wordmark-mark">AM</span>
@@ -247,14 +281,14 @@ export function PremiumHeader() {
           </span>
         </Link>
 
-        <nav className="premium-nav" aria-label="ناوبری اصلی Auto Makhsus" onMouseLeave={() => setActiveGroup(null)}>
+        <nav className="premium-nav" aria-label="ناوبری اصلی Auto Makhsus">
           {menuGroups.map((group) => (
-            <div key={group.key} className="premium-nav-item" onMouseEnter={() => setActiveGroup(group.key)}>
+            <div key={group.key} className="premium-nav-item" onMouseEnter={() => openMegaMenu(group.key)}>
               <Link
                 href={group.href}
                 className={`premium-nav-link ${pathname.startsWith(group.href) || activeGroup === group.key ? "is-active" : ""}`}
                 style={{ "--nav-accent": group.accent } as CSSProperties}
-                onFocus={() => setActiveGroup(group.key)}
+                onFocus={() => openMegaMenu(group.key)}
                 onClick={closeNavigation}
               >
                 <span className="nav-token" aria-hidden="true" />
@@ -286,7 +320,7 @@ export function PremiumHeader() {
         </button>
       </div>
 
-      {active ? <MegaMenu group={active} onNavigate={closeNavigation} /> : null}
+      {active ? <MegaMenu group={active} onNavigate={closeNavigation} onMouseEnter={cancelMegaMenuClose} onMouseLeave={scheduleMegaMenuClose} /> : null}
 
       <div className={`mobile-drawer ${mobileOpen ? "is-open" : ""}`} aria-hidden={!mobileOpen}>
         <div className="mobile-drawer-panel">
@@ -329,9 +363,19 @@ export function PremiumHeader() {
   );
 }
 
-function MegaMenu({ group, onNavigate }: { group: (typeof menuGroups)[number]; onNavigate: () => void }) {
+function MegaMenu({
+  group,
+  onNavigate,
+  onMouseEnter,
+  onMouseLeave,
+}: {
+  group: (typeof menuGroups)[number];
+  onNavigate: () => void;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
+}) {
   return (
-    <div className="mega-menu" style={{ "--mega-accent": group.accent } as CSSProperties}>
+    <div className="mega-menu" style={{ "--mega-accent": group.accent } as CSSProperties} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
       <div className="mega-panel">
         <div className="mega-feature">
           <p>{group.eyebrow}</p>

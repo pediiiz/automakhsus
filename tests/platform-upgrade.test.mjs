@@ -15,6 +15,19 @@ test("premium header exposes required platform navigation and CRM login", () => 
   assert.match(source, /CRM Login/);
 });
 
+test("premium header keeps mega menu stable across trigger and panel hover", () => {
+  const source = fs.readFileSync(new URL("../src/components/premium-header.tsx", import.meta.url), "utf8");
+  const styles = fs.readFileSync(new URL("../src/app/globals.css", import.meta.url), "utf8");
+
+  assert.match(source, /scheduleMegaMenuClose/);
+  assert.match(source, /cancelMegaMenuClose/);
+  assert.match(source, /setTimeout\(\(\) => \{/);
+  assert.match(source, /onMouseEnter=\{cancelMegaMenuClose\}/);
+  assert.match(source, /onMouseLeave=\{scheduleMegaMenuClose\}/);
+  assert.match(styles, /\.mega-menu::before/);
+  assert.match(styles, /pointer-events:\s*auto/);
+});
+
 function loadVideoProcessingModule() {
   const source = fs.readFileSync(new URL("../src/lib/video-processing.ts", import.meta.url), "utf8");
   const compiled = ts.transpileModule(source, {
@@ -82,6 +95,10 @@ test("AutoMakhsus CRM proxy preserves domain and applies AutoMakhsus default con
   assert.equal(
     crmProxy.rewriteCrmTextPayload('<script src="/_next/static/chunk.js"></script>', "https://automakhsus.com"),
     '<script src="/crm-next/static/chunk.js"></script>',
+  );
+  assert.equal(
+    crmProxy.rewriteCrmTextPayload('<a href="https://tehransandali.ir/fa/admin/crm">CRM</a>', "https://automakhsus.com"),
+    '<a href="https://automakhsus.com/fa/admin/crm">CRM</a>',
   );
 });
 
