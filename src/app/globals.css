@@ -4923,6 +4923,48 @@ body.mobile-nav-open > div > div.fixed.inset-x-3.bottom-3 {
   }
 }
 
+/* Final public typography safety cap: no oversized headings. */
+body h1 {
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+}
+
+body h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+}
+
+body h3 {
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+}
+
+body h4 {
+  font-size: 1.375rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+}
+
+body p,
+body li {
+  line-height: 1.7;
+}
+
+@media (max-width: 820px) {
+  body h1,
+  body h2 {
+    font-size: clamp(1.8rem, 8vw, 2.25rem) !important;
+    line-height: 1.18 !important;
+  }
+
+  body h3 {
+    font-size: clamp(1.25rem, 6vw, 1.75rem) !important;
+  }
+}
+
 @media (max-width: 430px) {
   .premium-header-shell {
     width: min(100% - 0.75rem, 100%);
@@ -5537,4 +5579,231 @@ body.mobile-nav-open > div > div.fixed.inset-x-3.bottom-3 {
 .shop-visual-panel::after,
 .vehicle-gallery-media-stack .premium-media-frame::after {
   opacity: 0.26;
+}
+
+/* Critical typography normalization: premium automotive scale, less shouting. */
+.am-hero h1,
+.shop-hero h1,
+.vehicle-gallery-hero h1,
+.vehicle-detail-hero h1,
+.shift-hero h1,
+.platform-hero h1,
+.content-hero h1,
+.store-detail-hero h1,
+.forum-hero h1,
+.academy-hero h1 {
+  max-width: 760px !important;
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+}
+
+.am-hero h2,
+.shop-hero h2,
+.vehicle-gallery-hero h2,
+.vehicle-detail-hero h2,
+.shift-hero h2,
+.platform-hero h2,
+.content-hero h2,
+.store-detail-hero h2,
+.forum-hero h2,
+.academy-hero h2,
+.shift-section-head h2,
+.footer-topline h2,
+.footer-action-band h2,
+.shift-promo-panel h2 {
+  max-width: 820px !important;
+  font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+}
+
+.am-hero h3,
+.shop-hero h3,
+.vehicle-gallery-hero h3,
+.vehicle-detail-hero h3,
+.shift-support-panel h3,
+.content-card h3,
+.shift-feature-card h3,
+.store-card h3,
+.product-card h3,
+.vehicle-gallery-card h3,
+.vehicle-model-card h3,
+.market-card h3,
+.technical-card h3,
+.infographic-card h3,
+.brand-card h3,
+.forum-card h3,
+.qa-card h3 {
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+}
+
+.content-card h4,
+.shift-feature-card h4,
+.store-card h4,
+.product-card h4,
+.vehicle-gallery-card h4,
+.vehicle-model-card h4,
+.market-card h4,
+.technical-card h4,
+.infographic-card h4,
+.brand-card h4 {
+  font-size: 1.375rem !important;
+  line-height: 1.35 !important;
+}
+
+.am-hero p,
+.shop-hero p,
+.vehicle-gallery-hero p,
+.vehicle-detail-hero p,
+.shift-section-head p,
+.content-card p,
+.shift-feature-card p,
+.store-card p,
+.product-card p,
+.vehicle-gallery-card p,
+.vehicle-model-card p,
+.market-card p,
+.technical-card p,
+.infographic-card p,
+.brand-card p {
+  font-size: clamp(1rem, 1.2vw, 1.125rem) !important;
+  line-height: 1.7 !important;
+}
+
+.content-card small,
+.shift-feature-card small,
+.store-card small,
+.product-card small,
+.vehicle-gallery-card small,
+.vehicle-model-card small,
+.market-card small,
+.technical-card small,
+.infographic-card small,
+.brand-card small {
+  font-size: 0.875rem !important;
+  line-height: 1.65 !important;
+}
+
+.shift-feature-card span,
+.store-card-mark,
+.stat-card strong,
+.vehicle-stat strong,
+.hero-stat strong {
+  font-size: clamp(1.75rem, 3vw, 2.5rem) !important;
+  line-height: 1.08 !important;
+}
+
+.card-title,
+.product-card h3,
+.store-card h3,
+.vehicle-gallery-card h3,
+.content-card h3 {
+  margin-bottom: 0.75rem !important;
+}
+
+@media (max-width: 820px) {
+  .am-hero h1,
+  .shop-hero h1,
+  .vehicle-gallery-hero h1,
+  .vehicle-detail-hero h1,
+  .shift-hero h1,
+  .platform-hero h1,
+  .content-hero h1,
+  .store-detail-hero h1,
+  .forum-hero h1,
+  .academy-hero h1,
+  .am-hero h2,
+  .shop-hero h2,
+  .vehicle-gallery-hero h2,
+  .vehicle-detail-hero h2,
+  .shift-hero h2,
+  .platform-hero h2,
+  .content-hero h2,
+  .store-detail-hero h2,
+  .forum-hero h2,
+  .academy-hero h2,
+  .shift-section-head h2,
+  .footer-topline h2,
+  .footer-action-band h2,
+  .shift-promo-panel h2 {
+    font-size: clamp(1.8rem, 8vw, 2.25rem) !important;
+    line-height: 1.18 !important;
+  }
+
+  .am-hero h3,
+  .shop-hero h3,
+  .vehicle-gallery-hero h3,
+  .vehicle-detail-hero h3,
+  .shift-support-panel h3,
+  .content-card h3,
+  .shift-feature-card h3,
+  .store-card h3,
+  .product-card h3,
+  .vehicle-gallery-card h3,
+  .vehicle-model-card h3,
+  .market-card h3,
+  .technical-card h3,
+  .infographic-card h3,
+  .brand-card h3 {
+    font-size: clamp(1.25rem, 6vw, 1.75rem) !important;
+  }
+
+  .am-hero p,
+  .shop-hero p,
+  .vehicle-gallery-hero p,
+  .vehicle-detail-hero p,
+  .shift-section-head p,
+  .content-card p,
+  .shift-feature-card p,
+  .store-card p,
+  .product-card p,
+  .vehicle-gallery-card p,
+  .vehicle-model-card p,
+  .market-card p,
+  .technical-card p,
+  .infographic-card p,
+  .brand-card p {
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+  }
+}
+
+/* EOF typography lock: premium scale must win over all previous visual layers. */
+body h1 {
+  font-size: clamp(2rem, 4vw, 3rem) !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+}
+
+body h2 {
+  font-size: clamp(1.75rem, 3vw, 2.25rem) !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+}
+
+body h3 {
+  font-size: clamp(1.375rem, 2.5vw, 1.75rem) !important;
+  line-height: 1.3 !important;
+  letter-spacing: 0 !important;
+}
+
+body h4 {
+  font-size: 1.375rem !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+}
+
+@media (max-width: 820px) {
+  body h1,
+  body h2 {
+    font-size: clamp(1.8rem, 8vw, 2.25rem) !important;
+    line-height: 1.18 !important;
+  }
+
+  body h3 {
+    font-size: clamp(1.25rem, 6vw, 1.75rem) !important;
+  }
 }

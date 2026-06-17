@@ -1,0 +1,274 @@
+[
+  {
+    "tag": "H1",
+    "text": "فروشگاه قطعات خودروهای خارجی",
+    "fontSize": "48px",
+    "lineHeight": "55.2px",
+    "width": 600,
+    "height": 110
+  },
+  {
+    "tag": "H2",
+    "text": "دسته‌بندی قطعات، مواد و تجهیزات برای خودروهای خارجی",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 896,
+    "height": 43
+  },
+  {
+    "tag": "H3",
+    "text": "قطعات مصرفی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "قطعات فنی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "برق و الکترونیک",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "آپشن و لوازم جانبی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مواد دیتیلینگ",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مواد صافکاری و نقاشی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "ابزار و تجهیزات",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "OEM",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "Aftermarket",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "Used",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "Special Order",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 370,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "فیلتر کاتالوگ",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 318,
+    "height": 43
+  },
+  {
+    "tag": "H3",
+    "text": "دسته‌بندی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 318,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "سازگاری برند",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 318,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "نوع قطعه",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 318,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "وضعیت",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 318,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "محصولات پیشنهادی",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 303,
+    "height": 43
+  },
+  {
+    "tag": "H3",
+    "text": "فیلتر روغن OEM برای BMW و Benz",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "لنت ترمز پریمیوم SUV خارجی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "سنسور ABS و سرعت چرخ",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "دوربین و سنسور پارک OEM-style",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "پکیج مواد سرامیک بدنه پریمیوم",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مواد آماده‌سازی صافکاری و نقاشی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "ابزار و تجهیزات عیب‌یابی کارگاهی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "شمع موتور OEM خودروهای خارجی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 73
+  },
+  {
+    "tag": "H3",
+    "text": "طبق و قطعات تعلیق Aftermarket معتبر",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 73
+  },
+  {
+    "tag": "H3",
+    "text": "چراغ و ماژول استوک سالم",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "سفارش خارجی قطعات گیربکس",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 396,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "برای مشاوره، رزرو سرویس، خرید قطعه یا نصب درخواست ثبت کنید",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 547,
+    "height": 86
+  },
+  {
+    "tag": "H2",
+    "text": "درخواست خدمات فنی، قطعه یا نصب",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 684,
+    "height": 43
+  },
+  {
+    "tag": "H2",
+    "text": "برای سرویس، قطعه یا همکاری سازمانی آماده‌ایم",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 820,
+    "height": 43
+  },
+  {
+    "tag": "H2",
+    "text": "Auto Makhsus",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 230,
+    "height": 43
+  }
+]

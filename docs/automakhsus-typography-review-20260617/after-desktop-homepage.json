@@ -1,0 +1,266 @@
+[
+  {
+    "tag": "H1",
+    "text": "Auto Makhsus",
+    "fontSize": "48px",
+    "lineHeight": "55.2px",
+    "width": 600,
+    "height": 55
+  },
+  {
+    "tag": "H2",
+    "text": "مرکز تخصصی خودروهای خارجی",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 600,
+    "height": 43
+  },
+  {
+    "tag": "H2",
+    "text": "از سرویس فنی تا قطعه، رسانه و پلتفرم دیجیتال خودرو",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 378,
+    "height": 130
+  },
+  {
+    "tag": "H3",
+    "text": "تشخیص و سرویس تخصصی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 254,
+    "height": 73
+  },
+  {
+    "tag": "H3",
+    "text": "قطعه، خرید و نصب",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 254,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "دانش، رسانه و اعتماد",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 254,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "پلتفرم دیجیتال خودرو",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 254,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "خدمات فنی برای همه برندهای خارجی و وارداتی",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 515,
+    "height": 86
+  },
+  {
+    "tag": "H2",
+    "text": "فروشگاه قطعات، مواد مصرفی و تجهیزات خودروهای خارجی",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 454,
+    "height": 86
+  },
+  {
+    "tag": "H3",
+    "text": "قطعات مصرفی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "قطعات فنی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "برق و الکترونیک",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "آپشن و لوازم جانبی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 73
+  },
+  {
+    "tag": "H3",
+    "text": "مواد دیتیلینگ",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مواد صافکاری و نقاشی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 73
+  },
+  {
+    "tag": "H3",
+    "text": "ابزار و تجهیزات",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "OEM",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "Aftermarket",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "Used",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "Special Order",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 186,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "قطعه را فقط نخرید؛ سازگاری، نصب و سابقه خدمات را یک‌جا مدیریت کنید.",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 715,
+    "height": 86
+  },
+  {
+    "tag": "H3",
+    "text": "نیاز به راهنمایی دارید؟",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 390,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "محتوا، آموزش، ویدئو و دانشنامه برای مالک خودرو خارجی",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 896,
+    "height": 43
+  },
+  {
+    "tag": "H3",
+    "text": "آکادمی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 380,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مرکز ویدئو",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 380,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "نمونه‌کارها",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 380,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "کامیونیتی و پرسش‌وپاسخ",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 380,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "دانشنامه خودرو",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 380,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "فروشگاه قطعات",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 380,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "برای مشاوره، رزرو سرویس، خرید قطعه یا نصب درخواست ثبت کنید",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 547,
+    "height": 86
+  },
+  {
+    "tag": "H2",
+    "text": "درخواست خدمات فنی، قطعه یا نصب",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 684,
+    "height": 43
+  },
+  {
+    "tag": "H2",
+    "text": "برای سرویس، قطعه یا همکاری سازمانی آماده‌ایم",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 820,
+    "height": 43
+  },
+  {
+    "tag": "H2",
+    "text": "Auto Makhsus",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 230,
+    "height": 43
+  }
+]

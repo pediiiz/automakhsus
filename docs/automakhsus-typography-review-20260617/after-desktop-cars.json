@@ -1,0 +1,322 @@
+[
+  {
+    "tag": "H1",
+    "text": "گالری دانشنامه خودروهای خارجی",
+    "fontSize": "48px",
+    "lineHeight": "55.2px",
+    "width": 600,
+    "height": 110
+  },
+  {
+    "tag": "H2",
+    "text": "برندهای پرتقاضا",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 240,
+    "height": 43
+  },
+  {
+    "tag": "H3",
+    "text": "بی‌ام‌و",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 71,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مرسدس بنز",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 134,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "پورشه",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 73,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "آئودی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 70,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "فولکس‌واگن",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 145,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "لندرور",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 82,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "رنج‌روور",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 92,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "تویوتا",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 72,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "لکسوس",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 96,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "نیسان",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 73,
+    "height": 36
+  },
+  {
+    "tag": "H2",
+    "text": "همه برندها",
+    "fontSize": "36px",
+    "lineHeight": "43.2px",
+    "width": 165,
+    "height": 43
+  },
+  {
+    "tag": "H3",
+    "text": "بی‌ام‌و",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 71,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مرسدس بنز",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 134,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "پورشه",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 73,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "آئودی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 70,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "فولکس‌واگن",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 145,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مینی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 57,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "لندرور",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 82,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "رنج‌روور",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 92,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "ولوو",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 53,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مازراتی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 83,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "آلفارومئو",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 104,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "جیپ",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 57,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "تویوتا",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 72,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "لکسوس",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 96,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "نیسان",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 73,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "اینفینیتی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 103,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "هیوندای",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 100,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "کیا",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 32,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "جنسیس",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 99,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "سوزوکی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 93,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "اشکودا",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 80,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "آیون",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 56,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "بی‌وای‌دی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 113,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "ام‌جی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 64,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "مزدا",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 49,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "میتسوبیشی",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 139,
+    "height": 36
+  },
+  {
+    "tag": "H3",
+    "text": "سوبارو",
+    "fontSize": "28px",
+    "lineHeight": "36.4px",
+    "width": 79,
+    "height": 36
+  }
+]
