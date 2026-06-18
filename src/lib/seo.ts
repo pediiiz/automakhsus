@@ -65,7 +65,7 @@ export const websiteSchema = {
 export const technicalServiceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
-  name: "مرکز تخصصی خودروهای خارجی Auto Makhsus",
+  name: "مرکز تخصصی خودرو Auto Makhsus",
   serviceType: "Foreign and imported car technical service, diagnostics, parts marketplace and buy plus install",
   provider: {
     "@type": "Organization",

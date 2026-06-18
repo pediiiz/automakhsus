@@ -6,7 +6,7 @@ import { breadcrumbSchema, pageMetadata, technicalServiceSchema } from "@/lib/se
 import { storeCategories, storeProducts } from "@/lib/store-data";
 
 export const metadata: Metadata = pageMetadata({
-  title: "فروشگاه قطعات خودروهای خارجی | Auto Makhsus",
+  title: "فروشگاه قطعات خودرو | Auto Makhsus",
   description: "فروشگاه Auto Makhsus برای قطعات مصرفی، فنی، برق، آپشن، دیتیلینگ، بدنه، OEM، Aftermarket، استوک و سفارش خارجی با مسیر خرید + نصب.",
   path: "/fa/store",
 });

@@ -6,8 +6,8 @@ import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { storeProducts } from "@/lib/store-data";
 
 export const metadata: Metadata = pageMetadata({
-  title: "جست‌وجوی قطعه خودروهای خارجی | Auto Makhsus",
-  description: "جست‌وجوی قطعه، بررسی سازگاری برند و مدل، استعلام قیمت و خرید + نصب در Auto Makhsus برای خودروهای خارجی.",
+  title: "جست‌وجوی قطعه خودرو | Auto Makhsus",
+  description: "جست‌وجوی قطعه، بررسی سازگاری برند و مدل، استعلام قیمت و خرید + نصب در Auto Makhsus برای خودرو.",
   path: "/fa/store/search",
 });
 

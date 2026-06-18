@@ -44,7 +44,7 @@ export function EcosystemContentLinks() {
     <section className="section bg-white">
       <div className="container-shell">
         <p className="eyebrow">Content Ecosystem</p>
-        <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">محتوا، آموزش، ویدئو و دانشنامه برای مالک خودرو خارجی</h2>
+        <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">محتوا، آموزش، ویدئو و دانشنامه برای مالک خودرو</h2>
         <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {ecosystemLinks.map((item) => (
             <Link key={item.href} href={item.href} className="content-link-card group" style={{ "--content-accent": item.accent } as CSSProperties}>
@@ -315,7 +315,7 @@ export function CommunityHome({ questions }: { questions: QuestionContent[] }) {
         </div>
       </section>
       <ContentGrid items={questions} basePath="/fa/community/questions" />
-      <LeadSection sourcePage="/fa/community" interest="سوال فنی خودرو خارجی" />
+      <LeadSection sourcePage="/fa/community" interest="سوال فنی خودرو" />
     </main>
   );
 }

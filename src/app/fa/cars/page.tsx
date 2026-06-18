@@ -6,8 +6,8 @@ import { absolute } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "دانشنامه جهانی خودروهای خارجی؛ برند، مدل و نسل",
-  description: "دانشنامه برندها، مدل‌ها، نسل‌ها و سال‌های خودروهای خارجی شامل خدمات، مشکلات رایج، قطعات، مقالات، ویدئوها، نمونه‌کارها و رزرو سرویس.",
+  title: "دانشنامه جهانی خودرو؛ برند، مدل و نسل",
+  description: "دانشنامه برندها، مدل‌ها، نسل‌ها و سال‌های خودرو شامل خدمات، مشکلات رایج، قطعات، مقالات، ویدئوها، نمونه‌کارها و رزرو سرویس.",
   path: "/fa/cars",
 });
 

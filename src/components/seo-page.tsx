@@ -14,7 +14,7 @@ import {
 } from "@/lib/site-data";
 
 const ecosystemBranches = [
-  { title: "Technical Hub", fa: "خدمات فنی خودروهای خارجی", brands: ["Auto Makhsus", "All Imported Cars"], accent: "#0B5CFF" },
+  { title: "Technical Hub", fa: "خدمات فنی خودرو", brands: ["Auto Makhsus", "All Imported Cars"], accent: "#0B5CFF" },
   { title: "Interior Division", fa: "صندلی، سالن و ون VIP", brands: ["TehranSandali", "MrSeat", "TehranSeat"], accent: "#2F80ED" },
   { title: "Upholstery Division", fa: "تودوزی و بازسازی سالن", brands: ["Tuduzi"], accent: "#4DA3FF" },
   { title: "Authorized Service", fa: "نمایندگی مولتی‌برند مجاز", brands: ["ANI2203"], accent: "#BDE9FF" },
@@ -23,7 +23,7 @@ const ecosystemBranches = [
 
 const heroSpecs = [
   { value: "360", label: "پوشش خدمات", detail: "فنی، فروشگاه، دانشنامه" },
-  { value: "55", label: "برند جهانی", detail: "دانشنامه خودروهای خارجی" },
+  { value: "55", label: "برند جهانی", detail: "دانشنامه خودرو" },
   { value: "24/7", label: "ثبت درخواست", detail: "CRM-backed lead routing" },
 ];
 
@@ -31,7 +31,7 @@ const whatWeDo = [
   {
     number: "01",
     title: "تشخیص و سرویس تخصصی",
-    description: "دیاگ، مکانیک، برق، گیربکس، جلوبندی، ترمز و کارشناسی قبل خرید برای خودروهای خارجی.",
+    description: "دیاگ، مکانیک، برق، گیربکس، جلوبندی، ترمز و کارشناسی قبل خرید برای خودرو.",
   },
   {
     number: "02",
@@ -75,7 +75,7 @@ export function PageHero({ eyebrow, title, subtitle, description, image }: { eye
             <a className="btn-ghost-dark" href="https://ani2203.com/fa/booking">رزرو خدمات آنی سرویس</a>
           </div>
           <div className="hero-superbar mt-9 grid max-w-3xl grid-cols-3 gap-3">
-            {["خدمات فنی خودروهای خارجی", "فروشگاه قطعات + نصب", "دانشنامه خودرو و پلتفرم دیجیتال"].map((item) => (
+            {["خدمات فنی خودرو", "فروشگاه قطعات + نصب", "دانشنامه خودرو و پلتفرم دیجیتال"].map((item) => (
               <div key={item} className="rounded-2xl border border-white/12 bg-white/[0.06] px-4 py-3 text-center shadow-[inset_0_1px_0_rgba(255,255,255,0.08)] backdrop-blur">
                 <span className="text-sm font-black text-white">{item}</span>
               </div>
@@ -125,7 +125,7 @@ export function WhatWeDoSection() {
           <p className="eyebrow">What We Do</p>
           <h2>از سرویس فنی تا قطعه، رسانه و پلتفرم دیجیتال خودرو</h2>
           <p>
-            Auto Makhsus برای خودروهای خارجی یک مسیر کامل می‌سازد: تشخیص مشکل، انتخاب قطعه، رزرو سرویس، ثبت سوابق، آموزش و پیگیری مشتری.
+            Auto Makhsus برای خودرو یک مسیر کامل می‌سازد: تشخیص مشکل، انتخاب قطعه، رزرو سرویس، ثبت سوابق، آموزش و پیگیری مشتری.
           </p>
         </div>
         <div className="what-we-do-grid">
@@ -176,7 +176,7 @@ export function EcosystemMap() {
           <p className="eyebrow text-[var(--ice)]">Ecosystem Map</p>
           <h2 className="mt-3 text-3xl font-black md:text-5xl">نقشه فنی، تجاری و عملیاتی Auto Makhsus</h2>
           <p className="mt-5 text-base leading-9 text-white/64">
-            Auto Makhsus فقط ویترین برندها نیست؛ مرکز فنی خودروهای خارجی، فروشگاه قطعات، شبکه نصب و پلتفرم دیجیتال عملیات است.
+            Auto Makhsus فقط ویترین برندها نیست؛ مرکز فنی خودرو، فروشگاه قطعات، شبکه نصب و پلتفرم دیجیتال عملیات است.
           </p>
         </div>
         <div className="ecosystem-map mt-10">
@@ -210,7 +210,7 @@ export function BrandEcosystem() {
     <section className="section bg-[linear-gradient(180deg,#f6f9ff_0%,#ffffff_100%)]">
         <div className="container-shell">
         <p className="eyebrow">Brand Ecosystem</p>
-        <h2 className="mt-3 text-3xl font-black md:text-5xl">سه برند اصلی، یک هاب فنی و تجاری خودروهای خارجی</h2>
+        <h2 className="mt-3 text-3xl font-black md:text-5xl">سه برند اصلی، یک هاب فنی و تجاری خودرو</h2>
         <p className="mt-5 max-w-4xl text-base leading-9 text-[var(--muted)]">
           در معماری جدید، MrSeat و TehranSeat زیر برندهای تهران صندلی هستند و در سطح مادر کنار برندهای اصلی نمایش داده نمی‌شوند.
         </p>
@@ -242,9 +242,9 @@ export function TechnicalServices() {
         <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
           <div>
             <p className="eyebrow">Foreign Car Technical Hub</p>
-            <h2 className="mt-3 text-3xl font-black md:text-5xl">مرکز تخصصی خودروهای خارجی، فراتر از نمایندگی‌های محدود</h2>
+            <h2 className="mt-3 text-3xl font-black md:text-5xl">مرکز تخصصی خودرو، فراتر از نمایندگی‌های محدود</h2>
             <p className="mt-5 text-base leading-9 text-[var(--muted)]">
-              Auto Makhsus برای همه خودروهای خارجی و وارداتی طراحی شده است؛ از دیاگ و برق تا بدنه، رنگ، دیتیلینگ، آپشن، قطعه و کارشناسی قبل خرید.
+              Auto Makhsus برای همه خودروهای وارداتی طراحی شده است؛ از دیاگ و برق تا بدنه، رنگ، دیتیلینگ، آپشن، قطعه و کارشناسی قبل خرید.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Link className="btn-primary" href="#lead">درخواست مشاوره</Link>
@@ -275,7 +275,7 @@ export function ForeignCarBrands() {
             <p className="eyebrow text-[var(--ice)]">Imported Car Coverage</p>
             <h2 className="mt-3 text-3xl font-black md:text-5xl">خدمات فنی برای همه برندهای خارجی و وارداتی</h2>
             <p className="mt-5 text-base leading-9 text-white/66">
-              ANI2203 فقط محدوده برندهای مجاز خود را پوشش می‌دهد، اما Auto Makhsus به عنوان هاب فنی و تجاری برای طیف گسترده خودروهای خارجی تعریف شده است.
+              ANI2203 فقط محدوده برندهای مجاز خود را پوشش می‌دهد، اما Auto Makhsus به عنوان هاب فنی و تجاری برای طیف گسترده خودرو تعریف شده است.
             </p>
           </div>
           <div className="brand-cloud">
@@ -296,7 +296,7 @@ export function MarketplaceSection() {
         <div className="grid gap-8 lg:grid-cols-[0.82fr_1.18fr] lg:items-start">
           <div className="sticky-panel">
             <p className="eyebrow">Marketplace</p>
-            <h2 className="mt-3 text-3xl font-black md:text-5xl">فروشگاه قطعات، مواد مصرفی و تجهیزات خودروهای خارجی</h2>
+            <h2 className="mt-3 text-3xl font-black md:text-5xl">فروشگاه قطعات، مواد مصرفی و تجهیزات خودرو</h2>
             <p className="mt-5 text-base leading-9 text-[var(--muted)]">
               فروشگاه Auto Makhsus برای خرید قطعه، خرید همراه نصب، سفارش خاص و اتصال سفارش به CRM، فاکتور، پروژه، انبار و گارانتی طراحی می‌شود.
             </p>

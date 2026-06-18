@@ -7,8 +7,8 @@ import { absolute } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "نمونه‌کارهای Auto Makhsus | قبل، حین و بعد خدمات خودروهای خارجی",
-  description: "نمونه‌کارهای Auto Makhsus برای دیاگ، خدمات فنی، دیتیلینگ، نصب آپشن، بدنه، رنگ و پروژه‌های خودروهای خارجی.",
+  title: "نمونه‌کارهای Auto Makhsus | قبل، حین و بعد خدمات خودرو",
+  description: "نمونه‌کارهای Auto Makhsus برای دیاگ، خدمات فنی، دیتیلینگ، نصب آپشن، بدنه، رنگ و پروژه‌های خودرو.",
   path: "/fa/projects",
 });
 

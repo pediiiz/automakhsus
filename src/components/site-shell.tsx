@@ -28,9 +28,9 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
           </div>
           <div className="footer-grid">
             <div className="footer-brand-block">
-              <p className="text-2xl font-black">مرکز تخصصی خودروهای خارجی</p>
+              <p className="text-2xl font-black">مرکز تخصصی خودرو</p>
               <p className="mt-4 max-w-xl text-sm leading-8 text-white/62">
-              مرکز تخصصی خودروهای خارجی برای خدمات فنی، دیاگ، برق، آپشن، دیتیلینگ، صافکاری، نقاشی، فروشگاه قطعات، خرید + نصب و پلتفرم دیجیتال خودرو.
+              مرکز تخصصی خودرو برای خدمات فنی، دیاگ، برق، آپشن، دیتیلینگ، صافکاری، نقاشی، فروشگاه قطعات، خرید + نصب و پلتفرم دیجیتال خودرو.
             </p>
               <div className="footer-support-box">
                 <strong>Support Center</strong>
@@ -75,7 +75,7 @@ export function SiteShell({ children }: { children: React.ReactNode }) {
               <p className="font-black">تماس</p>
               <div className="mt-4 grid gap-3 text-sm text-white/64">
               <Link href="/fa/cooperation">درخواست همکاری</Link>
-              <Link href="/fa/services">رزرو سرویس خودروهای خارجی</Link>
+              <Link href="/fa/services">رزرو سرویس خودرو</Link>
               <Link href="/fa/digital-platform">پلتفرم دیجیتال</Link>
               <a href={`tel:${phone}`}>{phone}</a>
                 <a href={`https://wa.me/${whatsapp}`}>واتساپ</a>

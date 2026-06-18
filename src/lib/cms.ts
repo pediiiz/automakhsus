@@ -84,7 +84,7 @@ const defaultCategory: Record<CmsContentType, string> = {
 };
 
 const defaultService: Record<CmsContentType, string> = {
-  ACADEMY_ARTICLE: "مشاوره فنی خودروهای خارجی",
+  ACADEMY_ARTICLE: "مشاوره فنی خودرو",
   VIDEO: "درخواست مشاوره ویدئو",
   PROJECT_SHOWCASE: "درخواست نمونه‌کار مشابه",
   FEED_POST: "درخواست پیگیری",
@@ -306,7 +306,7 @@ export function cmsRowToProject(row: CmsContentRow): ProjectContent {
   const base = cmsRowToContentCard(row);
   return {
     ...base,
-    vehicle: [row.vehicleBrand, row.vehicleModel].filter(Boolean).join(" ") || "خودرو خارجی",
+    vehicle: [row.vehicleBrand, row.vehicleModel].filter(Boolean).join(" ") || "خودرو",
     executionTime: "طبق برنامه پروژه",
     stages: [
       { title: "قبل", body: "ثبت وضعیت اولیه و نیاز مشتری." },

@@ -29,7 +29,7 @@ export type ForumTopic = {
 export const forumCategories: ForumCategory[] = [
   {
     slug: "technical-service",
-    title: "خدمات فنی خودروهای خارجی",
+    title: "خدمات فنی خودرو",
     description: "گفت‌وگوهای کنترل‌شده درباره دیاگ، مکانیک، برق، گیربکس، ترمز و جلوبندی.",
     groups: [
       { slug: "diagnostics", title: "دیاگ و خطایابی", description: "کد خطا، داده زنده، سنسورها و مسیر تشخیص.", topicCount: 18, moderation: "moderated-posting" },

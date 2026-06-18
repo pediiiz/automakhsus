@@ -5,7 +5,7 @@ import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "تماس با Auto Makhsus",
-  description: "تماس با Auto Makhsus برای خدمات فنی خودروهای خارجی، خرید قطعه، خرید + نصب، همکاری سازمانی، CRM و پلتفرم دیجیتال خودرو.",
+  description: "تماس با Auto Makhsus برای خدمات فنی خودرو، خرید قطعه، خرید + نصب، همکاری سازمانی، CRM و پلتفرم دیجیتال خودرو.",
   path: "/fa/contact",
 });
 

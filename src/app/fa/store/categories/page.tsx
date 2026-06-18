@@ -6,7 +6,7 @@ import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { storeCategories } from "@/lib/store-data";
 
 export const metadata: Metadata = pageMetadata({
-  title: "دسته‌بندی فروشگاه قطعات خودروهای خارجی | Auto Makhsus",
+  title: "دسته‌بندی فروشگاه قطعات خودرو | Auto Makhsus",
   description: "دسته‌بندی‌های فروشگاه Auto Makhsus شامل قطعات مصرفی، فنی، برق، آپشن، مواد دیتیلینگ، بدنه، ابزار، OEM، Aftermarket، استوک و سفارش خارجی.",
   path: "/fa/store/categories",
 });

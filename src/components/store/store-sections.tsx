@@ -15,7 +15,7 @@ export function StoreHero() {
       <div className="container-shell relative z-10 grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
         <div>
           <p className="eyebrow text-[var(--ice)]">Auto Makhsus Marketplace</p>
-          <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">فروشگاه قطعات خودروهای خارجی</h1>
+          <h1 className="mt-4 text-5xl font-black leading-tight md:text-7xl">فروشگاه قطعات خودرو</h1>
           <p className="mt-5 text-base leading-9 text-white/70 md:text-lg">
             کاتالوگ قطعات مصرفی، فنی، برق و الکترونیک، آپشن، مواد دیتیلینگ، مواد بدنه، ابزار، OEM، Aftermarket، استوک و سفارش خارجی با مسیر استعلام قیمت و خرید + نصب در Auto Makhsus.
           </p>
@@ -28,7 +28,7 @@ export function StoreHero() {
         <div className="shop-visual-panel premium-media-frame">
           <Image
             src={visual.store}
-            alt="فروشگاه قطعات خودروهای خارجی Auto Makhsus با مسیر استعلام، سازگاری و خرید به همراه نصب"
+            alt="فروشگاه قطعات خودرو Auto Makhsus با مسیر استعلام، سازگاری و خرید به همراه نصب"
             width={1600}
             height={1100}
             priority
@@ -51,7 +51,7 @@ export function StoreCategoryGrid({ categories }: { categories: StoreCategory[] 
     <section className="section bg-[linear-gradient(180deg,#f6f9ff_0%,#ffffff_100%)]">
       <div className="container-shell">
         <p className="eyebrow">Store Categories</p>
-        <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">دسته‌بندی قطعات، مواد و تجهیزات برای خودروهای خارجی</h2>
+        <h2 className="mt-3 max-w-4xl text-3xl font-black md:text-5xl">دسته‌بندی قطعات، مواد و تجهیزات برای خودرو</h2>
         <div className="mt-9 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
           {categories.map((category, index) => (
             <Link key={category.slug} href={storeCategoryPath(category.slug)} className="store-card group">

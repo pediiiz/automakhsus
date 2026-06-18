@@ -43,7 +43,7 @@ export function VehicleGallery({ brands }: { brands: VehicleBrand[] }) {
         <div className="container-shell relative z-10 grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
           <div>
             <p className="eyebrow text-[var(--ice)]">Vehicle Knowledge Base</p>
-            <h1 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">گالری دانشنامه خودروهای خارجی</h1>
+            <h1 className="mt-4 text-4xl font-black leading-tight text-white md:text-6xl">گالری دانشنامه خودرو</h1>
             <p className="mt-5 text-base leading-9 text-white/70 md:text-lg">
               برند، مدل، نسل و سال خودروهای معتبر جهانی را در یک گالری فنی و قابل جست‌وجو ببینید؛ هر مسیر به خدمات، قطعات، آموزش، پروژه و رزرو سرویس Auto Makhsus وصل می‌شود.
             </p>
@@ -57,7 +57,7 @@ export function VehicleGallery({ brands }: { brands: VehicleBrand[] }) {
             <div className="premium-media-frame">
               <Image
                 src={visual.cars}
-                alt="گالری تصویری دانشنامه خودروهای خارجی Auto Makhsus شامل برندها، مدل‌ها و نسل‌ها"
+                alt="گالری تصویری دانشنامه خودرو Auto Makhsus شامل برندها، مدل‌ها و نسل‌ها"
                 width={1600}
                 height={1100}
                 priority

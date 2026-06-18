@@ -6,7 +6,7 @@ import { type CSSProperties, useEffect, useRef, useState } from "react";
 import { marketplaceCategories, phone, technicalServices, whatsapp } from "@/lib/site-data";
 
 const knowledgeLinks = [
-  { label: "دانشنامه خودرو", href: "/fa/cars", description: "برند، مدل، نسل و مسیر خدمات خودروهای خارجی" },
+  { label: "دانشنامه خودرو", href: "/fa/cars", description: "برند، مدل، نسل و مسیر خدمات خودرو" },
   { label: "آکادمی", href: "/fa/academy", description: "مقالات فنی، نگهداری، عیب‌یابی و آموزش" },
   { label: "ویدئوها", href: "/fa/videos", description: "دیاگ، نصب آپشن، پروژه و آموزش تصویری" },
   { label: "نمونه‌کارها", href: "/fa/projects", description: "قبل، حین و بعد از پروژه‌های واقعی" },
@@ -60,13 +60,13 @@ const menuGroups = [
     key: "home",
     label: "خانه",
     eyebrow: "Auto Makhsus",
-    title: "هاب فنی و تجاری خودروهای خارجی",
+    title: "هاب فنی و تجاری خودرو",
     description: "صفحه اصلی Auto Makhsus برای سرویس، قطعه، دانشنامه و پلتفرم دیجیتال خودرو.",
     href: "/fa",
     accent: "#8FD3FF",
     links: [
       { label: "صفحه اصلی", href: "/fa", description: "معرفی اکوسیستم فنی، فروشگاهی و محتوایی Auto Makhsus" },
-      { label: "رزرو سرویس", href: "/fa/services", description: "ثبت درخواست سرویس خودروهای خارجی" },
+      { label: "رزرو سرویس", href: "/fa/services", description: "ثبت درخواست سرویس خودرو" },
       { label: "استعلام قطعه", href: "/fa/store", description: "استعلام قطعات و خرید + نصب" },
     ],
     featured: [
@@ -78,7 +78,7 @@ const menuGroups = [
     key: "services",
     label: "خدمات خودرو",
     eyebrow: "Technical Services",
-    title: "خدمات تخصصی برای خودروهای خارجی",
+    title: "خدمات تخصصی برای خودرو",
     description: "دیاگ، برق، مکانیک، قطعه، آپشن، دیتیلینگ و بدنه در یک مسیر CRM-backed.",
     href: "/fa/services",
     accent: "#0B5CFF",
@@ -121,7 +121,7 @@ const menuGroups = [
     label: "آکادمی",
     eyebrow: "Academy",
     title: "آموزش، مقاله، ویدئو و راهنمای فنی",
-    description: "راهنمای نگهداری، عیب‌یابی، ویدئو، نمونه‌کار و سوالات پرتکرار برای مالک خودرو خارجی.",
+    description: "راهنمای نگهداری، عیب‌یابی، ویدئو، نمونه‌کار و سوالات پرتکرار برای مالک خودرو.",
     href: "/fa/academy",
     accent: "#4DA3FF",
     links: knowledgeLinks.filter((item) => ["/fa/academy", "/fa/videos", "/fa/projects", "/fa/feed", "/fa/community"].includes(item.href)),
@@ -152,7 +152,7 @@ const menuGroups = [
     key: "community",
     label: "انجمن",
     eyebrow: "Community",
-    title: "پرسش و پاسخ کنترل‌شده خودروهای خارجی",
+    title: "پرسش و پاسخ کنترل‌شده خودرو",
     description: "پایه خواندنی کامیونیتی، سوالات فنی، پاسخ پذیرفته‌شده و لینک به خدمات.",
     href: "/fa/forum",
     accent: "#BDE9FF",
@@ -278,7 +278,7 @@ export function PremiumHeader() {
           <span className="am-wordmark-mark">AM</span>
           <span className="am-wordmark-copy">
             <strong>Auto Makhsus</strong>
-            <small>مرکز تخصصی خودروهای خارجی</small>
+            <small>مرکز تخصصی خودرو</small>
             <em>Technical + Commerce Platform</em>
           </span>
         </Link>
@@ -350,7 +350,7 @@ export function PremiumHeader() {
           <div className="mobile-drawer-head">
             <span>
               Auto Makhsus
-              <small>مرکز تخصصی خودروهای خارجی</small>
+              <small>مرکز تخصصی خودرو</small>
             </span>
             <button type="button" onClick={() => setMobileOpen(false)}>بستن</button>
           </div>

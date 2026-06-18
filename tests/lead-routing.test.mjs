@@ -42,8 +42,8 @@ test("infers marketplace leads from parts and purchase interests", () => {
 });
 
 test("defaults technical service leads to AutoMakhsus Technical", () => {
-  assert.equal(routing.inferLeadBusinessUnit("رزرو سرویس خودروهای خارجی"), "AUTOMAKHSUS_TECHNICAL");
-  assert.equal(routing.inferLeadBusinessUnit("دیاگ تخصصی خودروهای خارجی"), "AUTOMAKHSUS_TECHNICAL");
+  assert.equal(routing.inferLeadBusinessUnit("رزرو سرویس خودرو"), "AUTOMAKHSUS_TECHNICAL");
+  assert.equal(routing.inferLeadBusinessUnit("دیاگ تخصصی خودرو"), "AUTOMAKHSUS_TECHNICAL");
 });
 
 test("submitted business unit overrides inferred interest when valid", () => {

@@ -15,7 +15,7 @@ export function ForumHome() {
         <div className="container-shell grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
           <div>
             <p className="eyebrow text-[var(--ice)]">Forum Foundation</p>
-            <h1 className="mt-4 text-4xl font-black leading-tight md:text-7xl">انجمن تخصصی خودروهای خارجی</h1>
+            <h1 className="mt-4 text-4xl font-black leading-tight md:text-7xl">انجمن تخصصی خودرو</h1>
             <p className="mt-6 max-w-3xl text-base leading-9 text-white/70">
               ساختار کنترل‌شده انجمن Auto Makhsus برای گروه‌ها، موضوعات، پاسخ پذیرفته‌شده، pin/lock، گزارش تخلف و moderation. نوشتن عمومی تا زمان احراز هویت و moderation فعال نیست.
             </p>

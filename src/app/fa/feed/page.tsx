@@ -7,8 +7,8 @@ import { absolute } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "فید روزانه Auto Makhsus | فعالیت، پروژه و خدمات خودروهای خارجی",
-  description: "فید روزانه Auto Makhsus برای پست‌های کنترل‌شده درباره خدمات، پروژه‌ها، قطعات، خودروهای خارجی و درخواست مشاوره.",
+  title: "فید روزانه Auto Makhsus | فعالیت، پروژه و خدمات خودرو",
+  description: "فید روزانه Auto Makhsus برای پست‌های کنترل‌شده درباره خدمات، پروژه‌ها، قطعات، خودرو و درخواست مشاوره.",
   path: "/fa/feed",
 });
 

@@ -13,8 +13,8 @@ import { absolute, visual } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata, technicalServiceSchema } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
-  title: "Auto Makhsus | مرکز تخصصی خودروهای خارجی و فروشگاه قطعات",
-  description: "Auto Makhsus مرکز تخصصی خودروهای خارجی برای خدمات فنی، دیاگ، برق، آپشن، دیتیلینگ، صافکاری، نقاشی، فروشگاه قطعات و پلتفرم دیجیتال خودرو است.",
+  title: "Auto Makhsus | مرکز تخصصی خودرو و فروشگاه قطعات",
+  description: "Auto Makhsus مرکز تخصصی خودرو برای خدمات فنی، دیاگ، برق، آپشن، دیتیلینگ، صافکاری، نقاشی، فروشگاه قطعات و پلتفرم دیجیتال خودرو است.",
   path: "/fa",
   image: visual.og,
 });
@@ -27,7 +27,7 @@ export default function HomePage() {
       <PageHero
         eyebrow="Foreign Car Technical + Commerce Hub"
         title="Auto Makhsus"
-        subtitle="مرکز تخصصی خودروهای خارجی"
+        subtitle="مرکز تخصصی خودرو"
         description="خدمات فنی، دیاگ، برق، آپشن، دیتیلینگ، صافکاری، نقاشی، فروشگاه قطعات و پلتفرم دیجیتال خودرو."
         image={visual.hero}
       />
@@ -36,7 +36,7 @@ export default function HomePage() {
       <MarketplaceSection />
       <PromotionSupportSection />
       <EcosystemContentLinks />
-      <LeadSection sourcePage="/fa" interest="درخواست مشاوره خودروهای خارجی" />
+      <LeadSection sourcePage="/fa" interest="درخواست مشاوره خودرو" />
     </main>
   );
 }

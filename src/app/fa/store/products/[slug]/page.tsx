@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!product) return {};
   return pageMetadata({
     title: `${product.title} | فروشگاه Auto Makhsus`,
-    description: `${product.shortDescription} استعلام قیمت، مشاوره قطعه و ${product.installOption ? "خرید + نصب در Auto Makhsus" : "خرید قطعه"} برای خودروهای خارجی.`,
+    description: `${product.shortDescription} استعلام قیمت، مشاوره قطعه و ${product.installOption ? "خرید + نصب در Auto Makhsus" : "خرید قطعه"} برای خودرو.`,
     path: storeProductPath(product.slug),
   });
 }

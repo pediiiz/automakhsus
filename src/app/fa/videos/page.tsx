@@ -8,7 +8,7 @@ import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 
 export const metadata: Metadata = pageMetadata({
   title: "مرکز ویدئو Auto Makhsus | آموزش، دیاگ و نصب آپشن",
-  description: "ویدئوهای آموزشی، خدمات، دیاگ، نصب آپشن، توضیح فرایند و ترنسکریپت برای خودروهای خارجی در Auto Makhsus.",
+  description: "ویدئوهای آموزشی، خدمات، دیاگ، نصب آپشن، توضیح فرایند و ترنسکریپت برای خودرو در Auto Makhsus.",
   path: "/fa/videos",
 });
 

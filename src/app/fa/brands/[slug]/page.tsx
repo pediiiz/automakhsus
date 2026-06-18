@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   if (!brand) return {};
   return pageMetadata({
     title: `${brand.name} در اکوسیستم Auto Makhsus`,
-    description: `${brand.fa} یکی از برندهای اصلی Auto Makhsus در معماری رسمی خودروهای خارجی، خدمات تخصصی، تودوزی، نمایندگی مجاز یا عملیات دیجیتال مشتریان است.`,
+    description: `${brand.fa} یکی از برندهای اصلی Auto Makhsus در معماری رسمی خودرو، خدمات تخصصی، تودوزی، نمایندگی مجاز یا عملیات دیجیتال مشتریان است.`,
     path: `/fa/brands/${brand.slug}`,
     image: visual.network,
   });
