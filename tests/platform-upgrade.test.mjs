@@ -88,6 +88,10 @@ test("AutoMakhsus CRM proxy preserves domain and applies AutoMakhsus default con
   assert.equal(target.searchParams.get("bu"), "AUTOMAKHSUS_TECHNICAL");
   assert.equal(target.searchParams.get("entry"), "automakhsus");
 
+  const financeTarget = crmProxy.buildCrmProxyTargetUrl("https://automakhsus.com/fa/finance/dashboard");
+  assert.equal(financeTarget.origin, "http://tehransandali:3000");
+  assert.equal(financeTarget.pathname, "/fa/finance/dashboard");
+
   assert.equal(
     crmProxy.rewriteCrmLocationHeader("https://tehransandali.ir/fa/admin/login?next=%2Fcrm", "https://automakhsus.com"),
     "https://automakhsus.com/fa/admin/login?next=%2Fcrm",
