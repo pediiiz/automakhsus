@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { StoreProductDetail } from "@/components/store/store-sections";
 import { SeoJsonLd } from "@/components/seo-page";
+import { fetchPublicMediaByRelation } from "@/lib/media-center-public";
 import { absolute } from "@/lib/site-data";
 import { breadcrumbSchema, pageMetadata } from "@/lib/seo";
 import { findStoreCategory, findStoreProduct, storeProductPath, storeProductSchema, storeProducts } from "@/lib/store-data";
@@ -26,10 +27,11 @@ export default async function StoreProductPage({ params }: { params: Promise<{ s
   const product = findStoreProduct(slug);
   if (!product) notFound();
   const category = findStoreCategory(product.category);
+  const media = await fetchPublicMediaByRelation({ relationType: "product", relationId: slug, businessUnit: "AUTOMAKHSUS_MARKETPLACE", take: 3 });
   return (
     <>
       <SeoJsonLd data={breadcrumbSchema([{ name: "Auto Makhsus", url: absolute("/fa") }, { name: "فروشگاه", url: absolute("/fa/store") }, { name: category?.title || "محصول", url: absolute(`/fa/store/categories/${product.category}`) }, { name: product.title, url: absolute(storeProductPath(product.slug)) }])} />
-      <StoreProductDetail product={product} schema={storeProductSchema(product)} />
+      <StoreProductDetail product={product} schema={storeProductSchema(product)} media={media} />
     </>
   );
 }

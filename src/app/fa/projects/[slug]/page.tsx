@@ -4,6 +4,7 @@ import { ProjectDetail } from "@/components/content/content-sections";
 import { articleSchema, faqSchema, findContent, projects } from "@/lib/content-data";
 import { SeoJsonLd } from "@/components/seo-page";
 import { cmsRowToProject, getPublishedCmsContentBySlug } from "@/lib/cms";
+import { fetchPublicMediaByRelation } from "@/lib/media-center-public";
 import { pageMetadata } from "@/lib/seo";
 
 export const dynamic = "force-dynamic";
@@ -25,10 +26,11 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
   const cmsItem = await getPublishedCmsContentBySlug("PROJECT_SHOWCASE", slug);
   const item = cmsItem ? cmsRowToProject(cmsItem) : findContent(projects, slug);
   if (!item) notFound();
+  const media = await fetchPublicMediaByRelation({ relationType: "project", relationId: slug, take: 4 });
   return (
     <>
       <SeoJsonLd data={{ "@graph": [articleSchema(item), faqSchema(item)] }} />
-      <ProjectDetail item={item} />
+      <ProjectDetail item={item} media={media} />
     </>
   );
 }

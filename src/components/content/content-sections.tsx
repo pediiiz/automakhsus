@@ -1,9 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { CSSProperties } from "react";
+import { PublicMediaStrip } from "@/components/media/public-media-center";
 import { LeadSection, SeoJsonLd } from "@/components/seo-page";
 import type { ContentCard, ProjectContent, QuestionContent, VehicleBrand, VehicleGeneration, VehicleModel, VideoContent } from "@/lib/content-data";
 import { academyArticles, ecosystemLinks, projects, videos } from "@/lib/content-data";
+import type { PublicMediaAsset } from "@/lib/media-center-public";
 import { absolute, marketplaceCategories, technicalServices } from "@/lib/site-data";
 import { breadcrumbSchema } from "@/lib/seo";
 
@@ -98,7 +100,7 @@ export function ContentGrid({ items, basePath }: { items: ContentCard[]; basePat
   );
 }
 
-export function ContentDetail({ item, schema }: { item: ContentCard; schema?: object }) {
+export function ContentDetail({ item, schema, media = [], mediaRelationType = "academy_article" }: { item: ContentCard; schema?: object; media?: PublicMediaAsset[]; mediaRelationType?: string }) {
   return (
     <main>
       <SeoJsonLd data={breadcrumbSchema([{ name: "Auto Makhsus", url: absolute("/fa") }, { name: item.category, url: absolute(item.path) }])} />
@@ -143,6 +145,7 @@ export function ContentDetail({ item, schema }: { item: ContentCard; schema?: ob
           </aside>
         </div>
       </section>
+      <PublicMediaStrip media={media} relationType={mediaRelationType} relationId={item.slug} title="ویدئو و مدیای آموزشی از Media Center" />
       <LeadSection sourcePage={item.path} interest={item.service} />
     </main>
   );
@@ -262,7 +265,7 @@ export function VideoDetail({ item, schema }: { item: VideoContent; schema: obje
   );
 }
 
-export function ProjectDetail({ item }: { item: ProjectContent }) {
+export function ProjectDetail({ item, media = [] }: { item: ProjectContent; media?: PublicMediaAsset[] }) {
   return (
     <main>
       <ContentHero eyebrow={item.eyebrow} title={item.title} description={item.description} image={item.image} />
@@ -294,6 +297,7 @@ export function ProjectDetail({ item }: { item: ProjectContent }) {
           </div>
         </div>
       </section>
+      <PublicMediaStrip media={media} relationType="project" relationId={item.slug} title="ویدئو و مستندات پروژه از Media Center" />
       <LeadSection sourcePage={item.path} interest={`درخواست مشاوره ${item.service}`} />
     </main>
   );

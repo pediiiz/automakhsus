@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
+import { PublicMediaStrip } from "@/components/media/public-media-center";
 import { LeadSection, SeoJsonLd } from "@/components/seo-page";
+import type { PublicMediaAsset } from "@/lib/media-center-public";
 import type { StoreCategory, StoreProduct } from "@/lib/store-data";
 import { storeCategories, storeCategoryPath, storeProductPath } from "@/lib/store-data";
 import { visual } from "@/lib/site-data";
@@ -148,7 +150,7 @@ export function StoreCategoryDetail({ category, products }: { category: StoreCat
   );
 }
 
-export function StoreProductDetail({ product, schema }: { product: StoreProduct; schema: object }) {
+export function StoreProductDetail({ product, schema, media = [] }: { product: StoreProduct; schema: object; media?: PublicMediaAsset[] }) {
   return (
     <main>
       <SeoJsonLd data={schema} />
@@ -197,6 +199,7 @@ export function StoreProductDetail({ product, schema }: { product: StoreProduct;
           </article>
         </div>
       </section>
+      <PublicMediaStrip media={media} relationType="product" relationId={product.slug} title="ویدئو، نصب و مدیای محصول از Media Center" />
       <LeadSection sourcePage={storeProductPath(product.slug)} interest={`استعلام قطعه: ${product.title}`} />
     </main>
   );
