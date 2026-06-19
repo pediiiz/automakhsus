@@ -54,6 +54,10 @@ export function mediaApiBase() {
   return (process.env.AM_MEDIA_PUBLIC_API_BASE || defaultMediaApiBase).replace(/\/+$/, "");
 }
 
+export function mediaApiFetchBase() {
+  return (process.env.AM_MEDIA_PUBLIC_FETCH_BASE || mediaApiBase()).replace(/\/+$/, "");
+}
+
 export function absoluteMediaUrl(url: string | null | undefined) {
   if (!url) return null;
   if (/^https?:\/\//i.test(url)) return url;
@@ -62,7 +66,7 @@ export function absoluteMediaUrl(url: string | null | undefined) {
 }
 
 export async function fetchPublicMediaByRelation(input: { relationType: string; relationId: string; businessUnit?: string; take?: number }) {
-  const url = new URL(`${mediaApiBase()}/assets`);
+  const url = new URL(`${mediaApiFetchBase()}/assets`);
   url.searchParams.set("relationType", input.relationType);
   url.searchParams.set("relationId", input.relationId);
   url.searchParams.set("businessUnit", input.businessUnit || "AUTOMAKHSUS_TECHNICAL");

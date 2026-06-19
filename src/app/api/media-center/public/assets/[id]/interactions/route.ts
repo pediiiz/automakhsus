@@ -1,13 +1,13 @@
 import { NextRequest, NextResponse } from "next/server";
 
-import { mediaApiBase } from "@/lib/media-center-public";
+import { mediaApiFetchBase } from "@/lib/media-center-public";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
 
 async function proxy(request: NextRequest, id: string, init?: RequestInit) {
   const visitor = request.headers.get("x-am-media-visitor") || "";
-  const target = `${mediaApiBase()}/assets/${encodeURIComponent(id)}/interactions`;
+  const target = `${mediaApiFetchBase()}/assets/${encodeURIComponent(id)}/interactions`;
   const response = await fetch(target, {
     ...init,
     headers: {
