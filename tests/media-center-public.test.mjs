@@ -46,9 +46,9 @@ function loadMediaModule(env = {}) {
   return { ...cjsModule.exports, fetchCalls };
 }
 
-test("uses TehranSandali public Media API as default source", () => {
+test("uses AutoMakhsus public Media API as default source", () => {
   const media = loadMediaModule();
-  assert.equal(media.mediaApiBase(), "https://tehransandali.ir/api/public/media-center");
+  assert.equal(media.mediaApiBase(), "https://automakhsus.com/api/public/media-center");
   assert.equal(media.mediaApiFetchBase(), "https://tehransandali.ir/api/public/media-center");
 });
 
@@ -66,4 +66,9 @@ test("fetches relation-scoped media with public Media API URLs", async () => {
   assert.equal(results.length, 1);
   assert.equal(media.fetchCalls[0].startsWith("http://tehransandali:3000/api/public/media-center/assets?"), true);
   assert.equal(results[0].urls.playbackUrl, "https://media-api.example.test/api/public/media-center/assets/media-1/content?token=h");
+});
+
+test("public interaction URLs use the AutoMakhsus domain-local media API proxy", () => {
+  const media = loadMediaModule();
+  assert.equal(media.publicMediaProxyUrl("/assets/media-1/interactions"), "/api/public/media-center/assets/media-1/interactions");
 });

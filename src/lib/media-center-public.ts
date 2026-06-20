@@ -48,14 +48,15 @@ export type PublicMediaAsset = {
   summary: PublicMediaSummary;
 };
 
-const defaultMediaApiBase = "https://tehransandali.ir/api/public/media-center";
+const defaultMediaApiBase = "https://automakhsus.com/api/public/media-center";
+const defaultMediaApiFetchBase = "https://tehransandali.ir/api/public/media-center";
 
 export function mediaApiBase() {
   return (process.env.AM_MEDIA_PUBLIC_API_BASE || defaultMediaApiBase).replace(/\/+$/, "");
 }
 
 export function mediaApiFetchBase() {
-  return (process.env.AM_MEDIA_PUBLIC_FETCH_BASE || mediaApiBase()).replace(/\/+$/, "");
+  return (process.env.AM_MEDIA_PUBLIC_FETCH_BASE || defaultMediaApiFetchBase).replace(/\/+$/, "");
 }
 
 export function absoluteMediaUrl(url: string | null | undefined) {
@@ -92,5 +93,5 @@ export async function fetchPublicMediaByRelation(input: { relationType: string; 
 }
 
 export function publicMediaProxyUrl(path: string) {
-  return `/api/media-center/public${path.startsWith("/") ? path : `/${path}`}`;
+  return `/api/public/media-center${path.startsWith("/") ? path : `/${path}`}`;
 }
