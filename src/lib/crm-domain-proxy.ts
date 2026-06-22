@@ -46,6 +46,12 @@ export function rewriteCrmLocationHeader(location: string | null, publicOrigin: 
   if (location.startsWith(crmBackendOrigin)) return location.replace(crmBackendOrigin, publicOrigin);
   if (location.startsWith("https://tehransandali.ir")) return location.replace("https://tehransandali.ir", publicOrigin);
   if (location.startsWith("http://tehransandali.ir")) return location.replace("http://tehransandali.ir", publicOrigin);
+  if (location.startsWith("https://0.0.0.0:3000")) return location.replace("https://0.0.0.0:3000", publicOrigin);
+  if (location.startsWith("https://127.0.0.1:3000")) return location.replace("https://127.0.0.1:3000", publicOrigin);
+  if (location.startsWith("https://localhost:3000")) return location.replace("https://localhost:3000", publicOrigin);
+  if (location.startsWith("http://0.0.0.0:3000")) return location.replace("http://0.0.0.0:3000", publicOrigin);
+  if (location.startsWith("http://127.0.0.1:3000")) return location.replace("http://127.0.0.1:3000", publicOrigin);
+  if (location.startsWith("http://localhost:3000")) return location.replace("http://localhost:3000", publicOrigin);
   return location;
 }
 

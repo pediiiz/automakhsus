@@ -97,6 +97,14 @@ test("AutoMakhsus CRM proxy preserves domain and applies AutoMakhsus default con
     "https://automakhsus.com/fa/admin/login?next=%2Fcrm",
   );
   assert.equal(
+    crmProxy.rewriteCrmLocationHeader("http://0.0.0.0:3000/api/admin/media-center/assets/media-1/content?token=safe", "https://automakhsus.com"),
+    "https://automakhsus.com/api/admin/media-center/assets/media-1/content?token=safe",
+  );
+  assert.equal(
+    crmProxy.rewriteCrmLocationHeader("https://0.0.0.0:3000/api/admin/media-center/assets/media-1/content?token=safe", "https://automakhsus.com"),
+    "https://automakhsus.com/api/admin/media-center/assets/media-1/content?token=safe",
+  );
+  assert.equal(
     crmProxy.rewriteCrmTextPayload('<script src="/_next/static/chunk.js"></script>', "https://automakhsus.com"),
     '<script src="/crm-next/static/chunk.js"></script>',
   );
@@ -138,6 +146,12 @@ test("AutoMakhsus CRM proxy derives public origin from forwarded host instead of
 
   assert.equal(crmProxy.crmPublicHostFromHeaders(internalForwardedHostRequest.headers), "automakhsus.com");
   assert.equal(crmProxy.crmPublicOriginFromRequest(internalForwardedHostRequest), "https://automakhsus.com");
+});
+
+test("AutoMakhsus proxies protected CRM media content routes", () => {
+  const route = fs.readFileSync(new URL("../src/app/api/admin/media-center/assets/[id]/content/route.ts", import.meta.url), "utf8");
+  assert.match(route, /proxySharedCrmRequest/);
+  assert.match(route, /export function GET/);
 });
 
 test("academy video upload validation accepts safe formats and rejects dangerous files", () => {
