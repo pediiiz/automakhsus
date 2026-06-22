@@ -4965,6 +4965,28 @@ body li {
   }
 }
 
+/* EOF contrast lock: interactive states must not render as black/dark blocks. */
+.header-cta,
+.btn-ghost-dark {
+  border-color: rgba(143, 211, 255, 0.32) !important;
+  background: linear-gradient(135deg, rgba(234, 247, 255, 0.96), rgba(11, 92, 255, 0.92)) !important;
+  color: #04111f !important;
+  box-shadow: 0 16px 34px rgba(11, 92, 255, 0.18);
+}
+
+.header-cta:hover,
+.btn-ghost-dark:hover {
+  border-color: rgba(143, 211, 255, 0.58) !important;
+  background: linear-gradient(135deg, #8fd3ff, #0b5cff) !important;
+  color: #03101f !important;
+}
+
+.premium-nav-link.is-active {
+  border-color: color-mix(in srgb, var(--nav-accent) 42%, rgba(255,255,255,0.16)) !important;
+  background: color-mix(in srgb, var(--nav-accent) 20%, rgba(255,255,255,0.08)) !important;
+  color: #ffffff !important;
+}
+
 /* AM Media Center public playback and interaction layer. */
 .media-center-panel {
   border: 1px solid rgba(143, 211, 255, 0.18);
@@ -5332,6 +5354,27 @@ body li {
 
 .section {
   padding-block: clamp(5rem, 8vw, 8rem);
+}
+
+.header-cta,
+.btn-ghost-dark {
+  border-color: rgba(143, 211, 255, 0.32) !important;
+  background: linear-gradient(135deg, rgba(234, 247, 255, 0.96), rgba(11, 92, 255, 0.92)) !important;
+  color: #04111f !important;
+  box-shadow: 0 16px 34px rgba(11, 92, 255, 0.18);
+}
+
+.header-cta:hover,
+.btn-ghost-dark:hover {
+  border-color: rgba(143, 211, 255, 0.58) !important;
+  background: linear-gradient(135deg, #8fd3ff, #0b5cff) !important;
+  color: #03101f !important;
+}
+
+.premium-nav-link.is-active {
+  border-color: color-mix(in srgb, var(--nav-accent) 42%, rgba(255,255,255,0.16)) !important;
+  background: color-mix(in srgb, var(--nav-accent) 20%, rgba(255,255,255,0.08)) !important;
+  color: #ffffff !important;
 }
 
 .what-we-do-section,
