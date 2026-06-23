@@ -109,6 +109,13 @@ test("AutoMakhsus CRM proxy preserves domain and applies AutoMakhsus default con
     '<script src="/crm-next/static/chunk.js"></script>',
   );
   assert.equal(
+    crmProxy.rewriteCrmAssetHeader(
+      '</_next/static/css/app.css>; rel=preload; as="style", <http://tehransandali:3000/_next/static/media/font.woff2>; rel=preload; as="font"',
+      "https://automakhsus.com",
+    ),
+    '</crm-next/static/css/app.css>; rel=preload; as="style", <https://automakhsus.com/crm-next/static/media/font.woff2>; rel=preload; as="font"',
+  );
+  assert.equal(
     crmProxy.rewriteCrmTextPayload('<a href="https://tehransandali.ir/fa/admin/crm">CRM</a>', "https://automakhsus.com"),
     '<a href="https://automakhsus.com/fa/admin/crm">CRM</a>',
   );

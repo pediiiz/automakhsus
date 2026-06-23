@@ -55,6 +55,14 @@ export function rewriteCrmLocationHeader(location: string | null, publicOrigin: 
   return location;
 }
 
+export function rewriteCrmAssetHeader(value: string, publicOrigin: string) {
+  return value
+    .replaceAll(`${crmBackendOrigin}/_next/`, `${publicOrigin}/crm-next/`)
+    .replaceAll("https://tehransandali.ir/_next/", `${publicOrigin}/crm-next/`)
+    .replaceAll("http://tehransandali.ir/_next/", `${publicOrigin}/crm-next/`)
+    .replaceAll("</_next/", `</crm-next/`);
+}
+
 export function crmPublicHostFromHeaders(headers: Pick<Headers, "get">) {
   const forwardedHost = headers.get("x-forwarded-host")?.split(",")[0]?.trim();
   const host = forwardedHost || headers.get("host")?.trim();
@@ -98,6 +106,10 @@ function proxiedResponseHeaders(response: Response, publicOrigin: string) {
     if (lower === "location") {
       const rewritten = rewriteCrmLocationHeader(value, publicOrigin);
       if (rewritten) headers.set(key, rewritten);
+      return;
+    }
+    if (lower === "link") {
+      headers.set(key, rewriteCrmAssetHeader(value, publicOrigin));
       return;
     }
     headers.set(key, value);
